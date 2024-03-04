@@ -1,0 +1,49 @@
+
+
+"Schema designed to describe an user, its tasks and objectives"
+type User {
+  id: ID
+  name: String!
+  password: String!
+  mail: String!
+  tasks: [Task]
+  objectives: [Objective]
+}
+
+type Query {
+user(id:ID!): User
+}
+
+type Mutation {
+createUser(name: String!, password: String!, mail: String!): User
+deleteUser(id: ID!): Boolean
+updateUser (id: ID!, name: String!, password: String!, mail: String!): User
+}
+
+"Schema designed to describe a task"
+type Task {
+  name: String!
+  priority: String
+  category: Category!
+  status: String!
+  desc: String
+}
+
+"Schema designed to describe objective"
+type Objective {
+  title: String!
+  status: Boolean!
+}
+
+"Schema designed to describe tasks' categories "
+type Category {
+  name: String
+}
+
+"Schema designed to group tasks by category"
+type List {
+  name: Category
+  tasks: [Task]
+}
+
+

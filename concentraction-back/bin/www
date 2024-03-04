@@ -3,16 +3,16 @@
 /**
  * Module dependencies.
  */
-
-var app = require('../app');
-var debug = require('debug')('concentraction:server');
-var http = require('http');
+import app from "../server/app.js";
+import debugLib from 'debug';
+import http from 'http';
+const debug = debugLib('concentraction-back:server')
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '5050');
 app.set('port', port);
 
 /**
