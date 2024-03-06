@@ -6,7 +6,8 @@ import gql from "graphql-tag";
 import { ApolloServer } from '@apollo/server';
 import { buildSubgraphSchema } from '@apollo/subgraph';
 import { expressMiddleware } from '@apollo/server/express4';
-// import resolvers from "../resolvers.js";
+import resolvers from "./resolvers.js";
+import {typeDefs} from "./schema.js";
 import { readFileSync } from "fs";
 
 const PORT = process.env.PORT || 5050;
@@ -14,21 +15,19 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+//https://www.apollographql.com/docs/apollo-server/getting-started/
+// const typeDefs = gql(
+//   readFileSync("server/schema.graphql", {
+//     encoding: "utf-8",
+//   })
+// );
 
-const typeDefs = gql(
-  readFileSync("server/schema.graphql", {
-    encoding: "utf-8",
-  })
-);
-const server = new ApolloServer({
-  schema: buildSubgraphSchema({ typeDefs }),
-});
+ const server = new ApolloServer({
+     resolvers, typeDefs
+ });
 
-
-// const server = new ApolloServer({
-//   schema: buildSubgraphSchema({ typeDefs, resolvers }),
-// });
 //EN attendant que resolvers soit opérationnel
+//schema: buildSubgraphSchema
 // Note you must call `start()` on the `ApolloServer`
 // instance before passing the instance to `expressMiddleware`
 await server.start();
