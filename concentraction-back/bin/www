@@ -6,7 +6,6 @@
 import app from "../server/app.js";
 import debugLib from 'debug';
 import http from 'http';
-import 'dotenv/config.js';
 
 const debug = debugLib('concentraction-back:server')
 
