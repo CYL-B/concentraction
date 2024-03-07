@@ -2,13 +2,13 @@ import express from "express";
 import cors from "cors";
 // import users from "../routes/users.js";
 import 'dotenv/config.js';
-import gql from "graphql-tag";
+// import gql from "graphql-tag";
 import { ApolloServer } from '@apollo/server';
-import { buildSubgraphSchema } from '@apollo/subgraph';
+// import { buildSubgraphSchema } from '@apollo/subgraph';
 import { expressMiddleware } from '@apollo/server/express4';
 import resolvers from "./resolvers.js";
 import {typeDefs} from "./schema.js";
-import { readFileSync } from "fs";
+// import { readFileSync } from "fs";
 
 const PORT = process.env.PORT_SERVER || 5050;
 const app = express();
