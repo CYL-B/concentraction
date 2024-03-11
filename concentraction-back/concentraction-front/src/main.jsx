@@ -1,22 +1,24 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
 
 //Apollo import
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import {ApolloProvider} from "@apollo/client";
+import {apolloClient} from "./services/apolloClient.jsx";
 
-//uri specifies the URL of our GraphQL server.
-const client = new ApolloClient({
-  uri: 'https://flyby-router-demo.herokuapp.com/',
-  cache: new InMemoryCache(),
-});
+//router import
+import { RouterProvider } from "react-router-dom";
+import { routerNav } from "./services/react-router-dom.jsx";
 
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-    <App />
+    <RouterProvider router={routerNav} >
+    <ApolloProvider client={apolloClient}>
+      <App />
     </ApolloProvider>
-  </React.StrictMode>,
-)
+    </RouterProvider>
+  </React.StrictMode>
+);

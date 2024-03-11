@@ -1,41 +1,43 @@
-export function Heading1 () {
+function Heading1 () {
 
     return(
         <h1></h1>
     )
 }
 
-export function Heading2 () {
+function Heading2 ({content}) {
     
     return(
-        <h2></h2>
+        <h2 {...content}></h2>
     )
 }
 
-export function Heading3 () {
+ function Heading3 () {
     
     return(
         <h3></h3>
     )
 }
 
-export function Heading4 () {
+function Heading4 () {
     
     return(
         <h4></h4>
     )
 }
 
-export function Body () {
+function Body () {
 
     return(
         <p></p>
     )
 }
 
-export function Fineprint (){
+function Fineprint (){
     return(
         <p></p>
     )
 
 }
+
+export {Heading1, Heading2, Heading3, Heading4, Fineprint};
