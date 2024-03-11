@@ -5,10 +5,10 @@ function Heading1 ({children}) {
     )
 }
 
-function Heading2 ({children}) {
+function Heading2 ({text, heading2ClassName}) {
     
     return(
-        <h2 className="font-anton text-2xl leading-10 md:text-[40px] md:leading-[44px] xl:text-[48px] xl:leading-[52px]">{children}</h2>
+        <h2 className={`font-anton text-2xl leading-10 md:text-[40px] md:leading-[44px] xl:text-[48px] xl:leading-[52px] ${heading2ClassName ?? ""}`}>{text}</h2>
     )
 }
 

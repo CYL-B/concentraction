@@ -1,14 +1,16 @@
 import { Header } from "./header";
 
-function Container({ children, containerClassName }) {
-  return <div className={`container ${containerClassName}`}>{children}</div>;
+function Container({ children, className }) {
+  return <div className={`container ${className}`}>{children}</div>;
 }
 
-export function Layout({ children, containerClassName }) {
+export default function Layout({ children, containerClassName, headerTitle }) {
   return (
     <>
-      <Header></Header>
-      <Container containerClassName={containerClassName}>{children}</Container>
+    <Header headerTitle={headerTitle}></Header>
+      <div className={`container mx-auto ${containerClassName ?? ""}`}>
+        {children}
+      </div>
     </>
   );
 }
