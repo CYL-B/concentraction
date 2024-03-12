@@ -7,10 +7,10 @@ function NavElement() {
 
 export function NavBar() {
     return(
-        <nav>
-            <ol>
+        <nav className="sticky top-0 h-full">
+            <ul>
                 <NavElement></NavElement>
-            </ol>
+            </ul>
         </nav>
     )
 }
