@@ -1,5 +1,6 @@
 import IconifyIcon from "./icon";
 
+//Defining object variantMaps with properties meant to define each button style 
 const variantMaps = {
   primary:
     "bg-brand-red text-neutral-white border-brand-red hover:bg-neutral-white hover:text-brand-red",
@@ -7,6 +8,7 @@ const variantMaps = {
     "bg-neutral-white text-brand-blue border-brand-blue hover:bg-brand-blue hover:text-neutral-white",
 };
 
+//onClick function activated when button clicked, variant of button, label is the text within the button, type is the html tag to use, layoutClasses is the style shared by all buttons
 export function Button({
   onClick,
   variant = "primary",
@@ -47,7 +49,7 @@ export function Button({
   }
 }
 
-export function AddButton({ onClick, children, addText= true }) {
+export function AddButton({ onClick, children, addText = true }) {
   return (
     <button className="flex items-center justify-center gap-3 hover:last:underline" onClick={onClick} role="button">
       <IconifyIcon
