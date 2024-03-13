@@ -4,5 +4,6 @@
 }
 
 :focus {
-  @apply focus:outline focus:ring-brand-yellow;
+  @apply focus:outline;
+  outline-color:#FFD966;
 }
