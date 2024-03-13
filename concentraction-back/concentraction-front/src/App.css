@@ -1,4 +1,8 @@
 #root {
-  @apply m-10;
+  @apply m-0;
 
+}
+
+:focus {
+  @apply focus:outline focus:ring-brand-yellow;
 }
