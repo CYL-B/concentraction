@@ -9,6 +9,8 @@ import {
 
 import { Button, AddButton } from "../components/button";
 
+import { Link } from "../components/links";
+
 import Layout from "../components/layout";
 
 export default function Styleguide() {
@@ -31,6 +33,9 @@ export default function Styleguide() {
             <Button variant="secondary" label="Secondary"/>
             <AddButton>Test</AddButton>
             <AddButton addText={false}></AddButton>
+            <Link variant="primary">Link primary</Link>
+            <Link variant="secondary">Link secondary</Link>
+            <Link variant="fineprint">Link fineprint</Link>
           </section>
         </Layout>
     </>
