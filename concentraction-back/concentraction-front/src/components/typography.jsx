@@ -29,13 +29,13 @@ function Heading4 ({children}) {
 function Body ({children, body2}) {
 
     return(
-        <p className={`font-helvetica ${body2 ?"text-sm leading-[21px]":"text-base leading-6"} `}>{children}</p>
+        <p className={`font-nunito ${body2 ?"text-sm leading-[21px]":"text-base leading-6"} `}>{children}</p>
     )
 }
 
 function Fineprint ({children}){
     return(
-        <p className="font-helvetica text-xs leading-[18px]">{children}</p>
+        <p className="font-nunito text-xs leading-[18px]">{children}</p>
     )
 
 }

@@ -8,7 +8,7 @@ export default {
     extend: {
       fontFamily:{
         anton:["Anton, sans-serif"],
-        helvetica:["Helvetica Neue, sans-serif"]
+        nunito:["Nunito Sans, sans-serif"]
       },
       colors:{
         transparent:"transparent",
