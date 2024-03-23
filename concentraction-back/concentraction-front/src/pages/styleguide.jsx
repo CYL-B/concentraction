@@ -1,3 +1,4 @@
+//Typography section
 import {
   Heading1,
   Heading2,
@@ -7,10 +8,11 @@ import {
   Fineprint,
 } from "../components/typography";
 
+//Buttons and links section
 import { Button, AddButton } from "../components/button";
-
 import { Link } from "../components/links";
 
+//Page layout
 import Layout from "../components/layout";
 
 export default function Styleguide() {

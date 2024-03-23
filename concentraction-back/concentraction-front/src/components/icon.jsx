@@ -2,14 +2,14 @@ import { Icon, iconExists } from "@iconify-icon/react";
 //iconName : le nom de l'icon
 //iconClassName : classes à ajouter pour changer le style de l'icon
 
-export default function IconifyIcon({ iconName, iconClassName }) {
+export default function IconifyIcon({ iconName, iconClassName, height=40, width=40  }) {
 
-    if(iconExists(iconName)){
+    
   return (
-    <span className={`${iconClassName}`}>
+    <span className={`inline-flex w-fit ${iconClassName ?? ""}`}>
       <Icon
-        icon={iconName} width={40} height={40}
+        icon={iconName} width={width} height={height}
       />
     </span>
   );}
-}
+
