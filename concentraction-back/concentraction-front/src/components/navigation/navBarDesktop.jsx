@@ -1,8 +1,7 @@
 import { useState } from "react";
-
 import  Divider  from "./divider";
 import { SignOutButton } from "./navButtons";
-import NavElement from "./navBarElement";
+import {navMenuList} from "./navBarElement";
 import IconifyIcon from "../icon";
 
 
@@ -10,7 +9,6 @@ import IconifyIcon from "../icon";
 //navBarStyle general style of the navBar. Width changes when reduced. 
 //NavBarBefore and After : create one horizontal line and vertical line to style the navBar. Shadow property is used to create the effect of a very light line (cannot be accomplished with border)
 //navBarClass combines all of the above classes.
-//navMenuList : array with all the elements within the navBar except buttons, it iterates over navElementList and creates a NavElement for each object and properties inside the array. The span element disappears (opacity 0) when reduced. 
 //topButton : icon within button wrapper changes according to the state of the navBar, reduced or not.
 
 export function NavBar() {
@@ -31,37 +29,7 @@ export function NavBar() {
 
   const navBarClass = `${navBarStyle} ${navBarBefore} ${navBarAfter}`;
 
-  const navElementList = [
-    {
-      destination: "backlog",
-      labelName: "Backlog",
-      iconifyName: "material-symbols-light:add-notes-outline-rounded",
-    },
-    {
-      destination: "pomodoro",
-      labelName: "Pomodoro",
-      iconifyName: "material-symbols-light:timer-outline-rounded",
-    },
-    {
-      destination: "dashboard",
-      labelName: "Dashboard",
-      iconifyName: "material-symbols-light:date-range-outline",
-    },
-  ];
-
-  const navMenuList = navElementList.map((navElement) => (
-    <NavElement dest={`${navElement.destination}`}>
-      <IconifyIcon
-        iconName={`${navElement.iconifyName}`}
-        iconClassName={`navIcon`}
-      />
-      <span
-        className={`navLabel transition-opacity duration-500 ease-in-out ${isToggle?"opacity-0":"opacity-100 "}`}
-      >
-        {navElement.labelName}
-      </span>
-    </NavElement>
-  ));
+  
   return (
     <nav className={navBarClass}>
       <ul
