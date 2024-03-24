@@ -1,9 +1,10 @@
 import { useState } from "react";
 import  Divider  from "./divider";
-import { SignOutButton } from "./navButtons";
-import {navMenuList} from "./navBarElement";
-import IconifyIcon from "../icon";
+import { SignOutButton, TopButton } from "./navButtons";
+import {NavMenuList} from "./navBarElement";
 
+
+import { ToggleContext } from "./navContext";
 
 //isToggle state : when true, navBar is reduced, if not, navBar is normal
 //navBarStyle general style of the navBar. Width changes when reduced. 
@@ -11,12 +12,11 @@ import IconifyIcon from "../icon";
 //navBarClass combines all of the above classes.
 //topButton : icon within button wrapper changes according to the state of the navBar, reduced or not.
 
-export function NavBar() {
+export default function NavBarDesktop() {
   const [isToggle, setToggle] = useState(false);
 
   const toggleNavBar = () => {
     setToggle(!isToggle);
-    console.log(isToggle);
   };
 
   const navBarStyle = `navbar transition-[width] duration-500 ease-in-out ${
@@ -31,25 +31,18 @@ export function NavBar() {
 
   
   return (
+    <ToggleContext.Provider value={isToggle}>
     <nav className={navBarClass}>
       <ul
         className={`sticky p-5 top-0 left-0 w-full h-full z-0 flex flex-col justify-evenly items-start`}
       >
-        <button onClick={() => toggleNavBar()}>
-          <IconifyIcon
-            iconName={`${
-              isToggle
-                ? "material-symbols-light:keyboard-double-arrow-right"
-                : "material-symbols-light:keyboard-double-arrow-left"
-            }`}
-            iconClassName={` first:text-brand-blue border border-solid border-brand-blue rounded-full w-10 h-10`}
-          />
-        </button>
+        <TopButton toggleNavBar={toggleNavBar}/>
 
-        {navMenuList}
+        <NavMenuList/>
         <Divider/>
         <SignOutButton reduced={isToggle} />
       </ul>
     </nav>
+    </ToggleContext.Provider>
   );
 }
