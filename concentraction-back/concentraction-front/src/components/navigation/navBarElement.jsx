@@ -65,7 +65,7 @@ export function NavMenuList() {
       />
       <span
         className={`navLabel transition-opacity duration-500 ease-in-out ${
-          toggling ? "opacity-0" : "opacity-100 "
+          toggling ? "lg:opacity-0" : "lg:opacity-100 "
         }`}
       >
         {navElement.labelName}

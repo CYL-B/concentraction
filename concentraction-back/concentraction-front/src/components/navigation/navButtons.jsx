@@ -24,7 +24,7 @@ export function TopButton({ toggleNavBar }) {
   const toggling = useContext(ToggleContext);
 
   return (
-    <button onClick={toggleNavBar}>
+    <button onClick={toggleNavBar} className="hidden lg:block">
       <IconifyIcon
         iconName={`${
           toggling
@@ -40,7 +40,7 @@ export function TopButton({ toggleNavBar }) {
 export function TopButtonMobile({ topButtonFunction }) {
   return (
     <button
-      className="border-solid border border-brand-blue rounded-full w-20 h-20 fixed top-4 left-3 z-30 flex flex-col items-center justify-center gap-3 px-4"
+      className="lg:hidden border-solid border border-brand-blue rounded-full w-20 h-20 fixed top-4 left-3 z-30 flex flex-col items-center justify-center gap-3 px-4"
       onClick={topButtonFunction}
     >
       <div className="self-start w-5 h-[1px] bg-brand-blue"></div>
