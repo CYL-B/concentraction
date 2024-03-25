@@ -19,10 +19,10 @@ function Heading2 ({text, heading2ClassName}) {
     )
 }
 
-function Heading4 ({children}) {
+function Heading4 ({children, classHeading}) {
     
     return(
-        <h4 className="font-anton text-lg leading-4  md:leading-9 xl:text-2xl xl:leading-10">{children}</h4>
+        <h4 className={`font-anton text-lg leading-4  md:leading-9 xl:text-2xl xl:leading-10 ${classHeading} `}>{children}</h4>
     )
 }
 
