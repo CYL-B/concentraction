@@ -8,6 +8,9 @@ import Dashboard from "../pages/dashboard.jsx";
 import LogIn from "../pages/log-in.jsx";
 import Pomodoro from "../pages/pomodoro.jsx";
 import Styleguide from "../pages/styleguide.jsx";
+import Sitemap from "../pages/sitemap.jsx";
+import TermsAndConditions from "../pages/terms.jsx";
+
 
 export const routerNav = createBrowserRouter([
     {
@@ -45,4 +48,14 @@ export const routerNav = createBrowserRouter([
       element: <Styleguide />,
       errorElement: <ErrorPage />,
     },
+    {
+      path: "/sitemap",
+      element: <Sitemap />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/terms-and-conditions",
+      element: <TermsAndConditions />,
+      errorElement: <ErrorPage />,
+    }
   ]);

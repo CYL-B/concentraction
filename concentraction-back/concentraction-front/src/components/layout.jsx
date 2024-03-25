@@ -1,4 +1,5 @@
 import { Header } from "./header";
+import Footer from "./footer";
 import NavBar from "./navigation/navBar";
 
 //useMediaQuery(mediaQueriesSizes.md) vérifie si le viewport est inférieur à mediaQueriesSizes.md (768px). Si oui, returns navBarMobile sinon, navBarDesktop
@@ -22,6 +23,7 @@ export default function Layout({
             {children}
           </main>
         </div>
+        <Footer />
       </div>
     </div>
   );
