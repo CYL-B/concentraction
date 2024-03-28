@@ -33,9 +33,9 @@ function Body ({children, body2, classHeading}) {
     )
 }
 
-function Fineprint ({children, classHeading}){
+function Fineprint ({children, classFineprint}){
     return(
-        <p className={`font-nunito text-xs leading-[18px] ${classHeading}`}>{children}</p>
+        <p className={`font-nunito text-xs leading-[18px] ${classFineprint}`}>{children}</p>
     )
 
 }
