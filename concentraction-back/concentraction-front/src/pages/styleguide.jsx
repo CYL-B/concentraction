@@ -22,6 +22,7 @@ export default function Styleguide() {
         pageClassName="grid grid-cols-4 grid-rows-2 gap-2"
         >
           <section className="typography">
+            <Heading4 classHeading="underline">Typography</Heading4>
             <Heading1>Heading 1</Heading1>
             <Heading2>Heading 2</Heading2>
             <Heading3>Heading 3</Heading3>
@@ -31,6 +32,7 @@ export default function Styleguide() {
             <Fineprint>Fineprint</Fineprint>
           </section>
           <section className="flex flex-wrap gap-5 items-start Buttons and Links">
+          <Heading4 classHeading="underline">Buttons and Links</Heading4>
             <Button variant="primary">Primary</Button>
             <Button variant="secondary">Secondary</Button>
             <AddButton>Test</AddButton>
