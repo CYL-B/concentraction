@@ -19,6 +19,6 @@ footer {
 }
 
 .layout {
-  @apply bg-repeat;
-  background-image: url("./assets/bg1.png");
+  background-repeat: repeat;
+  background-image: url("./assets/bg-page.svg");
 }
