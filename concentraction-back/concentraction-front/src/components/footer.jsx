@@ -4,8 +4,27 @@ import IconifyIcon from "./icon";
 
 
 export default function Footer() {
+
+  const socialElements = [
+    {
+    href:"#",
+    ariaLabel:"facebook",
+    iconName:"arcticons:facebook"},
+    {
+    href:"#",
+    ariaLabel:"linkedin",
+    iconName:"arcticons:linkedin"},
+    {
+    href:"#",
+    ariaLabel:"instagram",
+    iconName:"arcticons:instagram"}
+  ]
+
+  const socialList = socialElements.map ((element) => (
+    <a href={element.href} aria-label={element.ariaLabel} rel="noreferrer" target="_blank"><IconifyIcon iconName={element.iconName} width={24} height={24}></IconifyIcon></a>
+  ))
   return (
-    <footer className=" absolute w-full h-1/12 self-end flex justify-between border-solid border-t border-brand-blue">
+    <footer className=" absolute w-full h-1/12 self-end flex justify-between border-solid border-t border-brand-blue p-2">
       <div className="min-w-[30%] flex flex-col justify-center">
         <Heading4 classHeading={"text-brand-blue uppercase"}>
           Concentraction
@@ -19,11 +38,9 @@ export default function Footer() {
       </div>
       <div className="flex flex-col justify-between items-center min-w-[30%]">
         <div className="socials ">
-        <a href="#" aria-label="facebook" rel="noreferrer" target="_blank"><IconifyIcon iconName="arcticons:facebook" width={20} height={20}></IconifyIcon></a>
-        <IconifyIcon iconName="arcticons:instagram" width={20} height={20}></IconifyIcon> 
-        <IconifyIcon iconName="arcticons:linkedin" width={20} height={20}></IconifyIcon>
+        {socialList}
         </div>
-        <Fineprint>Copyright @2024</Fineprint>
+        <Fineprint classFineprint={"text-brand-blue"}>Copyright @2024</Fineprint>
       </div>
     </footer>
   );
