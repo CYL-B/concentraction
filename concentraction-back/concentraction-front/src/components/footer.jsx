@@ -5,7 +5,7 @@ import IconifyIcon from "./icon";
 
 export default function Footer() {
   return (
-    <footer className=" absolute bottom-0 w-full h-1/12 self-end flex justify-between border-solid border-t border-brand-blue">
+    <footer className=" absolute w-full h-1/12 self-end flex justify-between border-solid border-t border-brand-blue">
       <div className="min-w-[30%] flex flex-col justify-center">
         <Heading4 classHeading={"text-brand-blue uppercase"}>
           Concentraction

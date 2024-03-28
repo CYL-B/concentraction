@@ -1,7 +1,7 @@
-function Heading1 ({children}) {
+function Heading1 ({children, classHeading}) {
 
     return(
-        <h1 className="font-anton text-[40px] leading-[44px] md:text-5xl md:leading-[52px] xl:text-6xl xl:leading-[70px]">{children}</h1>
+        <h1 className={`font-anton text-[40px] leading-[44px] md:text-5xl md:leading-[52px] xl:text-6xl xl:leading-[70px] ${classHeading}`}>{children}</h1>
     )
 }
 
@@ -12,10 +12,10 @@ function Heading2 ({text, heading2ClassName}) {
     )
 }
 
- function Heading3 ({children}) {
+ function Heading3 ({children, classHeading}) {
     
     return(
-        <h3 className="font-anton text-xl leading-[19px] md:text-2xl md:leading-[40px] xl:text-[40px] xl:leading-[44px]">{children}</h3>
+        <h3 className={`font-anton text-xl leading-[19px] md:text-2xl md:leading-[40px] xl:text-[40px] xl:leading-[44px] ${classHeading}`}>{children}</h3>
     )
 }
 
@@ -26,16 +26,16 @@ function Heading4 ({children, classHeading}) {
     )
 }
 
-function Body ({children, body2}) {
+function Body ({children, body2, classHeading}) {
 
     return(
-        <p className={`font-nunito ${body2 ?"text-sm leading-[21px]":"text-base leading-6"} `}>{children}</p>
+        <p className={`font-nunito ${body2 ?"text-sm leading-[21px]":"text-base leading-6"} ${classHeading} `}>{children}</p>
     )
 }
 
-function Fineprint ({children}){
+function Fineprint ({children, classHeading}){
     return(
-        <p className="font-nunito text-xs leading-[18px]">{children}</p>
+        <p className={`font-nunito text-xs leading-[18px] ${classHeading}`}>{children}</p>
     )
 
 }
