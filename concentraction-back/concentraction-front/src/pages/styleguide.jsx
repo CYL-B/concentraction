@@ -19,7 +19,7 @@ export default function Styleguide() {
   return (
     <>
         <Layout id="Styleguide" headerTitle="Styleguide" containerClassName="flex" 
-        mainClassName="grid grid-cols-4 grid-rows-2 gap-2"
+        pageClassName="grid grid-cols-4 grid-rows-2 gap-2"
         >
           <section className="typography">
             <Heading1>Heading 1</Heading1>
