@@ -1,5 +1,5 @@
 import './App.css';
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 function App() {

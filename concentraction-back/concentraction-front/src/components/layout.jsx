@@ -13,18 +13,18 @@ export default function Layout({
   pageClassName,
 }) {
   return (
-    <div id={id} className="flex h-screen w-screen">
+    <div id={id} className="layout flex h-screen w-screen bg-background">
       <NavBar />
 
-      <div className={`wrapper relative p-10 ${pageClassName ?? ""}`}>
+      <main role="main" className={`relative p-10 ${mainClassName ?? ""}`}>
         <Header headerTitle={headerTitle}></Header>
         <div className={`container mx-auto ${containerClassName ?? ""}`}>
-          <main role="main" className={`w-full ${mainClassName ?? ""}`}>
+          <div className={`w-full ${ pageClassName?? ""}`}>
             {children}
-          </main>
+          </div>
         </div>
         <Footer />
-      </div>
+      </main>
     </div>
   );
 }

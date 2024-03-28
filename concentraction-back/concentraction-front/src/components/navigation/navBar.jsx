@@ -2,6 +2,7 @@ import { useState } from "react";
 import  Divider  from "./divider";
 import { SignOutButton, TopButton, TopButtonMobile } from "./navButtons";
 import {NavMenuList} from "./navBarElement";
+import Logo from "../../assets/logo.svg?react";
 
 
 import { ToggleContext } from "./navContext";
@@ -50,6 +51,7 @@ export default function NavBar() {
         <NavMenuList/>
         <Divider/>
         <SignOutButton reduced={isToggle} />
+        <Logo/>
       </ul>
     </nav>
     </ToggleContext.Provider>
