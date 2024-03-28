@@ -12,6 +12,9 @@ import {
 import { Button, AddButton } from "../components/button";
 import { Link } from "../components/links";
 
+//Input
+import Checkbox from "../components/checkbox";
+
 //Page layout
 import Layout from "../components/layout";
 
@@ -40,6 +43,10 @@ export default function Styleguide() {
             <Link variant="primary">Link primary</Link>
             <Link variant="secondary">Link secondary</Link>
             <Link variant="fineprint">Link fineprint</Link>
+          </section>
+          <section className="flex flex-col Input">
+          <Heading4 classHeading="underline">Inputs</Heading4>
+          <Checkbox checkboxName="Example" checkboxTitle="Example"/>
           </section>
         </Layout>
     </>
