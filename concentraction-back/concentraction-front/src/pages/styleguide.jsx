@@ -31,8 +31,8 @@ export default function Styleguide() {
             <Fineprint>Fineprint</Fineprint>
           </section>
           <section className="flex flex-wrap gap-5 items-start Buttons and Links">
-            <Button variant="primary" label="Primary"/>
-            <Button variant="secondary" label="Secondary"/>
+            <Button variant="primary">Primary</Button>
+            <Button variant="secondary">Secondary</Button>
             <AddButton>Test</AddButton>
             <AddButton addText={false}></AddButton>
             <Link variant="primary">Link primary</Link>
