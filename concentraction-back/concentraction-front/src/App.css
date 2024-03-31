@@ -8,9 +8,10 @@
 }
 
 nav {
-.concentraction-logo {
-  @apply mx-auto;
-}}
+  .concentraction-logo {
+    @apply mx-auto;
+  }
+}
 
 footer {
   @apply bg-no-repeat bg-origin-content bg-contain;
@@ -25,4 +26,8 @@ footer {
 
 ::placeholder {
   @apply font-nunito text-base leading-6;
+}
+
+.react-datepicker-wrapper input[type="text"] {
+  @apply px-0;
 }

@@ -24,14 +24,14 @@ export default function InputDatePicker() {
   const [startDate, setStartDate] = useState(new Date());
 
   return (
-    <>
+    <div className="date-wrapper flex flex-col gap-y-2">
       <Body classHeading="font-bold" body2={true}>
         Date example
       </Body>
       <DatePicker
         locale="fr"
         dateFormat="P"
-        className="font-nunito text-base leading-6 border-solid border-b border-light-grey bg-transparent"
+        className="font-nunito text-base leading-6 border-solid border-b border-brand-blue bg-transparent"
         showIcon
         showTimeInput
         selected={startDate}
@@ -43,6 +43,7 @@ export default function InputDatePicker() {
             width={24}
             height={24}
             viewBox="0 0 36 36"
+            className="right-[35%]"
           >
             <path
               fill="#FF686B"
@@ -128,6 +129,6 @@ export default function InputDatePicker() {
           </svg>
         }
       />
-    </>
+    </div>
   );
 }
