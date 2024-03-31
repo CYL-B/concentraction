@@ -9,6 +9,8 @@ export function Input({
   placeholder,
   inputTitle,
   value,
+  isDark = false,
+  error,
   onChangeInput,
   ...inputProps
 }) {
@@ -20,11 +22,12 @@ export function Input({
     }
 
   return (
-    <div className="input-wrapper">
-      <Body body2={true}> {inputTitle}</Body>
+    <div className="input-wrapper flex flex-col gap-2">
+      <Body body2={true} classHeading="font-bold"> {inputTitle}</Body>
       <label for={inputId}>
         <input
-          type=""
+          type="" 
+          className={`border-b border-solid bg-transparent font-nunito placeholder:text-dark-grey outline-offset-4 ${!isDark?"border-light-grey focus:border-neutral-black transition-colors duration-300 ease-in-out":"border-white"}`}
           id={inputId}
           name={inputName}
           placeholder={placeholder}
