@@ -8,16 +8,19 @@ export default function Footer() {
       href: "#",
       ariaLabel: "facebook",
       iconName: "arcticons:facebook",
+      id:"facebook"
     },
     {
       href: "#",
       ariaLabel: "linkedin",
       iconName: "arcticons:linkedin",
+      id:"linkedin"
     },
     {
       href: "#",
       ariaLabel: "instagram",
       iconName: "arcticons:instagram",
+      id:"instagram"
     },
   ];
 
@@ -25,8 +28,10 @@ export default function Footer() {
     <a
       href={element.href}
       aria-label={element.ariaLabel}
+      key={element.id}
       rel="noreferrer"
       target="_blank"
+
     >
       <IconifyIcon
         iconName={element.iconName}

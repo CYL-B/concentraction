@@ -9,25 +9,56 @@ export function Input({
   placeholder,
   inputTitle,
   value,
-  isDark = false,
+  type,
+  variant = "light",
   error,
   onChangeInput,
   ...inputProps
 }) {
+  const [inputValue, setInputValue] = useState("");
 
-    const [inputValue, setInputValue] = useState("");
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+  };
 
-    const handleChange = (event) => {
-        setInputValue(event.target.value)
-    }
+  //Defining object variantMaps with properties meant to define each input style
+  const variantMaps = {
+    light: `focus:border-neutral-black transition-colors duration-300 ease-in-out hover:border-brand-blue placeholder:text-dark-grey  ${
+      inputValue !== "" ? "border-brand-blue" : "border-light-grey"
+    }`,
+    dark: `border-neutral-white text-neutral-white placeholder:text-dark-grey  ${
+      inputValue !== "" ? "border-neutral-white" : "border-dark-grey"
+    }`,
+    error: `text-brand-red border-brand-red placeholder:text-brand-red`,
+  };
+
+  const finalInputClasses = `border-b border-solid bg-transparent font-nunito outline-offset-4 ${
+    variantMaps[variant.toLowerCase()]
+  }`;
+
+  let titleHeading = "";
+  if (variant == "dark") {
+    titleHeading = "text-neutral-white";
+  } else if (variant == "error") {
+    titleHeading = "text-brand-red";
+  } else {
+    titleHeading = "text-neutral-black";
+  }
 
   return (
     <div className="input-wrapper flex flex-col gap-2">
-      <Body body2={true} classHeading={`font-bold ${isDark?"text-neutral-white":""}`}> {inputTitle}</Body>
-      <label for={inputId}>
+      <Body
+        body2={true}
+        classHeading={`font-bold ${
+          titleHeading}`}
+      >
+        {" "}
+        {inputTitle}
+      </Body>
+      <label htmlFor={inputId}>
         <input
-          type="" 
-          className={`border-b border-solid bg-transparent font-nunito placeholder:text-dark-grey outline-offset-4 ${!isDark?"border-light-grey focus:border-neutral-black transition-colors duration-300 ease-in-out hover:border-brand-blue":"border-neutral-white text-neutral-white"}`}
+          type={type}
+          className={`${finalInputClasses}`}
           id={inputId}
           name={inputName}
           placeholder={placeholder}
@@ -41,11 +72,9 @@ export function Input({
 }
 
 export function Form({}) {
-
-    const handleSubmit = () => {
-        e.preventDefault();
-
-    }
+  const handleSubmit = () => {
+    e.preventDefault();
+  };
   return (
     <form method="post" onSubmit={handleSubmit}>
       <AddButton role="submit"></AddButton>

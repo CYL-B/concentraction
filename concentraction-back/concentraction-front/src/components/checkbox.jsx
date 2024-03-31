@@ -14,7 +14,7 @@ export default function Checkbox({
   return (
     <div className="checkbox-wrapper">
       <Body classHeading="block font-bold">{checkboxTitle}</Body>
-      <label for={checkboxName} className="group flex items-center ">
+      <label htmlFor={checkboxName} className="group flex items-center ">
         <input
           className={`appearance-none w-5 h-5 border border-solid border-dark-grey rounded relative transition-all duration-300 ease-in-out ${
             isChecked
