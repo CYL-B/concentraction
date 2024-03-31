@@ -51,7 +51,7 @@ export default function Styleguide() {
         <section className="flex flex-col gap-2 Input">
           <Heading4 classHeading="underline">Inputs</Heading4>
           <Checkbox checkboxName="Example" checkboxTitle="Example" />
-          <Input></Input>
+          <Input placeholder="Placeholder" inputTitle="Input Example"></Input>
         </section>
       </Layout>
     </>

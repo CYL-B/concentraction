@@ -22,3 +22,7 @@ footer {
   background-repeat: repeat;
   background-image: url("./assets/bg-page.svg");
 }
+
+::placeholder {
+  @apply font-nunito text-base leading-6;
+}
