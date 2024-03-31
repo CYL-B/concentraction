@@ -23,11 +23,11 @@ export function Input({
 
   return (
     <div className="input-wrapper flex flex-col gap-2">
-      <Body body2={true} classHeading="font-bold"> {inputTitle}</Body>
+      <Body body2={true} classHeading={`font-bold ${isDark?"text-neutral-white":""}`}> {inputTitle}</Body>
       <label for={inputId}>
         <input
           type="" 
-          className={`border-b border-solid bg-transparent font-nunito placeholder:text-dark-grey outline-offset-4 ${!isDark?"border-light-grey focus:border-neutral-black transition-colors duration-300 ease-in-out":"border-white"}`}
+          className={`border-b border-solid bg-transparent font-nunito placeholder:text-dark-grey outline-offset-4 ${!isDark?"border-light-grey focus:border-neutral-black transition-colors duration-300 ease-in-out hover:border-brand-blue":"border-neutral-white text-neutral-white"}`}
           id={inputId}
           name={inputName}
           placeholder={placeholder}
