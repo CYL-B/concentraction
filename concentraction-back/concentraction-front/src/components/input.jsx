@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Body } from "./typography";
 import { AddButton } from "./button";
 //https://www.freecodecamp.org/news/how-to-build-forms-in-react/
-
+// https://www.w3schools.com/react/react_forms.asp
 export function Input({
   inputId,
   inputName,
@@ -12,14 +12,10 @@ export function Input({
   type,
   variant = "light",
   error,
-  onChangeInput,
+  handleChange,
   ...inputProps
 }) {
-  const [inputValue, setInputValue] = useState("");
-
-  const handleChange = (event) => {
-    setInputValue(event.target.value);
-  };
+  
 
   //Defining object variantMaps with properties meant to define each input style
   const variantMaps = {
@@ -47,11 +43,7 @@ export function Input({
 
   return (
     <div className="input-wrapper flex flex-col gap-2">
-      <Body
-        body2={true}
-        classHeading={`font-bold ${
-          titleHeading}`}
-      >
+      <Body body2={true} classHeading={`font-bold ${titleHeading}`}>
         {" "}
         {inputTitle}
       </Body>
@@ -75,8 +67,21 @@ export function Form({}) {
   const handleSubmit = () => {
     e.preventDefault();
   };
+
+  //object that contains several input values
+
+  const [inputValue, setInputValue] = useState({});
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputValue((values) => ({ ...values, [name]: value }));
+  };
+
   return (
     <form method="post" onSubmit={handleSubmit}>
+    <Input handleChange={handleChange}/>
+    <Input handleChange={handleChange}/>
       <AddButton role="submit"></AddButton>
     </form>
   );
