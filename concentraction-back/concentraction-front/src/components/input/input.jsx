@@ -1,15 +1,18 @@
 import { Body } from "../typography";
 //https://www.freecodecamp.org/news/how-to-build-forms-in-react/
 // https://www.w3schools.com/react/react_forms.asp
+//Integrating existing inputs https://react-hook-form.com/get-started#Integratinganexistingform
 export function Input({
-  inputId,
+  register,
+  required,
   inputName,
   placeholder,
   inputTitle,
-  value,
+  inputValue,
   type,
   variant = "light",
   error,
+  validate,
   handleChange,
   ...inputProps
 }) {
@@ -39,18 +42,19 @@ export function Input({
     titleHeading = "text-neutral-black";
   }
 
+  console.log("register", register(inputName))
   return (
     <div className="input-wrapper flex flex-col gap-2">
       <Body body2={true} classHeading={`font-bold ${titleHeading}`}>
         {" "}
         {inputTitle}
       </Body>
-      <label htmlFor={inputId}>
+      <label htmlFor={inputName}>
         <input
+        {...register(inputName)}
           type={type}
           className={`${finalInputClasses}`}
-          id={inputId}
-          name={inputName}
+          id={inputName}
           placeholder={placeholder}
           onChange={handleChange}
           value={inputValue}

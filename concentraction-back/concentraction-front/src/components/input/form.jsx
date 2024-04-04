@@ -1,8 +1,7 @@
+import React from "react";
 import { Input, FieldSet } from "./input";
-import { Dropdown, Option } from "./dropdown";
-import { TextArea } from "./textarea";
 import { AddButton } from "../button";
-import { useForm , SubmitHandler} from "react-hook-form";
+import { useForm , Form} from "react-hook-form";
 
 //watch : watch input value by passing the name of it
 //"handleSubmit" will validate your inputs before invoking "onSubmit"
@@ -10,7 +9,7 @@ import { useForm , SubmitHandler} from "react-hook-form";
 //include validation with required or other standard HTML validation rules
 //errors.nameOfInput : {/* errors will return when field validation fails  */}
 
-export function Form({}) {
+export function CustomForm({}) {
   const {
     register,
     handleSubmit,
@@ -28,19 +27,49 @@ export function Form({}) {
   //     setInputValue((values) => ({ ...values, [name]: value }));
   //   };
 
+
+
   const onSubmit = (data) => {
     console.log(data);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <Form action ="/api"
+    method="post"
+    onSubmit={handleSubmit(onSubmit)}
+    onSuccess
+    onError
+    validateStatus>
       <FieldSet>
-        <Input {...register("example")} />
-       <Dropdown {...register("dropdown example"), {required:true}}>
-        <Option value="Option 1">Option 1</Option>
-        </Dropdown>
+        <Input type="number" inputName="example1" register={register} aria-invalid={errors.example1 ? "true" : "false"}/>
+        <Input inputName="example2" register={register} required />
+       
       </FieldSet>
       <AddButton role="submit"></AddButton>
-    </form>
+    </Form>
   );
+}
+
+
+export function FormTwo ({defaultValues, children, onSubmit}) {
+  const { handleSubmit, register } = useForm({ defaultValues });
+  const childrenArray = React.Children.toArray(children);
+
+  console.log("register", register)
+  return(
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {childrenArray.map((child) => {
+        return child.props.inputName ?
+        React.createElement(child.type, {
+          ...{
+            ...child.props,
+            register,
+            key:child.props.name,
+          }
+        })
+        :child
+      })}
+
+    </form>
+  )
 }

@@ -13,12 +13,13 @@ import { Button, AddButton } from "../components/button";
 import { Link } from "../components/links";
 
 //Input
-import Checkbox from "../components/checkbox";
-import { Input } from "../components/input";
-import InputDatePicker from "../components/datePicker";
+import Checkbox from "../components/input/checkbox";
+import { Input } from "../components/input/input";
+import { FormTwo } from "../components/input/form";
+import InputDatePicker from "../components/input/datePicker";
 
 //Page layout
-import Layout from "../components/layout";
+import Layout from "../components/layout/layout";
 
 export default function Styleguide() {
   return (
@@ -52,7 +53,7 @@ export default function Styleguide() {
         <section className="flex flex-col gap-2 Input">
           <Heading4 classHeading="underline">Inputs</Heading4>
           <Checkbox checkboxName="Example" checkboxTitle="Example" />
-          <Input placeholder="Placeholder" inputTitle="Input Example"></Input>
+          <FormTwo><Input inputName="example" placeholder="Placeholder" inputTitle="Input Example"></Input></FormTwo>
           <InputDatePicker></InputDatePicker>
         </section>
       </Layout>

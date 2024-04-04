@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Body } from "./typography";
+import { Body } from "../typography";
 
 export default function Checkbox({
   checkboxId,

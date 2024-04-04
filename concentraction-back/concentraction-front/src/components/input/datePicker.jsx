@@ -1,7 +1,7 @@
 //https://github.com/Hacker0x01/react-datepicker
 
-import { useState, useEffect } from "react";
-import { Body } from "./typography";
+import { useState } from "react";
+import { Body } from "../typography";
 import DatePicker, {
   registerLocale,
   CalendarContainer,
