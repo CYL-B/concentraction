@@ -1,6 +1,4 @@
-import { useState } from "react";
-import { Body } from "./typography";
-import { AddButton } from "./button";
+import { Body } from "../typography";
 //https://www.freecodecamp.org/news/how-to-build-forms-in-react/
 // https://www.w3schools.com/react/react_forms.asp
 export function Input({
@@ -63,26 +61,11 @@ export function Input({
   );
 }
 
-export function Form({}) {
-  const handleSubmit = () => {
-    e.preventDefault();
-  };
+export function FieldSet ({children}) {
 
-  //object that contains several input values
-
-  const [inputValue, setInputValue] = useState({});
-
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputValue((values) => ({ ...values, [name]: value }));
-  };
-
-  return (
-    <form method="post" onSubmit={handleSubmit}>
-    <Input handleChange={handleChange}/>
-    <Input handleChange={handleChange}/>
-      <AddButton role="submit"></AddButton>
-    </form>
-  );
+  return(
+    <fieldset>
+      {children}
+    </fieldset>
+  )
 }
