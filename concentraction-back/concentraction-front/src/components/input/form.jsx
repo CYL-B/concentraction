@@ -50,12 +50,15 @@ export function CustomForm({}) {
   );
 }
 
+//receives children inputs : dropdown, textarea...
+//said children must be registered and receive a register prop in order for the form to pass down methods from react hook forms
 
 export function FormTwo ({defaultValues, children, onSubmit}) {
   const { handleSubmit, register } = useForm({ defaultValues });
-  const childrenArray = React.Children.toArray(children);
 
-  console.log("register", register)
+  //to map on children, it needs to be converted into an array thanks to the react method react.children.toArray
+  const childrenArray = React.Children.toArray(children);
+  
   return(
     <form onSubmit={handleSubmit(onSubmit)}>
       {childrenArray.map((child) => {
@@ -73,3 +76,5 @@ export function FormTwo ({defaultValues, children, onSubmit}) {
     </form>
   )
 }
+
+//React.createElement : create each element of its specific type, copies its props

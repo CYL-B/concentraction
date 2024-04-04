@@ -1,7 +1,14 @@
 import { Body } from "../typography";
-//https://www.freecodecamp.org/news/how-to-build-forms-in-react/
-// https://www.w3schools.com/react/react_forms.asp
 //Integrating existing inputs https://react-hook-form.com/get-started#Integratinganexistingform
+/*
+register: props required to pass register function from react hook form
+required : part of the register function
+inputName : name, id and HTMLFOR of element
+inputTitle : title of the input
+inputValue : value of each input
+type : type of input
+variant : used to choose the style to apply : light, dark or error 
+*/ 
 export function Input({
   register,
   required,
@@ -12,7 +19,6 @@ export function Input({
   type,
   variant = "light",
   error,
-  validate,
   handleChange,
   ...inputProps
 }) {
