@@ -1,5 +1,5 @@
-import { Heading2 } from "./typography";
-import { Divider } from "./divider";
+import { Heading2 } from "../typography";
+import { Divider } from "../divider";
 
 export function Header({headerTitle }) {
   return (

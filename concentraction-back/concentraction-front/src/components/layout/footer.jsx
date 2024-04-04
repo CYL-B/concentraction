@@ -1,6 +1,6 @@
-import { Heading4, Fineprint } from "./typography";
+import { Heading4, Fineprint } from "../typography";
 import { FooterLink } from "./footerLink";
-import IconifyIcon from "./icon";
+import IconifyIcon from "../icon";
 
 export default function Footer() {
   const socialElements = [
