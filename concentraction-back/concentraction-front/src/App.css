@@ -33,7 +33,7 @@ footer {
 }
 
 /*global styles applied to input*/
-input, textarea {
+input, textarea, .dropdown {
   @apply border-b border-solid bg-transparent font-nunito outline-offset-4;
 }
 
