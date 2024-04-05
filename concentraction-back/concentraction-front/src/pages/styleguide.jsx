@@ -14,7 +14,7 @@ import { Link } from "../components/links";
 
 //Input
 import Checkbox from "../components/input/checkbox";
-import { Input } from "../components/input/input";
+import { Input, TextArea } from "../components/input/input";
 import { FormTwo } from "../components/input/form";
 import InputDatePicker from "../components/input/datePicker";
 
@@ -53,7 +53,14 @@ export default function Styleguide() {
         <section className="flex flex-col gap-2 Input">
           <Heading4 classHeading="underline">Inputs</Heading4>
           <Checkbox checkboxName="Example" checkboxTitle="Example" />
-          <FormTwo><Input inputName="example" placeholder="Placeholder" inputTitle="Input Example"></Input></FormTwo>
+          <FormTwo>
+            <Input
+              name="example"
+              placeholder="Placeholder"
+              inputTitle="Input Example"
+            ></Input>
+            <TextArea name="example1" placeholder="Textarea" textTitle="TextArea"></TextArea>
+          </FormTwo>
           <InputDatePicker></InputDatePicker>
         </section>
       </Layout>
