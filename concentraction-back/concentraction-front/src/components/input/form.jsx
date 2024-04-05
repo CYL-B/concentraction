@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, FieldSet } from "./input";
+import { Input } from "./input";
 import { AddButton } from "../button";
 import { useForm , Form} from "react-hook-form";
 
@@ -40,11 +40,11 @@ export function CustomForm({}) {
     onSuccess
     onError
     validateStatus>
-      <FieldSet>
+      
         <Input type="number" inputName="example1" register={register} aria-invalid={errors.example1 ? "true" : "false"}/>
         <Input inputName="example2" register={register} required />
        
-      </FieldSet>
+
       <AddButton role="submit"></AddButton>
     </Form>
   );
@@ -62,7 +62,7 @@ export function FormTwo ({defaultValues, children, onSubmit}) {
   return(
     <form onSubmit={handleSubmit(onSubmit)}>
       {childrenArray.map((child) => {
-        return child.props.inputName ?
+        return child.props.name ?
         React.createElement(child.type, {
           ...{
             ...child.props,
@@ -71,7 +71,8 @@ export function FormTwo ({defaultValues, children, onSubmit}) {
           }
         })
         :child
-      })}
+      })
+      }
 
     </form>
   )

@@ -31,3 +31,20 @@ footer {
 .react-datepicker-wrapper input[type="text"] {
   @apply px-0;
 }
+
+/*global styles applied to input*/
+input, textarea {
+  @apply border-b border-solid bg-transparent font-nunito outline-offset-4;
+}
+
+.text-light{
+@apply border-light-grey transition-colors duration-300 ease-in-out hover:border-brand-blue placeholder:text-dark-grey [&:not(:placeholder-shown)]:border-brand-blue;
+}
+
+.text-dark {
+  @apply border-dark-grey text-neutral-white placeholder:text-dark-grey hover:border-neutral-white [&:not(:placeholder-shown)]:border-neutral-white;
+}
+
+.text-error {
+  @apply text-brand-red border-brand-red placeholder:text-brand-red;
+}
