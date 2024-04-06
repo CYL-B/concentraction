@@ -17,7 +17,7 @@ import Checkbox from "../components/input/checkbox";
 import { Input, TextArea } from "../components/input/input";
 import { FormTwo } from "../components/input/form";
 import InputDatePicker from "../components/input/datePicker";
-import { Dropdown } from "../components/input/dropdown";
+import { Dropdown, CustomDropdown } from "../components/input/dropdown";
 
 //Page layout
 import Layout from "../components/layout/layout";
@@ -63,6 +63,7 @@ export default function Styleguide() {
             <TextArea name="example1" placeholder="Textarea" textTitle="TextArea"></TextArea>
             <Dropdown name="Dropdown" options={["Options1", "Option2", "Option3"]}></Dropdown>
           </FormTwo>
+          <CustomDropdown/>
           <InputDatePicker></InputDatePicker>
         </section>
       </Layout>
