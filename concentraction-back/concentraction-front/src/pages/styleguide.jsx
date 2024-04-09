@@ -23,7 +23,6 @@ import formHandler from "../utils/hooks/formHandler";
 import Layout from "../components/layout/layout";
 
 export default function Styleguide() {
-
   return (
     <>
       <Layout
@@ -54,8 +53,8 @@ export default function Styleguide() {
         </section>
         <section className="flex flex-col gap-2 Input">
           <Heading4 classHeading="underline">Inputs</Heading4>
-          <Checkbox checkboxName="Example" checkboxTitle="Example" />
           <FormTwo>
+            <Checkbox name="Example" checkboxTitle="Example" />
             <Input
               name="example"
               placeholder="Placeholder"
@@ -74,7 +73,7 @@ export default function Styleguide() {
           <CustomDropdown
             headerTitle="Choose an option"
             options={[
-              { isSelected: false, name: "Example 1"},
+              { isSelected: false, name: "Example 1" },
               { isSelected: false, name: "Example 2" },
             ]}
           />
