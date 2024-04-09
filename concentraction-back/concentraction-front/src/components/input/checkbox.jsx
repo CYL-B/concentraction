@@ -3,7 +3,8 @@ import { Body } from "../typography";
 
 export default function Checkbox({
   checkboxId,
-  checkboxName,
+  register,
+  name,
   placeholder,
   checkboxTitle,
   checked,
@@ -14,7 +15,7 @@ export default function Checkbox({
   return (
     <div className="checkbox-wrapper">
       <Body classHeading="block font-bold">{checkboxTitle}</Body>
-      <label htmlFor={checkboxName} className="group flex items-center ">
+      <label htmlFor={name} className="group flex items-center ">
         <input
           className={`appearance-none w-5 h-5 border border-solid border-dark-grey rounded relative transition-all duration-300 ease-in-out ${
             isChecked
@@ -24,9 +25,10 @@ export default function Checkbox({
           {...checkboxProps}
           type="checkbox"
           id={checkboxId}
-          name={checkboxName}
+          name={name}
           placeholder={placeholder}
           checked={isChecked}
+          {...register(name)}
           onChange={() => setIsChecked((prev) => !prev)}
         ></input>
         <span
@@ -34,7 +36,7 @@ export default function Checkbox({
             isChecked ? "line-through" : ""
           }`}
         >
-          {checkboxName}
+          {name}
         </span>
       </label>
     </div>
