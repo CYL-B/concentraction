@@ -1,8 +1,9 @@
-import { useActionData } from "react-router-dom";
 import IconifyIcon from "../icon";
 import { Body } from "../typography";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import useFormHandler from "../../utils/hooks/formHandler";
 //https://ibrahimaq.com/blogs/how-to-create-a-custom-accessible-dropdown-with-react-and-typescript
+
 export function Dropdown({
   register,
   options,
@@ -47,49 +48,51 @@ export function Dropdown({
   );
 }
 
-export function CustomDropdown({ headerTitle, title, options, onValueUpdate }) {
+export function CustomDropdown({
+  headerTitle,
+  options = [],
+}) {
+
+  
+  //if toggleOpen, dropdown opens, if not, dropdown closes.
+  //is the selected option : its name, its status
   const [toggleOpen, setToggleOpen] = useState(false);
   const [selected, setSelected] = useState({
     isSelected: null,
     selectedName: null,
-    value:null
   });
 
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
 
+  //fires when clicked on button, toggles dropdown.
   const dropdownOpen = (e) => {
     e.preventDefault();
     setToggleOpen(!toggleOpen);
   };
 
-  const handleSelect = (option, e) => {
+  //fires when an option is clicked
+  const handleSelect = (e, option) => {
     e.preventDefault();
-    const { name,value } = option;
+    const { name } = option;
     setSelected({
       isSelected: true,
       selectedName: name,
-      value:value
     });
     setToggleOpen(false);
   };
 
-  useEffect(() => {
-    if (onValueUpdate !== undefined && selected.isSelected) {
-      onValueUpdate(selected.value);
-    }
-  }, [selected]);
+
   return (
-    <div className="dropdown-wrapper relative">
+    <div className="dropdown-wrapper relative min-w-40">
       <a
         href="#"
         aria-haspopup="dropdown-list"
         aria-expanded={toggleOpen}
         aria-label={selected.isSelected ? selected.selectedName : headerTitle}
-        title={title}
         onClick={dropdownOpen}
-        className="dropdown-header flex justify-between items-center"
+        className={`dropdown-header flex justify-between items-center border-b border-solid pb-4 ${selected.isSelected ?"border-neutral-white": toggleOpen ? "border-neutral-white": "border-light-grey"}`}
       >
-        <Body>{selected.isSelected ? selected.selectedName : headerTitle}</Body>
+        <Body classHeading="font-bold">{selected.isSelected ? selected.selectedName : headerTitle}</Body>
         <IconifyIcon
           iconName="raphael:arrowdown"
           width={20}
@@ -99,21 +102,26 @@ export function CustomDropdown({ headerTitle, title, options, onValueUpdate }) {
           }`}
         />
       </a>
-      {toggleOpen ? (
+      {toggleOpen && options.length > 1 ? (
         <ul
-          className={` dropdown-list absolute top-full flex flex-col items-start justify-center`}
+          className={` dropdown-list absolute top-full flex flex-col items-start justify-center z-50 bg-neutral-white w-full border-solid border-b  border-l border-r border-brand-blue rounded-br rounded-blshadow-brand-blue shadow-[1px_1px_0px_1px]`}
+          role="listbox"
         >
           {options.map((option, index) => {
+            return (
             <li
-              className={`list-item${index}`}
+              role="option"
+              aria-label={option.name}
+              aria-selected={option == selected}
+              className={`list-item${index} text-brand-blue font-nunito p-3 w-full`}
               name={option.name}
               key={option.name}
-              {...onValueUpdate}//function to be passed
+              
             >
-              <a href="#" onClick={handleSelect(option, e)}>
+              <a href="#" onClick={(e) => handleSelect(e, option)} className="block w-full">
                 <span>{option.name}</span>
               </a>
-            </li>;
+            </li>)
           })}
         </ul>
       ) : null}

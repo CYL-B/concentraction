@@ -18,11 +18,12 @@ import { Input, TextArea } from "../components/input/input";
 import { FormTwo } from "../components/input/form";
 import InputDatePicker from "../components/input/datePicker";
 import { Dropdown, CustomDropdown } from "../components/input/dropdown";
-
+import formHandler from "../utils/hooks/formHandler";
 //Page layout
 import Layout from "../components/layout/layout";
 
 export default function Styleguide() {
+
   return (
     <>
       <Layout
@@ -60,10 +61,23 @@ export default function Styleguide() {
               placeholder="Placeholder"
               inputTitle="Input Example"
             ></Input>
-            <TextArea name="example1" placeholder="Textarea" textTitle="TextArea"></TextArea>
-            <Dropdown name="Dropdown" options={["Options1", "Option2", "Option3"]}></Dropdown>
+            <TextArea
+              name="example1"
+              placeholder="Textarea"
+              textTitle="TextArea"
+            ></TextArea>
+            <Dropdown
+              name="Dropdown"
+              options={["Options1", "Option2", "Option3"]}
+            ></Dropdown>
           </FormTwo>
-          <CustomDropdown/>
+          <CustomDropdown
+            headerTitle="Choose an option"
+            options={[
+              { isSelected: false, name: "Example 1"},
+              { isSelected: false, name: "Example 2" },
+            ]}
+          />
           <InputDatePicker></InputDatePicker>
         </section>
       </Layout>
