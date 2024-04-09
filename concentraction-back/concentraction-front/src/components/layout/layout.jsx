@@ -16,7 +16,7 @@ export default function Layout({
     <div id={id} className="layout flex h-screen w-screen bg-background">
       <NavBar />
 
-      <main role="main" className={`relative p-10 overflow-y-scroll overflow-x-hidden box-border ${mainClassName ?? ""}`}>
+      <main role="main" className={`relative z-10 p-10 overflow-y-scroll overflow-x-hidden box-border ${mainClassName ?? ""}`}>
         <Header headerTitle={headerTitle}></Header>
         <div className={`container mx-auto ${containerClassName ?? ""}`}>
           <div className={`w-full ${ pageClassName?? ""}`}>

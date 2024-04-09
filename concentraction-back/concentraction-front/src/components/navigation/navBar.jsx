@@ -25,7 +25,7 @@ export default function NavBar() {
     setIsShown(!isShown);
   
   };
-  const navBarStyle = `w-screen fixed lg:relative z-20 z-1 transition-all duration-500 ease-in-out  ${
+  const navBarStyle = `w-screen fixed lg:relative z-20 transition-all duration-500 ease-in-out  ${
     isToggle ? "lg:w-20" : "lg:w-64"
   } ${
     isShown ? "translate-x-0" : "-translate-x-[100%]"
