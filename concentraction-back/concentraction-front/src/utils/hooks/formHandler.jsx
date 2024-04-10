@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function useFormHandler  (optionSelected)  {
+export default function useFormHandler  (e,optionSelected)  {
   //if toggleOpen, dropdown opens, if not, dropdown closes.
   //is the selected option : its name, its status
   const [toggleOpen, setToggleOpen] = useState(false);
@@ -15,13 +15,13 @@ export default function useFormHandler  (optionSelected)  {
 //   const hasError = !valueIsValid && isTouched;
 
   //fires when clicked on button, toggles dropdown.
-  const dropdownOpen = (e) => {
+  const dropdownOpen = () => {
     e.preventDefault();
     setToggleOpen(!toggleOpen);
   };
 
   //fires when an option is clicked
-  const handleSelect = (e) => {
+  const handleSelect = (e, optionSelected) => {
     e.preventDefault();
     const { name } = optionSelected;
     setSelected({
