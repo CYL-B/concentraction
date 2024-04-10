@@ -25,7 +25,7 @@ export default function NavBar() {
     setIsShown(!isShown);
   
   };
-  const navBarStyle = `w-screen fixed lg:relative z-20 transition-all duration-500 ease-in-out  ${
+  const navBarStyle = `w-screen h-screen fixed lg:sticky z-20 transition-all duration-500 ease-in-out  ${
     isToggle ? "lg:w-20" : "lg:w-64"
   } ${
     isShown ? "translate-x-0" : "-translate-x-[100%]"
@@ -44,7 +44,7 @@ export default function NavBar() {
       <TopButtonMobile topButtonFunction={showNavBar}/>
     <nav className={navBarClass}>
       <ul
-        className={`static lg:sticky p-5 top-0 left-0 w-full h-full z-0 flex flex-col justify-evenly items-center lg:items-start`}
+        className={`p-5 top-0 left-0 w-full h-full z-0 flex flex-col justify-evenly items-center lg:items-start`}
       >
         <TopButton toggleNavBar={toggleNavBar}/>
 
