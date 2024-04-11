@@ -18,16 +18,15 @@ export default function Layout({
 
   const ref= useRef(null);
   const scrollToMain = () => {
-
+ 
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
   return (
-    <>
-    <div id={id} className="layout flex w-screen h-auto bg-background">
+    <div id={id} className="layout flex w-screen min-h-screen bg-background ">
       <NavBar />
       <main 
         role="main"
-        className={`relative z-10 p-10 box-border overflow-x-hidden overflow-y-visible${
+        className={`relative z-10 p-10 box-border overflow-x-hidden overflow-y-hidden w-full ${
           mainClassName ?? ""
         }`}
       >
@@ -39,7 +38,6 @@ export default function Layout({
       </main>
       <Scrolltop scrollToTop={scrollToMain} />
     </div>
-    </>
   );
 }
 //?? : if value on the left is defined, it returns said value, if not, returns value on the right
