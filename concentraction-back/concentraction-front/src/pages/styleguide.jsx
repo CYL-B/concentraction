@@ -80,11 +80,7 @@ export default function Styleguide() {
         />
         <InputDatePicker></InputDatePicker>
       </section>
-<<<<<<< HEAD
       <section className="tabs flex flex-col w-fit">
-=======
-      <section className="tabs">
->>>>>>> 3008fb15f81b15ac87547d6d9339dd44086deeb3
         <Heading4 classHeading="underline">Tabs</Heading4>
         <Tabs
           tabsIds={["Example1", "Example2", "Example3"]}
