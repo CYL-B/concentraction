@@ -33,12 +33,14 @@ footer {
 }
 
 /*global styles applied to input*/
-input, textarea, .dropdown {
+input,
+textarea,
+.dropdown {
   @apply border-b border-solid bg-transparent font-nunito outline-offset-4;
 }
 
-.text-light{
-@apply border-light-grey transition-colors duration-300 ease-in-out hover:border-brand-blue placeholder:text-dark-grey [&:not(:placeholder-shown)]:border-brand-blue;
+.text-light {
+  @apply border-light-grey transition-colors duration-300 ease-in-out hover:border-brand-blue placeholder:text-dark-grey [&:not(:placeholder-shown)]:border-brand-blue;
 }
 
 .text-dark {
@@ -47,4 +49,11 @@ input, textarea, .dropdown {
 
 .text-error {
   @apply text-brand-red border-brand-red placeholder:text-brand-red;
+}
+
+.scrolltop:hover {
+  
+  .segment {
+    @apply fill-brand-blue;
+  }
 }
