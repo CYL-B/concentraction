@@ -1,0 +1,70 @@
+{
+  "hash": "6b21a245",
+  "configHash": "1cd5a11b",
+  "lockfileHash": "a1478a8c",
+  "browserHash": "90f732b7",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "b3631ca4",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "43102b54",
+      "needsInterop": true
+    },
+    "@apollo/client": {
+      "src": "../../node_modules/@apollo/client/index.js",
+      "file": "@apollo_client.js",
+      "fileHash": "a342b77c",
+      "needsInterop": false
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "4955aa6c",
+      "needsInterop": false
+    },
+    "react-hook-form": {
+      "src": "../../node_modules/react-hook-form/dist/index.esm.mjs",
+      "file": "react-hook-form.js",
+      "fileHash": "2955d131",
+      "needsInterop": false
+    },
+    "react-datepicker": {
+      "src": "../../node_modules/react-datepicker/dist/es/index.js",
+      "file": "react-datepicker.js",
+      "fileHash": "43f859bb",
+      "needsInterop": false
+    },
+    "date-fns/locale/fr": {
+      "src": "../../node_modules/date-fns/locale/fr.mjs",
+      "file": "date-fns_locale_fr.js",
+      "fileHash": "2fffb55b",
+      "needsInterop": false
+    },
+    "@iconify-icon/react": {
+      "src": "../../node_modules/@iconify-icon/react/dist/iconify.mjs",
+      "file": "@iconify-icon_react.js",
+      "fileHash": "b4d333d2",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-UF7DBQZA": {
+      "file": "chunk-UF7DBQZA.js"
+    },
+    "chunk-HLO74UWM": {
+      "file": "chunk-HLO74UWM.js"
+    },
+    "chunk-TQDKLHUW": {
+      "file": "chunk-TQDKLHUW.js"
+    },
+    "chunk-LNEMQRCO": {
+      "file": "chunk-LNEMQRCO.js"
+    }
+  }
+}

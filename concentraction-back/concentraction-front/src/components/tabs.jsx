@@ -1,20 +1,24 @@
 import { useState } from "react";
-export default function Tabs({ tabsIds=[], getHeader = () => {}, renderContent = () => {} }) {
-
-    //state active = takes the first element in the tabsIds array and sets it as the default open/active tab
-    //tabsId = array which includes each name of the tabs
-    //getHeader = function passed as a prop which returns the name of each tab button 
-    //renderContent = function passed as a prop which returns the active content based on the active tab id. 
+import { Heading3 } from "./typography";
+export default function Tabs({
+  tabsIds = [],
+  getHeader = () => {},
+  renderContent = () => {},
+}) {
+  //state active = takes the first element in the tabsIds array and sets it as the default open/active tab
+  //tabsId = array which includes each name of the tabs
+  //getHeader = function passed as a prop which returns the name of each tab button
+  //renderContent = function passed as a prop which returns the active content based on the active tab id.
   const [active, setActive] = useState(tabsIds[0]);
 
   return (
     <>
-      <ul className="tab__menu flex justify-around">
+      <ul className="tab__menu flex justify-around gap-5">
         {tabsIds.map((tabId) => {
           return (
-            <li key={tabId} className="tab__link">
+            <li key={tabId} className={`tab__link pb-2 border-b-2 border-solid transition-all ease-in-out duration-300 ${active == tabId ?"active text-brand-blue border-brand-blue":" inactive text-dark-grey border-transparent"}`}>
               <a href="#" onClick={() => setActive(tabId)}>
-                <span>{getHeader(tabId)}</span>
+                <Heading3>{getHeader(tabId)}</Heading3>
               </a>
             </li>
           );
