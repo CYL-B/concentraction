@@ -24,6 +24,9 @@ import Layout from "../components/layout/layout";
 //Tabs
 import Tabs from "../components/tabs";
 
+//Tags
+import Tag from "../components/tags";
+
 export default function Styleguide() {
   return (
     <Layout
@@ -83,6 +86,7 @@ export default function Styleguide() {
       <section className="tabs flex flex-col w-fit">
         <Heading4 classHeading="underline">Tabs</Heading4>
         <Tabs
+          tabMenuClassName="flex-wrap"
           tabsIds={["Example1", "Example2", "Example3"]}
           getHeader={(tabId) => {
             return tabId;
@@ -91,6 +95,10 @@ export default function Styleguide() {
             return tabId.toUpperCase();
           }}
         />
+      </section>
+      <section className="cards">
+      <Heading4 classHeading="underline">Cards and lists</Heading4>
+        <Tag>Example 1</Tag>
       </section>
     </Layout>
   );
