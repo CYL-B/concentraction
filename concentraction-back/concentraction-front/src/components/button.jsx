@@ -60,12 +60,13 @@ export function Button({
 export function AddButton({
   onClick,
   children,
-  addText = true,
+  addText = false,
   role = "button",
+  addButtonClass
 }) {
   return (
     <button
-      className="flex items-center justify-center gap-3 hover:last:underline"
+      className={`flex items-center justify-center gap-3 hover:last:underline ${addButtonClass}`}
       onClick={onClick}
       type={role}
     >

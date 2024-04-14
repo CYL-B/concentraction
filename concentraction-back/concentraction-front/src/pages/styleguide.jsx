@@ -27,6 +27,7 @@ import Tabs from "../components/tabs";
 //Tags and Cards
 import Tag from "../components/tags";
 import Card from "../components/card";
+import ListCard from "../components/listCard";
 
 export default function Styleguide() {
   return (
@@ -100,7 +101,9 @@ export default function Styleguide() {
       <section className="cards">
         <Heading4 classHeading="underline">Cards and lists</Heading4>
         <Tag>Example 1</Tag>
-        <Card cardTitle="Example1" cardDate="29 mai 2024" />
+        <Card cardId="Example1" cardTitle="Example1" cardDate="29 mai 2024" />
+        <Card cardId="Example2" cardTitle="Example2" cardDate="28 mai 2024" />
+        <ListCard listTitle="Test" listId="Test"></ListCard>
       </section>
     </Layout>
   );

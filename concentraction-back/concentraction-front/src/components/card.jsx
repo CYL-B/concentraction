@@ -2,9 +2,12 @@ import { Body } from "./typography";
 import Tag from "./tags";
 import IconifyIcon from "./icon";
 
-export default function Card({ cardTitle, cardDate }) {
+import useDraggable from "../utils/hooks/draggableHook";
+
+export default function Card({ cardId, cardTitle, cardDate }) {
+
   return (
-    <div className="flex justify-between items-end min-w-[296px] h-fit bg-brand-blue rounded-xl p-2">
+    <div id={cardId}  {...useDraggable(cardId)} draggable={true} className="flex justify-between items-end min-w-[296px] h-fit bg-brand-blue rounded-xl p-2">
       <div className="left-section">
         <Body classBody="font-bold text-neutral-white pb-1 text-shadow-card">{cardTitle}</Body>
         <CardDivider />
