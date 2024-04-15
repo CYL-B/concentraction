@@ -25,8 +25,8 @@ export default function Tabs({
           );
         })}
       </ul>
-      <div className="tab__container">
-        <div id={active} className="tab__content">
+      <div className="tab__container h-screen">
+        <div id={active} className="tab__content h-full">
           {renderContent(active)}
         </div>
       </div>

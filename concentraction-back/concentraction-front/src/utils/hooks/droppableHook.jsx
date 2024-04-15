@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 const useDroppable = (id) => {
   const [over, setOver] = useState(false);
+  const [cardList, setCardList] = useState([]);
 
   useEffect(() => {
     const handleDragOver = (event) => {
@@ -15,16 +16,8 @@ const useDroppable = (id) => {
     const handleDrop = (event) => {
       event.preventDefault();
       // Retrieve the data that was set during the drag operation
-      console.log(event.dataTransfer)
-      const draggedId = event.dataTransfer.getData("text/plain");
-      console.log(draggedId)
-
-      const source = document.getElementById(draggedId);
-      const dropTarget = document.querySelector(`#${id}`);
-      // Append the draggable element to the droppable area
-      dropTarget.appendChild(source);
-      // handle the drop action here
-      setOver(false);
+      const dragged = event.dataTransfer.getData("text/plain");
+      setCardList(...cardList, dragged);
     };
     const dropTarget = document.querySelector(`#${id}`);
     dropTarget.addEventListener("dragover", handleDragOver);
@@ -38,7 +31,7 @@ const useDroppable = (id) => {
     };
   }, [id]);
 
-  return { over };
+  return { over, cardList };
 };
 
 export default useDroppable;

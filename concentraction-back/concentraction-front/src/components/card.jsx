@@ -4,25 +4,35 @@ import IconifyIcon from "./icon";
 
 import useDraggable from "../utils/hooks/draggableHook";
 
-export default function Card({ cardId, cardTitle, cardDate }) {
+export default function Card({ cardTitle, cardDate, cardTag, handleOnDrag }) {
 
+
+  if(cardTitle && cardDate ){
   return (
-    <div id={cardId}  {...useDraggable(cardId)} draggable={true} className="flex justify-between items-end min-w-[296px] h-fit bg-brand-blue rounded-xl p-2">
+    <div
+      id={cardTitle}
+      draggable={true}
+      onDragStart={handleOnDrag}
+      className="flex justify-between items-end min-w-[296px] h-fit bg-brand-blue rounded-xl p-2"
+    >
       <div className="left-section">
-        <Body classBody="font-bold text-neutral-white pb-1 text-shadow-card">{cardTitle}</Body>
+        <Body classBody="font-bold text-neutral-white pb-1 text-shadow-card">
+          {cardTitle}
+        </Body>
         <CardDivider />
         <Body classBody="text-neutral-white pt-1 text-shadow-card" body2={true}>
           {cardDate}
         </Body>
       </div>
       <div className="middle-section"></div>
-      <Tag>CardTag</Tag>
+      {cardTag && 
+      <Tag>{cardTag}</Tag>}
       <div className="flex flex-col right-section">
         <CardDeleteButton />
         <CardUpdateButton />
       </div>
     </div>
-  );
+  )};
 }
 
 function CardDivider() {
