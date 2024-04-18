@@ -26,8 +26,6 @@ import Tabs from "../components/tabs";
 
 //Tags and Cards
 import Tag from "../components/tags";
-import Card from "../components/card";
-import ListCard from "../components/listCard";
 
 export default function Styleguide() {
   return (
