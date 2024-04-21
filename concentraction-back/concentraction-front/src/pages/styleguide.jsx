@@ -1,3 +1,4 @@
+import { useState } from "react";
 //Typography section
 import {
   Heading1,
@@ -26,8 +27,13 @@ import Tabs from "../components/tabs";
 
 //Tags and Cards
 import Tag from "../components/tags";
+import  Card  from "../components/dnd/card";
+import ListCard from "../components/dnd/listCard"
 
 export default function Styleguide() {
+  const onSubmitExample = (data) => {
+    console.log(data)
+  }
   return (
     <Layout
       id="Styleguide"
@@ -57,7 +63,7 @@ export default function Styleguide() {
       </section>
       <section className="flex flex-col gap-2 Input">
         <Heading4 classHeading="underline">Inputs</Heading4>
-        <FormTwo>
+        <FormTwo onSubmit={onSubmitExample}>
           <Checkbox name="Example" checkboxTitle="Example" />
           <Input
             name="example"
@@ -73,15 +79,18 @@ export default function Styleguide() {
             name="Dropdown"
             options={["Options1", "Option2", "Option3"]}
           ></Dropdown>
-        </FormTwo>
-        <CustomDropdown
+            <InputDatePicker></InputDatePicker>
+          {/* <CustomDropdown
           headerTitle="Choose an option"
+          name="Dropdown 2"
           options={[
             { isSelected: false, name: "Example 1" },
             { isSelected: false, name: "Example 2" },
           ]}
-        />
-        <InputDatePicker></InputDatePicker>
+        /> */}
+          <button type="submit">Submit</button>
+        </FormTwo>
+        
       </section>
       <section className="tabs flex flex-col w-fit">
         <Heading4 classHeading="underline">Tabs</Heading4>

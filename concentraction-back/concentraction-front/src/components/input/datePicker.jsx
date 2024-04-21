@@ -1,6 +1,5 @@
 //https://github.com/Hacker0x01/react-datepicker
 
-import { useState } from "react";
 import { Body } from "../typography";
 
 //Date picker imports
@@ -14,9 +13,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { fr } from "date-fns/locale/fr";
 registerLocale("fr", fr);
 
-//form validation with react hook form
-import { Controller, useForm } from "react-hook-form";
-
 // const MyContainer = ({ className, children }) => {
 //     return (
 //       <div style={{ padding: "16px", background: "#216ba5", color: "#fff" }}>
@@ -27,27 +23,24 @@ import { Controller, useForm } from "react-hook-form";
 //     );
 //   };
 
-export default function InputDatePicker() {
-  const { control, register, handleSubmit } = useForm();
+export default function InputDatePicker({onChange, value}) {
 
   return (
-    <div className="date-wrapper flex flex-col gap-y-2">
+    <div
+      className="date-wrapper flex flex-col gap-y-2"
+    >
       <Body classHeading="font-bold" body2={true}>
         Date example
       </Body>
-      <Controller
-        control={control}
-        name="date-input"
-        render={({ field }) => (
           <DatePicker
             locale="fr"
             dateFormat="P"
             className="font-nunito text-base leading-6 border-solid border-b border-brand-blue bg-transparent"
             showIcon
             showTimeInput
-            selected={field.value}
+            selected={value}
             toggleCalendarOnIconClick
-            onChange={(date) => field.onChange(date)}
+            onChange={onChange}
             icon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -140,8 +133,6 @@ export default function InputDatePicker() {
               </svg>
             }
           />
-        )}
-      />
     </div>
   );
 }

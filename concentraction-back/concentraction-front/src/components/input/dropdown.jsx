@@ -1,7 +1,8 @@
 import IconifyIcon from "../icon";
 import { Body } from "../typography";
-import { useState, useEffect } from "react";
-import useFormHandler from "../../utils/hooks/formHandler";
+import { useState } from "react";
+import { useForm} from "react-hook-form";
+
 //https://ibrahimaq.com/blogs/how-to-create-a-custom-accessible-dropdown-with-react-and-typescript
 
 export function Dropdown({
@@ -51,18 +52,16 @@ export function Dropdown({
 export function CustomDropdown({
   headerTitle,
   options = [],
+  onChange,
+  value
 }) {
-
-  
   //if toggleOpen, dropdown opens, if not, dropdown closes.
   //is the selected option : its name, its status
   const [toggleOpen, setToggleOpen] = useState(false);
   const [selected, setSelected] = useState({
-    isSelected: null,
-    selectedName: null,
+    isSelected: false,
+    selectedValue: value
   });
-
-  // const [error, setError] = useState(null);
 
   //fires when clicked on button, toggles dropdown.
   const dropdownOpen = (e) => {
@@ -72,27 +71,32 @@ export function CustomDropdown({
 
   //fires when an option is clicked
   const handleSelect = (e, option) => {
-    e.preventDefault();
-    const { name } = option;
-    setSelected({
-      isSelected: true,
-      selectedName: name,
-    });
+    setSelected({ isSelected: true, selectedValue: option.name });
+    onChange(option.name)
     setToggleOpen(false);
   };
 
-
   return (
-    <div className="dropdown-wrapper relative min-w-40">
+    <div
+      className="dropdown-wrapper relative min-w-40"
+    >
       <a
         href="#"
         aria-haspopup="dropdown-list"
         aria-expanded={toggleOpen}
-        aria-label={selected.isSelected ? selected.selectedName : headerTitle}
+        aria-label={selected.isSelected ? value : headerTitle}
         onClick={dropdownOpen}
-        className={`dropdown-header flex justify-between items-center border-b border-solid pb-4 ${selected.isSelected ?"border-neutral-white": toggleOpen ? "border-neutral-white": "border-light-grey"}`}
+        className={`dropdown-header flex justify-between items-center border-b border-solid pb-4 ${
+          selected.isSelected
+            ? "border-neutral-white"
+            : toggleOpen
+            ? "border-neutral-white"
+            : "border-light-grey"
+        }`}
       >
-        <Body classHeading="font-bold">{selected.isSelected ? selected.selectedName : headerTitle}</Body>
+        <Body classHeading="font-bold">
+          {selected.isSelected ? value : headerTitle}
+        </Body>
         <IconifyIcon
           iconName="raphael:arrowdown"
           width={20}
@@ -109,19 +113,23 @@ export function CustomDropdown({
         >
           {options.map((option, index) => {
             return (
-            <li
-              role="option"
-              aria-label={option.name}
-              aria-selected={option == selected}
-              className={`list-item${index} text-brand-blue font-nunito p-3 w-full`}
-              name={option.name}
-              key={option.name}
-              
-            >
-              <a href="#" onClick={(e) => handleSelect(e, option)} className="block w-full">
-                <span>{option.name}</span>
-              </a>
-            </li>)
+              <li
+                role="option"
+                aria-label={option.name}
+                aria-selected={option == value}
+                className={`list-item${index} text-brand-blue font-nunito p-3 w-full`}
+                name={option.name}
+                key={option.name}
+              >
+                <a
+                  href="#"
+                  onClick={(e) => handleSelect(e, option)}
+                  className="block w-full"
+                >
+                  <span>{option.name}</span>
+                </a>
+              </li>
+            );
           })}
         </ul>
       ) : null}

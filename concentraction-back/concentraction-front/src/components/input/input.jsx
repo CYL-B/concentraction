@@ -4,7 +4,6 @@ import { Body } from "../typography";
 register: props required to pass register function from react hook form
 required : part of the register function
 name : name, id and HTMLFOR of element
-inputTitle : title of the input
 inputValue : value of each input
 type : type of input
 variant : used to choose the style to apply : light, dark or error 
@@ -15,10 +14,10 @@ export function Input({
   required,
   name,
   placeholder,
-  inputTitle,
   inputValue,
+  isNotCustomComponent = true,
   type,
-  variant = "text-dark",
+  variant,
   error,
   handleChange,
   ...inputProps
@@ -33,10 +32,10 @@ export function Input({
   }
 
   return (
-    <fieldset className="input-wrapper flex flex-col gap-2">
+    <fieldset className="input-wrapper flex flex-col gap-2" {...isNotCustomComponent}>
       <Body body2={true} classHeading={`font-bold ${titleHeading}`}>
         {" "}
-        {inputTitle}
+        {name}
       </Body>
       <label htmlFor={name}>
         <input
@@ -59,7 +58,6 @@ export function TextArea({
   required,
   name,
   placeholder,
-  textTitle,
   textValue,
   type,
   variant = "text-light",
@@ -87,7 +85,7 @@ export function TextArea({
   return (
     <fieldset className="text-wrapper flex flex-col gap-2">
       <Body body2={true} classHeading={`font-bold ${titleHeading}`}>
-        {textTitle}
+        {name}
       </Body>
       <label htmlFor={name}>
         <textarea

@@ -25,7 +25,7 @@ export default function Card({ cardTitle, cardDate, cardTag,...cardProps }) {
         </div>
       </div>
     );
-  }
+  } else {return}
 }
 
 function CardDivider() {
