@@ -4,7 +4,6 @@ import InputDatePicker from "./datePicker";
 import { AddButton } from "../button";
 import { useForm, Controller } from "react-hook-form";
 
-//watch : watch input value by passing the name of it
 //"handleSubmit" will validate your inputs before invoking "onSubmit"
 //register : register your input into the hook by invoking the "register" function
 //include validation with required or other standard HTML validation rules

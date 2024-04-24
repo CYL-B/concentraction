@@ -25,7 +25,7 @@ export function Button({
 }) {
   const buttonLayoutClasses = `btn font-anton rounded-md text-base leading-6 text-center border-[3px] border-solid align-middle flex ${
     isIcon ? "p-0" : "px-11 py-5"
-  } w-auto h-auto focus:outline focus:outline-solid focus:ring-brand-yellow`;
+  } w-fit h-auto focus:outline focus:outline-solid focus:ring-brand-yellow`;
 
   const finalButtonClasses = `${buttonLayoutClasses} ${type} ${
     variantMaps[variant.toLowerCase()]
@@ -46,7 +46,7 @@ export function Button({
   } else {
     return (
       <button
-        role="button"
+        type={role}
         onClick={onClick}
         className={finalButtonClasses}
         {...restProps}

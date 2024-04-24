@@ -1,8 +1,8 @@
 import Checkbox from "./checkbox";
-import { Input, TextArea } from "./input";
-import { CustomDropdown } from "./dropdown";
-import { AddButton } from "../button";
-import { useForm, Controller } from "react-hook-form";
+import { Input } from "./input";
+import { Button } from "../button";
+import { Heading1 } from "../typography";
+import { useForm } from "react-hook-form";
 
 export function SignUpForm() {
   const {
@@ -15,20 +15,25 @@ export function SignUpForm() {
   const onSubmit = (data) => {
     console.log(data);
   };
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+  return (<div className="border-[5px] border-neutral-black flex flex-col items-center gap-1 p-4 lg:gap-10 rounded">
+    <Heading1>Sign Up</Heading1>
+    <form className="flex flex-col gap-1 lg:gap-8 items-center justify-between w-auto" onSubmit={handleSubmit(onSubmit)}>
       <Input
+        placeholder="Nom"
         name="Nom"
         register={register}
+        required= {true}
+        type="text"
         aria-invalid={errors.example1 ? "true" : "false"}
       />
-      <Input name="Prénom" register={register} required />
-      <Input name="Email" register={register} required />
-      <Input name="Password" register={register} required />
+      <Input placeholder="Prénom" name="Prénom" register={register} required= {true} type="text" />
+      <Input placeholder="Email" name="Email" register={register}  required= {true} type="email" />
+      <Input placeholder="Password" name="Password" register={register}  required= {true} type="password" minLength={8}/>
 
       <Checkbox name="Data" register={register} />
-      <AddButton role="submit" />
+      <Button role="submit" type="button">Sign up</Button>
     </form>
+    </div>
   );
 }
 

@@ -11,13 +11,14 @@ variant : used to choose the style to apply : light, dark or error
 
 export function Input({
   register,
-  required,
   name,
+  required = false,
   placeholder,
+  minLength,
   inputValue,
   isNotCustomComponent = true,
   type,
-  variant,
+  variant ="",
   error,
   handleChange,
   ...inputProps
@@ -32,20 +33,19 @@ export function Input({
   }
 
   return (
-    <fieldset className="input-wrapper flex flex-col gap-2" {...isNotCustomComponent}>
-      <Body body2={true} classHeading={`font-bold ${titleHeading}`}>
+    <fieldset className="input-wrapper flex flex-col gap-2 w-fit" {...isNotCustomComponent}>
+      <Body body2={true} classBody={`font-bold ${titleHeading}`}>
         {" "}
         {name}
       </Body>
       <label htmlFor={name}>
         <input
-          {...register(name)}
+          {...register(name, {required: required}, {minLength: minLength})}
           type={type}
           className={`${variant}`}
           id={name}
           placeholder={placeholder}
           onChange={handleChange}
-          value={inputValue}
           {...inputProps}
         ></input>
       </label>
