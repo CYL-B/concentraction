@@ -4,7 +4,7 @@ import cors from "cors";
 import 'dotenv/config.js';
 // import gql from "graphql-tag";
 import { ApolloServer } from '@apollo/server';
-// import { buildSubgraphSchema } from '@apollo/subgraph';
+import { buildSubgraphSchema } from '@apollo/subgraph';
 import { expressMiddleware } from '@apollo/server/express4';
 import resolvers from "./resolvers.js";
 import {typeDefs} from "./schema.js";
@@ -22,8 +22,7 @@ app.use(express.json());
 // );
 
  const server = new ApolloServer({
-     resolvers, typeDefs
- });
+  schema: buildSubgraphSchema({ typeDefs, resolvers })});
 
 //EN attendant que resolvers soit opérationnel
 //schema: buildSubgraphSchema

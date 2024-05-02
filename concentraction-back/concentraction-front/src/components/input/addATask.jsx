@@ -4,12 +4,17 @@ import InputDatePicker from "./datePicker";
 import { AddButton } from "../button";
 import { useForm, Controller } from "react-hook-form";
 
+//redux
+import { useDispatch } from "react-redux";
+
 //"handleSubmit" will validate your inputs before invoking "onSubmit"
 //register : register your input into the hook by invoking the "register" function
 //include validation with required or other standard HTML validation rules
 //errors.nameOfInput : {/* errors will return when field validation fails  */}
 
 export function AddATask({}) {
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -19,6 +24,7 @@ export function AddATask({}) {
 
   const onSubmit = (data) => {
     console.log(data);
+    dispatch(addTask(data));
   };
 
   return (
