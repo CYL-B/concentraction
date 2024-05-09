@@ -1,8 +1,7 @@
 import {
   ApolloClient,
   InMemoryCache,
-  createHttpLink,
-  gql,
+  createHttpLink
 } from "@apollo/client";
 
 //connect the ApolloClient instance with the GraphQL API.

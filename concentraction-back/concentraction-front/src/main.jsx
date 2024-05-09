@@ -13,16 +13,14 @@ import { routerNav } from "./services/react-router-dom.jsx";
 
 //Redux import
 import {Provider} from 'react-redux';
-import {store} from './store.js';
+// import {store} from './store.js';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Provider store={store}>
     <RouterProvider router={routerNav} >
     <ApolloProvider client={apolloClient}>
       <App />
     </ApolloProvider>
     </RouterProvider>
-    </Provider>
   </React.StrictMode>
 );

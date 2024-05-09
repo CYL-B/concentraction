@@ -1,4 +1,4 @@
-import { Icon, iconExists } from "@iconify-icon/react";
+import { Icon } from "@iconify-icon/react";
 //iconName : le nom de l'icon
 //iconClassName : classes à ajouter pour changer le style de l'icon
 

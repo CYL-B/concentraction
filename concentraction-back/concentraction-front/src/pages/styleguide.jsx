@@ -13,6 +13,9 @@ import {
 import { Button, AddButton } from "../components/button";
 import { Link } from "../components/links";
 
+//Calendar
+import CalendarWrapper from "../components/calendar/calendarWrapper";
+
 //Input
 import Checkbox from "../components/input/checkbox";
 import { Input, TextArea } from "../components/input/input";
@@ -39,7 +42,7 @@ export default function Styleguide() {
       id="Styleguide"
       headerTitle="Styleguide"
       containerClassName="flex"
-      pageClassName="grid grid-cols-4 grid-rows-2 gap-2"
+      pageClassName="grid grid-cols-3 grid-rows-2 gap-2"
     >
       <section className="typography">
         <Heading4 classHeading="underline">Typography</Heading4>
@@ -111,6 +114,10 @@ export default function Styleguide() {
         <Card cardId="Example1" cardTitle="Example1" cardDate="29 mai 2024" />
         <Card cardId="Example2" cardTitle="Example2" cardDate="28 mai 2024" />
         <ListCard listTitle="Test" listId="Test"></ListCard>
+      </section>
+      <section className="calendar">
+      <Heading4 classHeading="underline">Calendar</Heading4>
+      <CalendarWrapper/>
       </section>
     </Layout>
   );

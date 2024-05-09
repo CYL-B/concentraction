@@ -1,20 +1,20 @@
 import { useEffect } from "react";
 import { AddATask } from "../components/input/addATask";
 
-import { useFetchTasks } from "../features/tasks/tasks";
+// import { useFetchTasks } from "../features/tasks/tasks";
 
-import {selectTasks} from "../utils/selectors";
+// import {selectTasks} from "../utils/selectors";
 
 export default function Backlog() {
-  //demo store
-  const store = useStore();
-const tasks = useSelector(selectTasks);
+//   //demo store
+//   const store = useStore();
+// const tasks = useSelector(selectTasks);
 
-const tasksList = tasks.data;
+// const tasksList = tasks.data;
 
-  useEffect(() => {
-    useFetchTasks(store);
-  }, [store]);
+  // useEffect(() => {
+  //   useFetchTasks(store);
+  // }, [store]);
 
   // if (tasks.status == 'rejected'){
   //   return <span>Il y a un problème</span>
