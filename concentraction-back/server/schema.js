@@ -8,47 +8,82 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    "create an account for new user"
-    signup(name: String!, password: String!, mail: String!): AuthPayload
-    "update user's information"
-    updateUser(id: ID!, name: String!, password: String!, mail: String!): User
-    "login an existing user"
-    login(email: String!, password: String!): AuthPayload
+    "create an account for new user, returns AuthPayload"
+    signup(name: String!, content: UserInput!): AuthPayloadResponse!
+    "update user's information, returns user"
+    updateUser(id: ID!, name: String, password: String, mail: String): UpdateUserResponse!
+    "login an existing user, returns AuthPayload"
+    login(content:UserInput!): AuthPayloadResponse!
     "create a new task"
-    addTask(
-      name: String!
-      priority: String
-      category: String!
-      status: String!
-      startDate: Date
-      endDate: Date
-      desc: String
-    ): Task!
+    addTask(content:
+      TaskContent!
+    ): AddTaskResponse
     "delete a task"
     deleteTask(id: ID!): Task!
 
     "update a task"
     updateTask(
       id: ID!
-      name: String!
-      priority: String
-      category: String!
-      status: String!
-      startDate: Date
-      endDate: Date
-      desc: String
-    ): Task!
+      content: TaskContent!
+    ): UpdateTaskResponse!
   }
 
-  type Subscription {
-    updateTask: Task
+  "Information to provide as argument of user"
+  input UserInput {
+    email: String!
+    password: String!
   }
+
+  "Information to provide as argument of task"
+  input TaskContent {
+    name: String!
+    priority: Priority
+    category: Category!
+    status: Status!
+    startDate: Date
+    endDate: Date
+    desc: String
+  }
+
 
   "Identification of a user"
-  type AuthPayload {
+  type AuthPayloadResponse {
+    "Similar to HTTP status code"
+    code:Int!
+    "Indicates if the request was successful"
+    success: Boolean!
+    "Human readable message for the UI"
+    message: String!
     token: String
+    "User created or logged in"
     user: User
   }
+
+  
+  "User response"
+  type UpdateUserResponse {
+    code:Int!
+    success: Boolean!
+    message: String!
+    user: User
+  }
+  
+  "Add task response"
+  type AddTaskResponse {
+    code:Int!
+    success: Boolean!
+    message: String!
+    task: Task
+  }
+  "Update task response"
+  type UpdateTaskResponse {
+    code:Int!
+    success: Boolean!
+    message: String!
+    task: Task
+  }
+
+
 
   "Schema designed to describe an user, its tasks and objectives"
   type User {
@@ -64,6 +99,7 @@ export const typeDefs = gql`
 
   "Schema designed to describe a task"
   type Task {
+    id: ID!
     name: String!
     priority: Priority
     category: Category!
@@ -73,7 +109,7 @@ export const typeDefs = gql`
     desc: String
   }
 
-  "Schema designed to describe objective"
+  "Schema designed to describe an objective"
   type Objective {
     title: String!
     status: Boolean!

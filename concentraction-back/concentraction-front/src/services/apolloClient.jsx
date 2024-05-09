@@ -1,4 +1,9 @@
-import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  createHttpLink,
+  gql,
+} from "@apollo/client";
 
 //connect the ApolloClient instance with the GraphQL API.
 const httpLink = createHttpLink({
@@ -11,3 +16,4 @@ export const apolloClient = new ApolloClient({
   link: httpLink,
   cache: new InMemoryCache(),
 });
+
