@@ -1,3 +1,4 @@
+/** Wrapper from dnd that makes the children wrapped inside it draggable such as a card **/
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
@@ -7,6 +8,8 @@ export default function Draggable({
   id
 }) {
   const Element = element || "div";
+
+  //useSortable is a custom hook that takes an argument id (takes card id props here) and returns the attributes, listeners, setNodeRef, transform, transition and isDragging
   const {
     attributes,
     listeners,

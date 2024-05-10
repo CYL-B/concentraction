@@ -1,3 +1,7 @@
+/** each day of a given month that can include one or more tasks depending on its due date 
+ * day : date in the month 
+ * children : list of tasks in the day **/
+
 export function Day({ day, children }) {
   return (
     <div className="taskContainer flex items-center min-h-fit">

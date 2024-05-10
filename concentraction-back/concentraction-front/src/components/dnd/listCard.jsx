@@ -1,3 +1,4 @@
+/** Element that represents a list in a given board with the whole droppable and draggable logic that works thanks to sortable Context */
 import { Heading4 } from "../typography";
 import IconifyIcon from "../icon";
 import { AddButton } from "../button";
@@ -26,19 +27,18 @@ export default function ListCard({
       strategy={verticalListSortingStrategy}
     >
       <Droppable elementId={listTitle}>
-        <div className="container-drag min-w-[296px] flex flex-col justify-between border container-drag border-solid border-neutral-black bg-neutral-white">
+        <div className="container-drop min-w-[296px] flex flex-col justify-between border container-drag border-solid border-neutral-black bg-neutral-white">
           <div className="list-header flex justify-between items-center border-b border-solid border-neutral-black px-3">
             <Heading4>{listTitle}</Heading4>
             <button onClick={handleDelete}>
               <IconifyIcon height={20} width={20} iconName="ph:trash-thin" />
             </button>
           </div>
-          <div className=" list-body droppable gap-y-2 p-2 flex flex-col h-full">
+          <div className=" list-body draggable gap-y-2 p-2 flex flex-col h-full">
             {taskList &&
               taskList.map((task, index) => {
                 return (
-                  <Draggable id={task.title}
-                  >
+                  <Draggable id={task.title}>
                     <Card
                       key={task.title}
                       cardTitle={task.title}
