@@ -1,3 +1,8 @@
+/** Organism that tasks several inputs, submit button and dropdown. It includes the logic to add a task and cache it (state management) : 
+ * with apollo server (GraphQL)  : implement mutation to add a task and cache 
+ * with react hook form (UI) : handles errors and validation
+ */
+
 import { Input, TextArea } from "./input";
 import { CustomDropdown } from "./dropdown";
 import InputDatePicker from "./datePicker";

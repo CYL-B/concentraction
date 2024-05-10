@@ -1,3 +1,7 @@
+/** Checkbox registered with react hook form
+ * checked props : to know if the checkbox is checked or not, takes a boolean state isChecked
+ * setIsChecked : takes previous state and updates it
+ */
 import { useState } from "react";
 import { Body } from "../typography";
 
@@ -42,38 +46,37 @@ export default function Checkbox({
     </div>
   );
 }
+//Unused 10.05.24
+// export function ToDoList() {
+//   const [todos, setTodos] = useState([
+//     { task: "Pick up groceries", done: false },
+//     { task: "Buy Milk", done: true },
+//     { task: "Complete Project X", done: false },
+//   ]);
 
-export function ToDoList() {
+//   const handleChange = (done, i) => {
+//     let tmp = todos[i];
+//     tmp.done = !done;
+//     let todosClone = [...todos];
+//     todosClone[i] = tmp;
+//     setTodos([...todosClone]);
+//   };
 
-    const [todos, setTodos] = useState([
-        { task: "Pick up groceries", done: false },
-        { task: "Buy Milk", done: true },
-        { task: "Complete Project X", done: false },
-      ]);
-
-      const handleChange = (done, i) => {
-        let tmp = todos[i];
-        tmp.done = !done;
-        let todosClone = [...todos];
-        todosClone[i] = tmp;
-        setTodos([...todosClone]);
-      };
-
-      return (
-        <div className="app">
-        {todos.map(({ task, done }, i) => (
-            <div key={i}>
-              <label htmlFor={i}>
-                <input
-                  type="checkbox"
-                  onChange={() => handleChange(done, i)}
-                  checked={done}
-                  id={i}
-                />
-                <span>{task}</span>
-              </label>
-            </div>
-          ))}
-        </div>
-      )
-}
+//   return (
+//     <div className="app">
+//       {todos.map(({ task, done }, i) => (
+//         <div key={i}>
+//           <label htmlFor={i}>
+//             <input
+//               type="checkbox"
+//               onChange={() => handleChange(done, i)}
+//               checked={done}
+//               id={i}
+//             />
+//             <span>{task}</span>
+//           </label>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }

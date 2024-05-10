@@ -1,9 +1,8 @@
+/*Custom dropdown component : does not use select and option elements
+Dropdown : dropdown with select and options */ 
 import IconifyIcon from "../icon";
 import { Body } from "../typography";
 import { useState } from "react";
-import { useForm} from "react-hook-form";
-
-//https://ibrahimaq.com/blogs/how-to-create-a-custom-accessible-dropdown-with-react-and-typescript
 
 export function Dropdown({
   register,
@@ -12,12 +11,6 @@ export function Dropdown({
   variant = "text-light",
   ...rest
 }) {
-  // const [option, setOption] = useState("");
-
-  // const handleDropdown = (event) => {
-  //   setOption(event.target.value)
-  // }
-
   return (
     <div className={`dropdown relative  ${variant.toLowerCase()}`}>
       <select
@@ -56,7 +49,7 @@ export function CustomDropdown({
   value
 }) {
   //if toggleOpen, dropdown opens, if not, dropdown closes.
-  //is the selected option : its name, its status
+  //selected : object with isSelected and selectedValue properties
   const [toggleOpen, setToggleOpen] = useState(false);
   const [selected, setSelected] = useState({
     isSelected: false,
@@ -70,6 +63,8 @@ export function CustomDropdown({
   };
 
   //fires when an option is clicked
+  //setSelected : changes object selected and its value
+  //onChange: uses reverse data flow => sends info on the option selected to the parent
   const handleSelect = (e, option) => {
     setSelected({ isSelected: true, selectedValue: option.name });
     onChange(option.name)
@@ -84,7 +79,7 @@ export function CustomDropdown({
         href="#"
         aria-haspopup="dropdown-list"
         aria-expanded={toggleOpen}
-        aria-label={selected.isSelected ? value : headerTitle}
+        aria-label={selected.isSelected ? selected.value : headerTitle}
         onClick={dropdownOpen}
         className={`dropdown-header flex justify-between items-center border-b border-solid pb-4 ${
           selected.isSelected
@@ -95,7 +90,7 @@ export function CustomDropdown({
         }`}
       >
         <Body classHeading="font-bold">
-          {selected.isSelected ? value : headerTitle}
+          {selected.isSelected ?  selected.value : headerTitle}
         </Body>
         <IconifyIcon
           iconName="raphael:arrowdown"
@@ -116,7 +111,7 @@ export function CustomDropdown({
               <li
                 role="option"
                 aria-label={option.name}
-                aria-selected={option == value}
+                aria-selected={option.name ==  selected.value}
                 className={`list-item${index} text-brand-blue font-nunito p-3 w-full`}
                 name={option.name}
                 key={option.name}

@@ -1,13 +1,17 @@
+/* Input component */ 
 import { Body } from "../typography";
-//Integrating existing inputs https://react-hook-form.com/get-started#Integratinganexistingform
-/*
-register: props required to pass register function from react hook form
+
+/** register: props required to pass register function from react hook form
 required : part of the register function
 name : name, id and HTMLFOR of element
 inputValue : value of each input
 type : type of input
 variant : used to choose the style to apply : light, dark or error 
+minLength: props passed to register function
+error: props passed to register function to handle errors
+handleChange: props passed to monitor changes in input
 */
+
 
 export function Input({
   register,
@@ -16,13 +20,13 @@ export function Input({
   placeholder,
   minLength,
   inputValue,
-  isNotCustomComponent = true,
   type,
   variant ="",
   error,
   handleChange,
   ...inputProps
 }) {
+  //changes the color of the title depending on the variant
   let titleHeading = "";
   if (variant == "text-dark") {
     titleHeading = "text-neutral-white";
@@ -33,7 +37,7 @@ export function Input({
   }
 
   return (
-    <fieldset className="input-wrapper flex flex-col gap-2 w-fit" {...isNotCustomComponent}>
+    <fieldset className="input-wrapper flex flex-col gap-2 w-fit">
       <Body body2={true} classBody={`font-bold ${titleHeading}`}>
         {" "}
         {name}
@@ -65,14 +69,6 @@ export function TextArea({
   handleTextChange,
   ...textProps
 }) {
-  // const [textarea, setTextarea] = useState(
-  //     "The content of a textarea goes in the value attribute"
-  //   );
-
-  //   const handleChange = (event) => {
-  //     setTextarea(event.target.value)
-  //   }
-
   let titleHeading = "";
   if (variant == "text-dark") {
     titleHeading = "text-neutral-white";

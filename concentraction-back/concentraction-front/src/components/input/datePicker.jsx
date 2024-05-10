@@ -1,4 +1,4 @@
-//https://github.com/Hacker0x01/react-datepicker
+/** Date picker component from react datepicker library */
 
 import { Body } from "../typography";
 
