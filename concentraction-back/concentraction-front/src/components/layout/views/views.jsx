@@ -1,9 +1,11 @@
+/** Day View component which displays all tasks for the current day */
+
 import { useState } from "react";
 import ListCard from "../../dnd/listCard";
 import Card from "../../dnd/card";
 import { DAY_TASKS } from "../../../data/tasks";
 
-//helpers
+//custom hooks
 import {
   useFindListSectionContainer,
   useInitializeLists,
@@ -28,13 +30,16 @@ import { getTaskById } from "../../../utils/hooks/getTasks";
 
 function DayView() {
   const tasks = DAY_TASKS;
-  //returns an object with properties each named after a container, each property is an array of tasks
+
+  //returns an object with properties named after a container, each property contains an array of tasks
   const initialBoardSections = useInitializeLists(tasks);
 
   const [listSections, setListSections] = useState(initialBoardSections);
 
+  //identifies which task is being dragged
   const [activeTaskId, setActiveTaskId] = useState(null);
 
+  //defines what triggers the drag
   const sensors = useSensors(
     useSensor(MouseSensor),
     useSensor(TouchSensor),
@@ -42,12 +47,14 @@ function DayView() {
     useSensor(PointerSensor)
   );
 
+  //when handle starts, changes the activeTaskId
   const handleDragStart = ({ active }) => {
     setActiveTaskId(active.id);
   };
 
   //destructure arguments
   const handleDragOver = ({ active, over }) => {
+    //active is the task being dragged 
     //find title/id of activeContainer (to drag from)
     const activeContainer = useFindListSectionContainer(
       listSections,
@@ -55,7 +62,8 @@ function DayView() {
     );
     //find title/id of overContainer(to drag to)
     const overContainer = useFindListSectionContainer(listSections, over?.id);
-    //if those do not exister or if the activecontainer is the same as the overcontainer (no drag) > return early
+
+    //if those do not exist or if the activecontainer is the same as the overcontainer (no drag) > return early
     if (
       !activeContainer ||
       !overContainer ||
@@ -64,13 +72,16 @@ function DayView() {
       return;
     }
 
+    //checks that the over container is not the same as the active container
     if (activeContainer && overContainer && activeContainer !== overContainer) {
       //pass a function to setListSections with the existing list as argument to update it
       setListSections((listSection) => {
-        //select object within listSections which property's name matches the name of active/over container (ex : to do)
+
+        //select array of tasks within listSections which property's name matches the name of active/over container (ex : to do)
         const activeItems = listSection[activeContainer];
         const overItems = listSection[overContainer];
-        //find the index of the item which id matches the active id
+
+        //within array of tasks of the active container, find the index of the item which id matches the active id (so task being dragged)
         const activeIndex = activeItems.findIndex(
           (item) => item.id === active.id
         );
@@ -101,11 +112,16 @@ function DayView() {
     }
   };
 
+  //active is the task being dragged from and over is the list being dropped to
   const handleDragEnd = ({ active, over }) => {
+
+
+    //returns active container 
     const activeContainer = useFindListSectionContainer(
       listSections,
       active.id
     );
+    //returns over container 
 
     console.log("end", activeContainer);
     const overContainer = useFindListSectionContainer(listSections, over?.id);
@@ -118,13 +134,19 @@ function DayView() {
       return;
     }
 
+    //boucle sur chaque tâche associée au container de début et trouve l'index de la tâche dont l'id correspond à l'id de la tâche active (recherche de la tâche active)
     const activeIndex = listSections[activeContainer].findIndex(
       (task) => task.id === active.id
     );
+
+    //boucle sur chaque tâche associée au container de fin et trouve l'index de la tâche dont l'id correspond à l'id de la tâche active
     const overIndex = listSections[overContainer].findIndex(
       (task) => task.id === over?.id
     );
 
+    /* If the task is not already in the over container
+    arrayMoveImmutable(array, fromIndex, toIndex)
+      Clones the given array, moves the item to a new position in the new array, and then returns the new array. The given array is not mutated.*/
     if (activeIndex !== overIndex) {
       setListSections((listSections) => ({
         ...listSections,
@@ -145,6 +167,7 @@ function DayView() {
 
   const task = activeTaskId ? getTaskById(tasks, activeTaskId) : null;
 
+  //permet de créer les différentes listSections
   var toDoLists = Object.keys(listSections);
 
   return (

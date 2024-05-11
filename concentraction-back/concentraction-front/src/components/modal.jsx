@@ -1,17 +1,11 @@
-import { Dropdown } from "./input/dropdown";
-import { FormTwo } from "./input/form";
-import InputDatePicker from "./input/datePicker";
+/** Modal that shows up to add or update a task */
 import { Heading2 } from "./typography";
-import { Button } from "./button";
-import IconifyIcon from "./icon";
-import { Input } from "./input/input";
-
+import { AddATask } from "./input/addATask";
 export function Modal() {
   return (
     <div>
-      <FormTwo>
-        <Input></Input>
-      </FormTwo>
+      <ModalHeader />
+      <AddATask />
     </div>
   );
 }

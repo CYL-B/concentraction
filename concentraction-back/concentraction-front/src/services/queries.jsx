@@ -1,3 +1,4 @@
+/** List of queries and mutations sent tothe apollo server */
 import {
     gql
   } from "@apollo/client";

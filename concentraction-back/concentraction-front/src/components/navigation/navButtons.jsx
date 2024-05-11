@@ -1,3 +1,4 @@
+/** Buttons in the navbar */
 import { Button } from "../button";
 import IconifyIcon from "../icon";
 

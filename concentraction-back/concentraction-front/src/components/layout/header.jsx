@@ -1,3 +1,4 @@
+/** Header component inserted inside Layout */
 import { Heading2 } from "../typography";
 import { Divider } from "../divider";
 

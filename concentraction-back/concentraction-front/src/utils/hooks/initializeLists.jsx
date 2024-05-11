@@ -1,11 +1,13 @@
+/** Ref documentation TDL */
 import { DAYVIEW_SECTIONS } from "../constants/boardSections";
 import { getTasksByStatus } from "./getTasks";
 
-//creates an object with tasks sorted by status (from dayview sections)
 export function useInitializeLists(tasks) {
   const listSections = {};
+  //creates an object with tasks sorted by status (from dayview sections) : {todo:[], ongoing:[], done:[]}
 
   Object.keys(DAYVIEW_SECTIONS).forEach((listSectionKey) => {
+    // listSectionKey.toLowerCase().trim();
     listSections[listSectionKey] = getTasksByStatus(tasks, listSectionKey);
   });
 

@@ -1,3 +1,4 @@
+/** Includes typography components */
 function Heading1({ children, classHeading }) {
   return (
     <h1

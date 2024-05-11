@@ -1,3 +1,6 @@
+/** Tasks of the day
+ * MUST INCLUDE query from back end to make it dynamic
+ */
 export const DAY_TASKS = [
     {
         id:"Title 2",

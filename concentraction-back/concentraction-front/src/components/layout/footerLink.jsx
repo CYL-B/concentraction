@@ -1,4 +1,4 @@
-import { Children } from "react";
+/** FooterLink with element Link from react-router-dom : allows user to navigate to another page */
 import { Link } from "react-router-dom";
 
 export function FooterLink({ dest, children }) {

@@ -1,3 +1,7 @@
+/** Footer component which comprises : 
+ * footerLink : links to other pages
+ * socialList : links to social media
+ */
 import { Heading4, Fineprint } from "../typography";
 import { FooterLink } from "./footerLink";
 import IconifyIcon from "../icon";

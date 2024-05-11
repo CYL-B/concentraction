@@ -1,3 +1,4 @@
+/** A tag represents the category of a task */
 import { Fineprint } from "./typography";
 export default function Tag({children}) {
   return (
