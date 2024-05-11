@@ -11,7 +11,7 @@ export default function Card({ cardTitle, cardDate, cardTag,...cardProps }) {
   //only creates a new card if given a title and due date
   if (cardTitle && cardDate) {
     return (
-      <div {...cardProps } className="flex justify-between items-end min-w-[296px] h-fit bg-brand-blue rounded-xl p-2">
+      <div {...cardProps } className="flex justify-between items-end min-w-[200px] md:min-w-[296px] h-fit bg-brand-blue rounded-xl p-2">
         <div className="left-section">
           <Body classBody="font-bold text-neutral-white pb-1 text-shadow-card">
             {cardTitle}

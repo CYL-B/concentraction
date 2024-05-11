@@ -28,6 +28,10 @@ import {
 import { arrayMove } from "@dnd-kit/sortable";
 import { getTaskById } from "../../../utils/hooks/getTasks";
 
+//media query
+import { useMediaQuery } from "../../../utils/hooks/mediaQueryHook";
+import ListSlider from "../../../services/slickCarousel";
+
 function DayView() {
   const tasks = DAY_TASKS;
 
@@ -54,7 +58,7 @@ function DayView() {
 
   //destructure arguments
   const handleDragOver = ({ active, over }) => {
-    //active is the task being dragged 
+    //active is the task being dragged
     //find title/id of activeContainer (to drag from)
     const activeContainer = useFindListSectionContainer(
       listSections,
@@ -76,7 +80,6 @@ function DayView() {
     if (activeContainer && overContainer && activeContainer !== overContainer) {
       //pass a function to setListSections with the existing list as argument to update it
       setListSections((listSection) => {
-
         //select array of tasks within listSections which property's name matches the name of active/over container (ex : to do)
         const activeItems = listSection[activeContainer];
         const overItems = listSection[overContainer];
@@ -114,14 +117,12 @@ function DayView() {
 
   //active is the task being dragged from and over is the list being dropped to
   const handleDragEnd = ({ active, over }) => {
-
-
-    //returns active container 
+    //returns active container
     const activeContainer = useFindListSectionContainer(
       listSections,
       active.id
     );
-    //returns over container 
+    //returns over container
 
     console.log("end", activeContainer);
     const overContainer = useFindListSectionContainer(listSections, over?.id);
@@ -170,30 +171,49 @@ function DayView() {
   //permet de créer les différentes listSections
   var toDoLists = Object.keys(listSections);
 
-  return (
-    <DndContext
-      sensors={sensors}
-      collisionDetection={closestCorners}
-      onDragEnd={handleDragEnd}
-      onDragOver={handleDragOver}
-      onDragStart={handleDragStart}
-    >
-      <section className="flex justify-between items-center h-full">
-        {toDoLists.map((listSectionKey) => {
-          return (
-            <ListCard
-              key={listSectionKey}
-              taskList={listSections[listSectionKey]}
-              listTitle={listSectionKey}
-            ></ListCard>
-          );
-        })}
-        <DragOverlay dropAnimation={dropAnimation}>
-          {task ? <Card cardDate={task.date} cardTitle={task.title} /> : ""}
-        </DragOverlay>
+  if (useMediaQuery("md")) {
+    return (
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCorners}
+        onDragEnd={handleDragEnd}
+        onDragOver={handleDragOver}
+        onDragStart={handleDragStart}
+      >
+        <section className="flex justify-between items-center h-full">
+          {toDoLists.map((listSectionKey) => {
+            return (
+              <ListCard
+                key={listSectionKey}
+                taskList={listSections[listSectionKey]}
+                listTitle={listSectionKey}
+              ></ListCard>
+            );
+          })}
+          <DragOverlay dropAnimation={dropAnimation}>
+            {task ? <Card cardDate={task.date} cardTitle={task.title} /> : ""}
+          </DragOverlay>
+        </section>
+      </DndContext>
+    );
+  } else {
+    return (
+      <section className="carousel-container h-full my-10">
+        <ListSlider>
+          {toDoLists.map((listSectionKey, index) => {
+            return (
+              <ListCard
+                index={index}
+                key={listSectionKey}
+                taskList={listSections[listSectionKey]}
+                listTitle={listSectionKey}
+              ></ListCard>
+            );
+          })}
+        </ListSlider>
       </section>
-    </DndContext>
-  );
+    );
+  }
 }
 
 //dragOverlay emulates the active task being dragged from one list to another

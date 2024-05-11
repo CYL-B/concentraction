@@ -133,10 +133,8 @@ export const typeDefs = gql`
   }
 "Restricts the values for property Status"
   enum Status {
-    TO
-    DO
-    ON
-    GOING
+    TODO
+    ONGOING
     DONE
   }
   

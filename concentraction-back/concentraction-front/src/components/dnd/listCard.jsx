@@ -25,9 +25,10 @@ export default function ListCard({
       id={listTitle}
       items={taskList}
       strategy={verticalListSortingStrategy}
+      {...listCardProps}
     >
       <Droppable elementId={listTitle}>
-        <div className="container-drop min-w-[296px] flex flex-col justify-between border container-drag border-solid border-neutral-black bg-neutral-white">
+        <div className="container-drop min-w-[200px] md:min-w-[296px] flex flex-col justify-between border container-drag border-solid border-neutral-black bg-neutral-white">
           <div className="list-header flex justify-between items-center border-b border-solid border-neutral-black px-3">
             <Heading4>{listTitle}</Heading4>
             <button onClick={handleDelete}>
