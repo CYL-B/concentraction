@@ -1,4 +1,4 @@
-/** Unused 11/05/24 */
+/** Used in day view */
 //matchMedia est une méthode applicable à window et qui récupère un objet MediaQueryList avec le statut du viewport, si l'objet match l'argument query alors return true.
 //matches() est une méthode applicable à l'élément et qui returns true si l'élément à laquelle elle est appliquée correspond
 

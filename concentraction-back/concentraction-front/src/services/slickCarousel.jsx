@@ -1,3 +1,6 @@
+/** Carousel from https://react-slick.neostack.com/docs/api 
+ * each slide within slider should have a property index <...index={1}>
+*/
 import Slider from "react-slick";
 
 export default function ListSlider({children}) {

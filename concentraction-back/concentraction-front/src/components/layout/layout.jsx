@@ -3,13 +3,14 @@
  * navbar
  * footer at bottom
  * scrolltop at the bottom right corner
+ * modal that shows up to add or update a task
  */
 import { Header } from "./header";
 import Footer from "./footer";
 import NavBar from "../navigation/navBar";
 import Scrolltop from "../scrolltop";
 
-import { useRef } from "react";
+import { Modal } from "../modal";
 
 export default function Layout({
   children,
@@ -24,6 +25,7 @@ export default function Layout({
   };
   return (
     <div id={id} className="layout flex w-screen min-h-screen bg-background ">
+      <Modal/>
       <NavBar />
       <main
         role="main"
