@@ -7,27 +7,26 @@
  */
 import { Heading2 } from "./typography";
 import { AddATask } from "./input/addATask";
-import { useOpenModal, useClickOutside } from "../utils/hooks/openModal";
+import { useOpenModal } from "../utils/hooks/openModal";
 
 export function Modal() {
-  const { modal, closeModal } = useOpenModal();
-
-  const dropdownRef = useClickOutside(closeModal, modal);
+  const { modal, closeModal, handleOpenModal, ref } = useOpenModal();
 
   return (
     <>
       <section
         aria-modal="true"
-        role="dialog"
-        aria-hidden={modal}
+        aria-hidden={!modal}
+        ref={ref}
         tabIndex={-1}
-        className={`modal h-full w-full fixed top-0 right-0  ${
-          modal ? "overflow-auto z-50 block" : "hidden overflow-hidden"
+        className={`modal-backdrop fixed top-0 right-0 h-full w-full bg-neutral-black bg-opacity-60 flex ${
+          modal ? "inline-block z-40" : "hidden z-0"
         }`}
       >
         <div
-          role="document"
-          className={`modal-content translate-y-0 w-1/2 h-full ${
+          aria-labelledby="Add a task"
+          role="dialog"
+          className={`modal-content translate-y-0 w-1/2  ${
             modal ? "translate-x-0" : "-translate-x-full"
           }`}
         >
@@ -35,12 +34,6 @@ export function Modal() {
           <AddATask />
         </div>
       </section>
-      {modal && (
-        <div
-          ref={dropdownRef}
-          className="modal-overlay fixed top-0 right-0 opacity-50 z-40 w-full h-full bg-neutral-black"
-        ></div>
-      )}
     </>
   );
 }
