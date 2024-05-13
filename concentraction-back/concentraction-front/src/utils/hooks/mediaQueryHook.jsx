@@ -11,10 +11,10 @@ export function useMediaQuery(screen) {
 
   useEffect(() => {
     const query = `(min-width: ${mediaQueriesSizes[screen]})`;
-    console.log(query)
+    // console.log(query)
     
     const media = window.matchMedia(query);
-    console.log("media",media.matches)
+    // console.log("media",media.matches)
     
     if (media.matches !== matches) {
       setMatches(media.matches)

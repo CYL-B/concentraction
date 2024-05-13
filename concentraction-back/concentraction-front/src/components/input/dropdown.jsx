@@ -79,7 +79,7 @@ export function CustomDropdown({
         href="#"
         aria-haspopup="dropdown-list"
         aria-expanded={toggleOpen}
-        aria-label={selected.isSelected ? selected.value : headerTitle}
+        aria-label={selected.isSelected ? selected.selectedValue : headerTitle}
         onClick={dropdownOpen}
         className={`dropdown-header flex justify-between items-center border-b border-solid pb-4 ${
           selected.isSelected
@@ -90,7 +90,7 @@ export function CustomDropdown({
         }`}
       >
         <Body classHeading="font-bold">
-          {selected.isSelected ?  selected.value : headerTitle}
+          {selected.isSelected ?  selected.selectedValue : headerTitle}
         </Body>
         <IconifyIcon
           iconName="raphael:arrowdown"
@@ -111,7 +111,7 @@ export function CustomDropdown({
               <li
                 role="option"
                 aria-label={option.name}
-                aria-selected={option.name ==  selected.value}
+                aria-selected={option.name ==  selected.selectedValue}
                 className={`list-item${index} text-brand-blue font-nunito p-3 w-full`}
                 name={option.name}
                 key={option.name}

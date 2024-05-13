@@ -23,6 +23,9 @@ export default function Layout({
   const scrollToMain = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
+
+
+
   return (
     <div id={id} className="layout flex w-screen min-h-screen bg-background ">
       <Modal/>

@@ -71,12 +71,10 @@ export default function Styleguide() {
           <Input
             name="example"
             placeholder="Placeholder"
-            inputTitle="Input Example"
           ></Input>
           <TextArea
             name="example1"
             placeholder="Textarea"
-            textTitle="TextArea"
           ></TextArea>
           <Dropdown
             name="Dropdown"

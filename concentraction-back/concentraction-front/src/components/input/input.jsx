@@ -80,7 +80,7 @@ export function TextArea({
 
   return (
     <fieldset className="text-wrapper flex flex-col gap-2">
-      <Body body2={true} classHeading={`font-bold ${titleHeading}`}>
+      <Body body2={true} classBody={`font-bold ${titleHeading}`}>
         {name}
       </Body>
       <label htmlFor={name}>

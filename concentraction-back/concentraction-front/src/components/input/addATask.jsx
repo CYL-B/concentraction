@@ -61,7 +61,7 @@ export function AddATask() {
   // if (error) return `Submission error! ${error.message}`;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full bg-neutral-white">
       <Input
         type="number"
         name="Nom de la tâche"
@@ -95,6 +95,7 @@ export function AddATask() {
             options={[{ name: "Example 1" }, { name: "Example 2" }]}
             onChange={onChange}
             value={value}
+            headerTitle={"Statut"}
           />
         )}
       />
@@ -107,6 +108,7 @@ export function AddATask() {
             options={[{ name: "Example 1" }, { name: "Example 2" }]}
             onChange={onChange}
             value={value}
+            headerTitle={"Category"}
           />
         )}
       />
