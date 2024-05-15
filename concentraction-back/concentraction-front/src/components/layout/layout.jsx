@@ -5,13 +5,14 @@
  * scrolltop at the bottom right corner
  * modal that shows up to add or update a task
  */
+
 import { Header } from "./header";
 import Footer from "./footer";
 import NavBar from "../navigation/navBar";
 import Scrolltop from "../scrolltop";
 
-import { Modal } from "../modal";
-
+import { Modal } from "../modal/modal";
+import { ModalProvider, ModalContext } from "../modal/modalContext";
 export default function Layout({
   children,
   containerClassName,
@@ -24,9 +25,9 @@ export default function Layout({
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
 
-
-
   return (
+    <ModalProvider>
+
     <div id={id} className="layout flex w-screen min-h-screen bg-background ">
       <Modal/>
       <NavBar />
@@ -44,6 +45,7 @@ export default function Layout({
       </main>
       <Scrolltop scrollToTop={scrollToMain} />
     </div>
+    /</ModalProvider>
   );
 }
 //?? : if value on the left is defined, it returns said value, if not, returns value on the right

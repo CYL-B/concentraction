@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { AddATask } from "../components/input/addATask";
+import { AddATask } from "../components/modal/addATask";
 
 // import { useFetchTasks } from "../features/tasks/tasks";
 

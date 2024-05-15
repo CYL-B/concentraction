@@ -3,10 +3,15 @@
  * with react hook form (UI) : handles errors and validation
  */
 
-import { Input, TextArea } from "./input";
-import { CustomDropdown } from "./dropdown";
-import InputDatePicker from "./datePicker";
-import { AddButton } from "../button";
+//context to toggle modal
+import { useContext } from "react";
+import { ModalContext } from "./modalContext";
+
+//Input elements
+import { Input, TextArea } from "../input/input";
+import { CustomDropdown } from "../input/dropdown";
+import InputDatePicker from "../input/datePicker";
+import { Button } from "../button";
 import { useForm, Controller } from "react-hook-form";
 
 //Apollo client import
@@ -26,6 +31,9 @@ export function AddATask() {
     control,
     formState: { errors },
   } = useForm();
+
+ //consumer component
+const {closeModal} = useContext(ModalContext);
 
   // //extracts addTask mutation from useMutation hook, loading, error
   // const[addTask, { loading, error}] = useMutation(ADD_TASK, {
@@ -61,7 +69,7 @@ export function AddATask() {
   // if (error) return `Submission error! ${error.message}`;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full bg-neutral-white">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full bg-neutral-white flex flex-col justify-around">
       <Input
         type="number"
         name="Nom de la tâche"
@@ -112,7 +120,10 @@ export function AddATask() {
           />
         )}
       />
-      <AddButton role="submit" />
+      <div className="button-wrapper flex justify-between">
+      <Button variant="secondary" onClick={closeModal}>Annuler</Button>
+      <Button role="submit">Ajouter une tâche</Button>
+      </div>
     </form>
   );
 }
