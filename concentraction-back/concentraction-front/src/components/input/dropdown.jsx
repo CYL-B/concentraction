@@ -73,7 +73,7 @@ export function CustomDropdown({
 
   return (
     <div
-      className="dropdown-wrapper relative min-w-40"
+      className="dropdown-wrapper relative max-w-40"
     >
       <a
         href="#"
@@ -89,7 +89,7 @@ export function CustomDropdown({
             : "border-light-grey"
         }`}
       >
-        <Body classHeading="font-bold">
+        <Body body2 classBody="font-bold">
           {selected.isSelected ?  selected.selectedValue : headerTitle}
         </Body>
         <IconifyIcon

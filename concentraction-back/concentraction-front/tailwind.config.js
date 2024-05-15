@@ -8,7 +8,13 @@ export default {
         card: ["1px 1px 0 #000",
           "-1px 1px 0 #000",
           "-1px -1px 0 #000",
-          "1px -1px 0 #000"]
+          "1px -1px 0 #000"],
+          modalHeader: [
+            "1px 1px 0 #000",
+          "1px 1px 0 #000",
+          "1px 1px 0 #000",
+          "1px 1px 0 #000"
+          ]
       },
       fontFamily: {
         anton: ["Anton, sans-serif"],

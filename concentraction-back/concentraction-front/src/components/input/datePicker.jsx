@@ -29,7 +29,7 @@ export default function InputDatePicker({onChange, value}) {
     <div
       className="date-wrapper flex flex-col gap-y-2"
     >
-      <Body classHeading="font-bold" body2={true}>
+      <Body classBody="font-bold" body2={true}>
         Date example
       </Body>
           <DatePicker
@@ -47,7 +47,7 @@ export default function InputDatePicker({onChange, value}) {
                 width={24}
                 height={24}
                 viewBox="0 0 36 36"
-                className="right-[35%]"
+                className="right-0"
               >
                 <path
                   fill="#FF686B"

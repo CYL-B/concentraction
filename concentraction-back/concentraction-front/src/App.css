@@ -28,8 +28,11 @@ footer {
   @apply font-nunito text-base leading-6;
 }
 
-.react-datepicker-wrapper input[type="text"] {
-  @apply px-0;
+.react-datepicker-wrapper {
+  width: fit-content;
+  input[type="text"] {
+    @apply px-0;
+  }
 }
 
 /*global styles applied to input*/
@@ -52,7 +55,6 @@ textarea,
 }
 
 .scrolltop:hover {
-  
   .segment {
     @apply fill-brand-blue;
   }

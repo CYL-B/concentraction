@@ -69,9 +69,10 @@ const {closeModal} = useContext(ModalContext);
   // if (error) return `Submission error! ${error.message}`;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full bg-neutral-white flex flex-col justify-around">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex flex-col justify-around  ">
+      <div className="input-wrapper bg-neutral-white rounded-md p-2.5 mx-10 border border-solid border-brand-blue">
       <Input
-        type="number"
+        type="text"
         name="Nom de la tâche"
         register={register}
         aria-invalid={errors.example1 ? "true" : "false"}
@@ -120,7 +121,8 @@ const {closeModal} = useContext(ModalContext);
           />
         )}
       />
-      <div className="button-wrapper flex justify-between">
+      </div>
+      <div className="button-wrapper flex justify-around bg-brand-yellow py-5">
       <Button variant="secondary" onClick={closeModal}>Annuler</Button>
       <Button role="submit">Ajouter une tâche</Button>
       </div>
