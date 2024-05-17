@@ -17,7 +17,7 @@ export function SignUpForm() {
     console.log(data);
   };
   return (
-    <div className="border-[5px] border-neutral-black flex flex-col items-center gap-1 p-4 lg:gap-10 rounded">
+    <div className="border-[5px] border-neutral-black flex flex-col items-center gap-1 p-4 lg:px-[140px] lg:gap-10 rounded bg-neutral-white lg:h-[90%] overflow-scroll lg:w-[80%] lg:self-center">
       <Heading1>Sign Up</Heading1>
       <form
         className="flex flex-col gap-1 lg:gap-8 items-center justify-between w-auto"
