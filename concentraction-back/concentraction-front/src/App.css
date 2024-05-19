@@ -24,12 +24,6 @@ footer {
   background-image: url("./assets/bg-page.svg");
 }
 
-.sign-up {
-  background-image: url("./assets/bg-vector-size.jpeg");
-  background-position: center;
-  background-size: cover;
-}
-
 .sign-up-image {
   background-image: url("./assets/sign-up-image.jpg");
   background-position: center;
