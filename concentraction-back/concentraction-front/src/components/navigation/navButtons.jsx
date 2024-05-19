@@ -8,9 +8,13 @@ import { ToggleContext } from "./navContext";
 //Button to sign out
 //reduced : property that changes depending on the state of the menu (reduced or not).
 export function SignOutButton({ reduced = false }) {
+  //log out logic > https://www.apollographql.com/docs/react/networking/authentication/#header
+  const signOut = () => {
+    localStorage.removeItem('token');
+  };
   return (
     <li>
-      <Button variant="primary" isIcon={reduced}>
+      <Button variant="primary" isIcon={reduced} onClick={signOut}>
         {reduced ? (
           <IconifyIcon iconName="material-symbols-light:logout-sharp" />
         ) : (

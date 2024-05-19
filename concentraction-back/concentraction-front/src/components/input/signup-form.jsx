@@ -5,6 +5,10 @@ import { Button } from "../button";
 import { Heading1 } from "../typography";
 import { useForm } from "react-hook-form";
 
+//Apollo client import
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../../services/queries.jsx";
+
 export function SignUpForm() {
   const {
     register,
@@ -13,12 +17,23 @@ export function SignUpForm() {
     formState: { errors },
   } = useForm();
 
+  const [addUser, { loading, error }] = useMutation(ADD_USER, {
+    onCompleted: (data) => {
+      const token = data.token;
+      sessionStorage.setItem('token', token);
+      //needs to add redirection
+    },
+  });
+
   const onSubmit = (data) => {
+    addUser({variables:{name: data.Nom, user: data}})
     console.log(data);
   };
   return (
-    <div className="border-[5px] border-neutral-black flex flex-col items-center justify-around gap-1 p-4 rounded bg-neutral-white h-[90%] overflow-scroll w-[80%] mb-3
-      lg:px-[140px] lg:gap-10 lg:w-3/5 lg:mb-0">
+    <div
+      className="border-[5px] border-neutral-black flex flex-col items-center justify-around gap-1 p-4 rounded bg-neutral-white h-[90%] overflow-scroll w-[80%] mb-3
+      lg:px-[140px] lg:gap-10 lg:w-3/5 lg:mb-0"
+    >
       <Heading1>Sign Up</Heading1>
       <form
         className="flex flex-col gap-1 lg:gap-8 items-center justify-between w-full"
