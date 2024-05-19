@@ -9,9 +9,9 @@ export const typeDefs = gql`
 
   type Mutation {
     "create an account for new user, returns AuthPayload"
-    signup(name: String!, content: UserInput!): AuthPayloadResponse!
+    addUser(name: String!, content: UserInput!): AuthPayloadResponse!
     "update user's information, returns user"
-    updateUser(id: ID!, name: String, password: String, mail: String): UpdateUserResponse!
+    updateUser(id: ID!, name: String, password: String, email: String): UpdateUserResponse!
     "login an existing user, returns AuthPayload"
     login(content:UserInput!): AuthPayloadResponse!
     "create a new task"
@@ -28,7 +28,7 @@ export const typeDefs = gql`
     ): UpdateTaskResponse!
   }
 
-  "Information to provide as argument of user"
+  "Information to provide as argument of user, used in signup and login"
   input UserInput {
     email: String!
     password: String!
@@ -83,14 +83,12 @@ export const typeDefs = gql`
     task: Task
   }
 
-
-
   "Schema designed to describe an user, its tasks and objectives"
   type User {
     id: ID!
     name: String!
     password: String!
-    mail: String!
+    email: String!
     "Tasks assigned to the specific USER"
     tasks: [Task]
     "Objectives assigned to the specific USER"
@@ -115,16 +113,21 @@ export const typeDefs = gql`
     status: Boolean!
   }
 
-  "Schema designed to describe category"
-  type Category {
-    name: String
-  }
-
   "Schema designed to describe list"
   type List {
     name: Category
     tasks: [Task]
   }
+
+  "Restricts the values for property Category"
+  enum Category {
+    WORK
+    PERSONAL
+    PHOTOGRAPHY
+    ARTICLES
+    OTHER
+  }
+
 "Restricts the values for property Priority"
   enum Priority {
     LOW

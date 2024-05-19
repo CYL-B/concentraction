@@ -1,5 +1,10 @@
 // implementation of the GraphQL schema.
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import db from "../models/bddconnect.js";
+
+//import mongoose schemas
+import { UserModel } from "../models/user.js";
 
 //define a custom scalar for date type
 import { GraphQLScalarType, Kind } from "graphql";
@@ -73,15 +78,19 @@ const resolvers = {
   //chiffrer password
   Mutation: {
     //creates a new user
-    signup: async (_, { name, password, mail }, context) => {
-      let collection = await db.collection("users");
-      const insert = await collection.insertOne({ name, password, mail });
-      if (insert.acknowledged) {
+    addUser: async (_, { name, password, email }, context) => {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const user = new UserModel({ name, password: hashedPassword, email});
+      const newUser = await user.save();
+      const token = jwt.sign({ id: user.id }, 'secretkey');
+
+      if (newUser) {
         return {
           code: 200,
           success: true,
           message: "Successfully added new user",
-          user: insert,
+          user: newUser,
+          token:token
         };
       }
       return null;
