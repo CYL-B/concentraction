@@ -34,7 +34,7 @@ export default {
       backgroundImage: {
         "sign-up-desk":"url('./assets/bg-vector-size.jpeg')",
         "sign-up-mobile":"url('./assets/sign-up-mobile.jpeg')",
-        "sign-up-image": "url('./assets/sign-up-image.svg')"
+        "sign-up-image": "url('./assets/sign-up-image.jpg')"
       }
     },
   },
