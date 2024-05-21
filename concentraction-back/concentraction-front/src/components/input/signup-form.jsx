@@ -1,8 +1,8 @@
 /** Organism in charge of the sign-up and log-in logic. It includes several inputs registered with react hook form  */
-import Checkbox from "./checkbox";
-import { Input } from "./input";
-import { Button } from "../button";
-import { Heading1 } from "../typography";
+import Checkbox from "./checkbox.jsx";
+import { Input } from "./input.jsx";
+import { Button } from "../button.jsx";
+import { Heading1 } from "../typography.jsx";
 import { useForm } from "react-hook-form";
 
 //Apollo client import
@@ -17,17 +17,31 @@ export function SignUpForm() {
     formState: { errors },
   } = useForm();
 
-  const [addUser, { loading, error }] = useMutation(ADD_USER, {
+  const [addUser, { data, loading, error }] = useMutation(ADD_USER, {
     onCompleted: (data) => {
-      const token = data.token;
-      sessionStorage.setItem('token', token);
+      console.log(data);
+      // const token = data.token;
+      // sessionStorage.setItem('token', token);
       //needs to add redirection
     },
   });
 
   const onSubmit = (data) => {
-    addUser({variables:{name: data.Nom, user: data}})
-    console.log(data);
+    // console.log(data);
+    // console.log(addUser());
+    try {
+      addUser({
+        variables: {
+          name: data.Nom,
+          content: { email: data.Email, password: data.Password },
+        },
+      });
+    } catch (res) {
+      const errors = res.graphQLErrors.map((error) => {
+        return error.message;
+      });
+      console.error("GraphQL Errors:", errors);
+    }
   };
   return (
     <div
@@ -47,13 +61,13 @@ export function SignUpForm() {
           type="text"
           aria-invalid={errors.example1 ? "true" : "false"}
         />
-        <Input
+        {/* <Input
           placeholder="Prénom"
           name="Prénom"
           register={register}
           required={true}
           type="text"
-        />
+        /> */}
         <Input
           placeholder="Email"
           name="Email"

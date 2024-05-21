@@ -1,8 +1,8 @@
 /** Router for the app */
 //React router dom import
 import { createBrowserRouter} from "react-router-dom";
-import App from "../App";
-import SignUp from "../pages/sign-up";
+import App from "../App.jsx";
+import SignUp from "../pages/sign-up.jsx";
 import ErrorPage  from "../pages/error-page.jsx";
 import Backlog from "../pages/backlog.jsx";
 import Dashboard from "../pages/dashboard.jsx";

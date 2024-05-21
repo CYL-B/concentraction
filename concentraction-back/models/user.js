@@ -48,4 +48,4 @@ const UserSchema = new mongoose.Schema({
   objectives: [ObjectiveSchema]
 });
 
-export const UserModel = mongoose.model('users', UserSchema);
+export const UserModel = mongoose.model('Users', UserSchema);

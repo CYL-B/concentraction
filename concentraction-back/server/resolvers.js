@@ -1,7 +1,6 @@
 // implementation of the GraphQL schema.
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import db from "../models/bddconnect.js";
 
 //import mongoose schemas
 import { UserModel } from "../models/user.js";
@@ -49,7 +48,7 @@ const resolvers = {
   },
   //{id} : déstructure args
   Query: {
-    //promise : if successful, get user, if not, return error
+    // promise : if successful, get user, if not, return error
     user: async (_, { id }) => {
       try {
         let collection = await db.collection("users");
@@ -78,19 +77,26 @@ const resolvers = {
   //chiffrer password
   Mutation: {
     //creates a new user
-    addUser: async (_, { name, password, email }, context) => {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const user = new UserModel({ name, password: hashedPassword, email});
+    addUser: async (_, { name, content }, context) => {
+      const hashedPassword = await bcrypt.hash(content.password, 10);
+      const email = content.email;
+      const user = new UserModel({
+        username: name,
+        password: hashedPassword,
+        email: email,
+      });
       const newUser = await user.save();
-      const token = jwt.sign({ id: user.id }, 'secretkey');
-
+      //creates token
+      const token = jwt.sign({ id: user.id }, "secretkey");
       if (newUser) {
+        console.log("here")
+
         return {
           code: 200,
           success: true,
           message: "Successfully added new user",
           user: newUser,
-          token:token
+          token: token,
         };
       }
       return null;
@@ -108,7 +114,7 @@ const resolvers = {
       { name, priority, category, status, startDate, endDate, desc, token },
       context
     ) => {
-      let collection = await db.collection("users");
+      // let collection = await db.collection("users");
     },
 
     //modification de la tâche
@@ -117,15 +123,15 @@ const resolvers = {
       { id, name, priority, category, status, startDate, endDate, desc, token },
       context
     ) => {
-      let collection = await db.collection("users");
+      // let collection = await db.collection("users");
     },
 
     //suppression de la tâche, logique à revoir
 
     deleteTask: async (_, { id, token }, context) => {
-      let collection = await db.collection("users");
-      const dbDelete = await collection.deleteOne({ _id: new ObjectId(id) });
-      return dbDelete.acknowledged && dbDelete.deletedCount == 1 ? true : false;
+      // let collection = await db.collection("users");
+      // const dbDelete = await collection.deleteOne({ _id: new ObjectId(id) });
+      // return dbDelete.acknowledged && dbDelete.deletedCount == 1 ? true : false;
     },
   },
 };

@@ -3,7 +3,7 @@ import { setContext } from '@apollo/client/link/context';
 
 //connect the ApolloClient instance with the GraphQL API and .
 const httpLink = createHttpLink({
-  uri: "http://localhost:5050/",
+  uri: "http://localhost:5050/graphql",
 });
 
 //Add an authorization header to every HTTP request by chaining together Apollo Linkss
@@ -24,4 +24,5 @@ const authLink = setContext((_, { headers }) => {
 export const apolloClient = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
+  connectToDevTools: true
 });
