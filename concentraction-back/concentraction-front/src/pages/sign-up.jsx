@@ -1,5 +1,5 @@
-import { SignUpForm } from "../components/input/signup-form"
-import { SignUpImage } from "../components/sign-up-image"
+import { SignUpForm } from "../components/sign-up/signup-form"
+import { SignUpImage } from "../components/sign-up/sign-up-image"
 export default function SignUp() {
 
     return (

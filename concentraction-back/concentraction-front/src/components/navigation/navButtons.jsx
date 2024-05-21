@@ -5,12 +5,19 @@ import IconifyIcon from "../icon";
 import { useContext } from "react";
 import { ToggleContext } from "./navContext";
 
+//redirecting from react router
+import { useNavigate } from 'react-router-dom';
+
 //Button to sign out
 //reduced : property that changes depending on the state of the menu (reduced or not).
 export function SignOutButton({ reduced = false }) {
   //log out logic > https://www.apollographql.com/docs/react/networking/authentication/#header
+
+  const navigate = useNavigate();
+
   const signOut = () => {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+    navigate("/sign-up")
   };
   return (
     <li>

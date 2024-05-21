@@ -1,9 +1,14 @@
 /** Organism in charge of the sign-up and log-in logic. It includes several inputs registered with react hook form  */
-import Checkbox from "./checkbox.jsx";
-import { Input } from "./input.jsx";
+import { useState } from "react";
+import Checkbox from "../input/checkbox.jsx";
+import { Input } from "../input/input.jsx";
 import { Button } from "../button.jsx";
 import { Heading1 } from "../typography.jsx";
 import { useForm } from "react-hook-form";
+
+//redirecting from react router
+import { useNavigate } from 'react-router-dom';
+
 
 //Apollo client import
 import { useMutation } from "@apollo/client";
@@ -17,18 +22,19 @@ export function SignUpForm() {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
   const [addUser, { data, loading, error }] = useMutation(ADD_USER, {
     onCompleted: (data) => {
       console.log(data);
-      // const token = data.token;
-      // sessionStorage.setItem('token', token);
+      const token = data.token;
+      sessionStorage.setItem("token", token);
       //needs to add redirection
+      navigate("/dashboard")
     },
   });
 
   const onSubmit = (data) => {
-    // console.log(data);
-    // console.log(addUser());
     try {
       addUser({
         variables: {
@@ -85,7 +91,7 @@ export function SignUpForm() {
         />
 
         <Checkbox name="Data" register={register} />
-        <Button role="submit" type="button">
+        <Button role="submit" type="submit">
           Sign up
         </Button>
       </form>
