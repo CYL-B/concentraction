@@ -74,7 +74,6 @@ const resolvers = {
   },
   //retrieve nested tasks
 
-  //chiffrer password
   Mutation: {
     //creates a new user
     addUser: async (_, { name, content }, context) => {
@@ -89,7 +88,7 @@ const resolvers = {
       //creates token
       const token = jwt.sign({ id: user.id }, "secretkey");
       if (newUser) {
-        console.log("here")
+        console.log("here");
 
         return {
           code: 200,
@@ -98,14 +97,35 @@ const resolvers = {
           user: newUser,
           token: token,
         };
+      } else {
+        return {
+          code: 401,
+          success: false,
+          message: "Failed to add new user",
+        };
       }
-      return null;
     },
 
-    //logique de login à ajouter
-    //checks information to see if user exists
-    login: async (_, { password, mail }, context) => {
-      let collection = await db.collection("users");
+    //get user, compare password entered and password in database, create token
+    login: async (_, { content }, context) => {
+      const { email, password } = content;
+      const user = await UserModel.findOne({ email });
+      if (user && bcrypt.compareSync(password, user.password)) {
+        const token = jwt.sign({ id: user.id }, "secretkey");
+        return {
+          code: 200,
+          success: true,
+          message: "Successfully logged in",
+          user: user,
+          token: token,
+        };
+      } else {
+        return {
+          code: 401,
+          success: false,
+          message: "Incorrect email or password",
+        };
+      }
     },
 
     //création de tâche

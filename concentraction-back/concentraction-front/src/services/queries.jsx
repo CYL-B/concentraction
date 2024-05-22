@@ -17,6 +17,23 @@ export const ADD_USER = gql`
   }
 `;
 
+/*MUTATION LOGIN */
+
+export const LOGIN = gql`
+  mutation Login($content: UserInput!) {
+    login(content: $content) {
+      code
+      success
+      message
+      token
+      user {
+        id
+        email
+      }
+    }
+  }
+`;
+
 // /*MUTATION ADD TASK TO LIST*/
 //provide user token or id to access tasks list and add it to the list
 // export const ADD_TASK = gql`mutation AddTask($content: TaskContent!) {addTask(content: $content) {task {name priority category status startDate endDate desc}}

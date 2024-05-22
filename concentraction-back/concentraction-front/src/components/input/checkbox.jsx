@@ -8,6 +8,7 @@ import { Body } from "../typography";
 export default function Checkbox({
   checkboxId,
   register,
+  required,
   name,
   placeholder,
   checkboxTitle,
@@ -32,7 +33,7 @@ export default function Checkbox({
           name={name}
           placeholder={placeholder}
           checked={isChecked}
-          {...register(name)}
+          {...register(name, {required: required})}
           onChange={() => setIsChecked((prev) => !prev)}
         ></input>
         <span

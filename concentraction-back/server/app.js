@@ -13,7 +13,7 @@ import { expressMiddleware } from "@apollo/server/express4";
 import resolvers from "./resolvers.js";
 import { typeDefs } from "./schema.js";
 
-import http from "http";
+// import http from "http";
 
 //authentification
 import { UserModel } from "../models/user.js";
@@ -25,7 +25,7 @@ const app = express();
 
 // Our httpServer handles incoming requests to our Express app.
 
-const httpServer = http.createServer(app);
+// const httpServer = http.createServer(app);
 
 app.use(cors());
 app.use(express.json());
@@ -35,6 +35,7 @@ connect();
 //verifies the JWT token and retrieves the user from the database.
 const authenticate = async (req) => {
   //  extracts a user token from the HTTP Authorization header included in each operation
+  //cf apollo client, token is included in headers
   const token = req.headers["authorization"];
   if (token) {
     try {
