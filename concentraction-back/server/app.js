@@ -13,7 +13,8 @@ import { expressMiddleware } from "@apollo/server/express4";
 import resolvers from "./resolvers.js";
 import { typeDefs } from "./schema.js";
 
-// import http from "http";
+// for token;
+import jwt from "jsonwebtoken";
 
 //authentification
 import { UserModel } from "../models/user.js";
@@ -33,10 +34,10 @@ app.use(express.json());
 connect();
 
 //verifies the JWT token and retrieves the user from the database.
-const authenticate = async (req) => {
+const authenticate = async (token) => {
   //  extracts a user token from the HTTP Authorization header included in each operation
   //cf apollo client, token is included in headers
-  const token = req.headers["authorization"];
+  console.log("token", token);
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
@@ -44,7 +45,12 @@ const authenticate = async (req) => {
       return user;
     } catch (err) {
       console.error(err);
-      throw new Error("Your session expired. Sign in again.");
+      throw new GraphQLError('User is not authenticated', {
+        extensions: {
+          code: 'UNAUTHENTICATED',
+          http: { status: 401 },
+        },
+      });
     }
   }
 };
@@ -54,11 +60,7 @@ const authenticate = async (req) => {
 const server = new ApolloServer({
   schema: buildSubgraphSchema({
     typeDefs,
-    resolvers,
-    context: async ({ req }) => {
-      const user = await authenticate(req);
-      return { user };
-    },
+    resolvers
   }),
 });
 
@@ -67,7 +69,13 @@ const server = new ApolloServer({
 await server.start();
 
 // Specify the path to mount the server
-app.use("/graphql", cors(), express.json(), expressMiddleware(server));
+app.use("/graphql", cors(), express.json(), expressMiddleware(server, {
+  context: async ({ req }) => {
+    const token = req.headers.authorization;
+    const user = await authenticate(token);
+    return { user };
+  }
+}));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -133,20 +133,51 @@ const resolvers = {
     },
 
     //création de tâche
-    addTask: async (
-      _,
-      { name, priority, category, status, startDate, endDate, desc, token },
-      context
-    ) => {
-     console.log(context);
-
+    addTask: async (_, { content }, contextValue) => {
+      const { name, priority, category, status, startDate, endDate, desc } =
+        content;
+      const user = contextValue.user;
+      if (user) {
+        const userID = user.id ?? user._id;
+        const findUser = await UserModel.updateOne(
+          { id: userID },
+          {
+            $push: {
+              tasks: {
+                name,
+                priority,
+                category,
+                status,
+                startDate,
+                endDate,
+                desc,
+              },
+            },
+          }
+        );
+        const updatedTask = await findUser.save();
+        if (updatedTask) {
+          return {
+            code: 200,
+            success: true,
+            message: "Task successfully added",
+            task: content
+          };
+        }
+      } else {
+        return {
+          code: 401,
+          success: false,
+          message: "You don't have permission to add a task",
+        };
+      }
     },
 
     //modification de la tâche
     updateTask: async (
       _,
       { id, name, priority, category, status, startDate, endDate, desc, token },
-      context
+      contextValue
     ) => {
       // let collection = await db.collection("users");
     },

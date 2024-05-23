@@ -36,7 +36,7 @@ export default function InputDatePicker({onChange, value}) {
       </Body>
           <DatePicker
             locale="fr"
-            dateFormat='dd/MM/yyyy'	
+            dateFormat="dd/MM/yyyy"
             className="font-nunito text-base leading-6 border-solid border-b border-brand-blue bg-transparent"
             showIcon
             showTimeInput

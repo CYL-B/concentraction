@@ -37,18 +37,18 @@ export const LOGIN = gql`
 export const ADD_TASK = gql`
   mutation AddTask($content: TaskContent!) {
     addTask(content: $content) {
-        code
-        success
-        message
-        task {
-          id
-          name
-          priority
-          category
-          status
-          startDate
-          endDate
-          desc
+      code
+      message
+      success
+      task {
+        category
+        desc
+        endDate
+        id
+        name
+        priority
+        startDate
+        status
       }
     }
   }

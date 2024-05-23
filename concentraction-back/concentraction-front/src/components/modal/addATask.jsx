@@ -56,23 +56,29 @@ export function AddATask() {
       });
     },
   });
+  
+  const formatDateFn = (date) => {
+    const selectedDate = new Date(date)
+    return selectedDate.getDate() + "/"+ parseInt(selectedDate.getMonth()+1) +"/"+ selectedDate.getFullYear();
+
+} 
 
   const onSubmit = (data) => {
-    console.log(data);
+    const startDate = formatDateFn(data.StartDate);
+    const endDate = formatDateFn(data.echeance);
+
+    console.log(data, startDate, endDate )
     try {
       addTask({
         variables: {
           content: {
             name: data.titre,
-            priority,
-            status: data.Statut,
-            category: data.Catégorie,
-            startDate: data.StartDate,
-            endDate: data.Échéance,
-            desc: data.Description,
+            status: data.statut,
+            category: data.category
           },
         },
       });
+      console.log(addTask)
     } catch (res) {
       const errors = res.graphQLErrors.map((error) => {
         return error.message;
@@ -99,7 +105,7 @@ export function AddATask() {
         <TextArea name="Description" register={register} />
         <Controller
           control={control}
-          name="Échéance"
+          name="echeance"
           render={({ field: { onChange, value } }) => (
             <InputDatePicker onChange={onChange} value={value} />
           )}
@@ -115,10 +121,10 @@ export function AddATask() {
 
         <Controller
           control={control}
-          name="Statut"
+          name="statut"
           render={({ field: { onChange, value } }) => (
             <CustomDropdown
-              options={[{ name: "Example 1" }, { name: "Example 2" }]}
+              options={[{ name: "TODO" }, { name: "ONGOING" }, { name: "DONE" }]}
               onChange={onChange}
               value={value}
               headerTitle={"Statut"}
@@ -128,7 +134,7 @@ export function AddATask() {
 
         <Controller
           control={control}
-          name="Catégorie"
+          name="category"
           render={({ field: { onChange, value } }) => (
             <CustomDropdown
               options={[{ name: "ARTICLES" }, { name: "WORK" }, { name: "PERSONAL" }, { name: "PHOTOGRAPHY" }, { name: "OTHER" }]}

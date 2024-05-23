@@ -1,6 +1,11 @@
-import { ApolloClient, InMemoryCache, createHttpLink} from "@apollo/client";
-import { setContext } from '@apollo/client/link/context';
-
+/*https://www.apollographql.com/docs/react/api/link/introduction*/
+import {
+  ApolloClient,
+  InMemoryCache,
+  createHttpLink,
+  ApolloLink,
+  from,
+} from "@apollo/client";
 
 //connect the ApolloClient instance with the GraphQL API and .
 const httpLink = createHttpLink({
@@ -8,23 +13,39 @@ const httpLink = createHttpLink({
 });
 
 //Add an authorization header to every HTTP request by chaining together Apollo Linkss
-const authLink = setContext((_, { headers }) => {
+const authLink = new ApolloLink((operation, forward) => {
   // get the authentication token from local storage if it exists
   const token = sessionStorage.getItem("token");
-  console.log(token, "apollo")
-  // return the headers to the context so httpLink can read them
-  return {
+  console.log("tokenfront", token);
+
+  operation.setContext(({ headers }) => ({
+    // return the headers to the context
     headers: {
+      authorization: token,
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
     },
-  };
+  }
+  
+));
+  return forward(operation);
 });
+
+// const authLink = new ApolloLink((operation, forward) =>
+//   operation.setContext((_, { headers }) => {
+//     // get the authentication token from local storage if it exists
+//     const token = sessionStorage.getItem("token")
+//     ;
+//     // return the headers to the context
+//     return (
+//       forward(operation)
+//     );
+//   })
+// );
 
 //uri specifies the URL of our GraphQL server.
 
 export const apolloClient = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: from([authLink, httpLink]),
   cache: new InMemoryCache(),
-  connectToDevTools: true
+  connectToDevTools: true,
 });
