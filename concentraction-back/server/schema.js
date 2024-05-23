@@ -40,8 +40,8 @@ export const typeDefs = gql`
     priority: Priority
     category: Category!
     status: Status!
-    startDate: Date
-    endDate: Date
+    startDate: String
+    endDate: String
     desc: String
   }
 
@@ -102,8 +102,8 @@ export const typeDefs = gql`
     priority: Priority
     category: Category!
     status: Status!
-    startDate: Date
-    endDate: Date
+    startDate: String
+    endDate: String
     desc: String
   }
 
@@ -140,7 +140,4 @@ export const typeDefs = gql`
     ONGOING
     DONE
   }
-  
-  "Custom scalar defined in resolver"
-  scalar Date
 `;

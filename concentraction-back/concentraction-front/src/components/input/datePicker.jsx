@@ -1,4 +1,6 @@
-/** Date picker component from react datepicker library */
+/** Date picker component from react datepicker library 
+ * https://github.com/Hacker0x01/react-datepicker/blob/main/docs/datepicker.md
+*/
 
 import { Body } from "../typography";
 
@@ -34,7 +36,7 @@ export default function InputDatePicker({onChange, value}) {
       </Body>
           <DatePicker
             locale="fr"
-            dateFormat="P"
+            dateFormat='dd/MM/yyyy'	
             className="font-nunito text-base leading-6 border-solid border-b border-brand-blue bg-transparent"
             showIcon
             showTimeInput

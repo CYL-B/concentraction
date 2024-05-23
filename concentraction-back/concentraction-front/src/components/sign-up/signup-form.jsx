@@ -10,6 +10,8 @@ import { useForm } from "react-hook-form";
 //redirecting from react router
 import { useNavigate } from "react-router-dom";
 
+//sessionStorage
+import { useSessionStorage } from "../../utils/hooks/sessionStorage.jsx";
 //Apollo client import
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../../services/queries.jsx";
@@ -28,8 +30,10 @@ export function SignUpForm({ logIn }) {
     onCompleted: (data) => {
       const dataFromBack = data.addUser;
       if (dataFromBack.success == true && dataFromBack.token != null) {
-        const token = data.token;
-        sessionStorage.setItem("token", token);
+
+        const token = sessionStorage.setItem("token", dataFromBack.token);
+        console.log(token);
+        
         //needs to add redirection
         navigate("/dashboard");
       }
@@ -37,11 +41,12 @@ export function SignUpForm({ logIn }) {
   });
   //useeffect ?
   const onSubmit = (data) => {
+    console.log(addUser);
     try {
       addUser({
         variables: {
           name: data.Nom,
-          content: { email: data.Email, password: data.Password },
+          content: { email: data.Email, password: data.Password }
         },
       });
     } catch (res) {
@@ -49,6 +54,7 @@ export function SignUpForm({ logIn }) {
         return error.message;
       });
     }
+    console.log(errors)
   };
   return (
     <>

@@ -13,6 +13,9 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../services/queries.jsx";
 
+//sessionStorage
+import { useSessionStorage } from "../../utils/hooks/sessionStorage.jsx";
+
 export function LogInForm({ signUp }) {
   const {
     register,
@@ -25,9 +28,11 @@ export function LogInForm({ signUp }) {
 
   const [login, { data, loading, error }] = useMutation(LOGIN, {
     onCompleted: (data) => {
-      if (data.success == true && data.token != null) {
-        const token = data.token;
-        sessionStorage.setItem("token", token);
+      // const [token, setToken] = useSessionStorage("token", null);
+      if (data.login.success == true && data.login.token != null) {
+        const tokenFromBack = data.login.token;
+       const token = sessionStorage.setItem("token", tokenFromBack);
+        console.log(token);
         //redirection
         navigate("/dashboard");
       }

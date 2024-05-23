@@ -1,5 +1,5 @@
-/** Organism that tasks several inputs, submit button and dropdown. It includes the logic to add a task and cache it (state management) : 
- * with apollo server (GraphQL)  : implement mutation to add a task and cache 
+/** Organism that tasks several inputs, submit button and dropdown. It includes the logic to add a task and cache it (state management) :
+ * with apollo server (GraphQL)  : implement mutation to add a task and cache
  * with react hook form (UI) : handles errors and validation
  */
 
@@ -32,99 +32,118 @@ export function AddATask() {
     formState: { errors },
   } = useForm();
 
- //consumer component
-const {closeModal} = useContext(ModalContext);
+  //consumer component
+  const { closeModal } = useContext(ModalContext);
 
   //extracts addTask mutation from useMutation hook, loading, error
-  const[addTask, { loading, error}] = useMutation(ADD_TASK, {
+  const [addTask, { loading, error }] = useMutation(ADD_TASK, {
     onCompleted: (data) => {
-      console.log(data)
+      console.log(data);
     },
-    update(cache, {data}) {
+    update(cache, { data }) {
       //current state of tasks
-      const {tasks} = cache.readQuery({
-        query: GET_USER_TASKS}
-      );
+      const { tasks } = cache.readQuery({
+        query: GET_USER_TASKS,
+      });
       //change the data within the cache for get user tasks, copying current tasks and adding the new one
       cache.writeQuery({
-        query:GET_USER_TASKS,
-        data:{
-          user :{
-          tasks:[
-            data.addTask,
-            ...tasks
-          ]}
-        }
-      })
-    }
-  }
-    );
+        query: GET_USER_TASKS,
+        data: {
+          user: {
+            tasks: [data.addTask, ...tasks],
+          },
+        },
+      });
+    },
+  });
 
   const onSubmit = (data) => {
     console.log(data);
-    addTask({variables: {content: data}})
+    try {
+      addTask({
+        variables: {
+          content: {
+            name: data.titre,
+            priority,
+            status: data.Statut,
+            category: data.Catégorie,
+            startDate: data.StartDate,
+            endDate: data.Échéance,
+            desc: data.Description,
+          },
+        },
+      });
+    } catch (res) {
+      const errors = res.graphQLErrors.map((error) => {
+        return error.message;
+      });
+    }
   };
 
   // if (loading) return 'Submitting...';
   // if (error) return `Submission error! ${error.message}`;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full h-full flex flex-col justify-around  ">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full h-full flex flex-col justify-around  "
+    >
       <div className="input-wrapper bg-neutral-white rounded-md p-2.5 mx-10 border border-solid border-brand-blue">
-      <Input
-        type="text"
-        name="Nom de la tâche"
-        register={register}
-        aria-invalid={errors.example1 ? "true" : "false"}
-      />
-      <Input name="example2" register={register} required />
+        <Input
+          type="text"
+          name="titre"
+          register={register}
+          aria-invalid={errors.example1 ? "true" : "false"}
+        />
 
-      <TextArea name="Description" register={register} />
-      <Controller
-        control={control}
-        name="Échéance"
-        render={({ field: { onChange, value } }) => (
-          <InputDatePicker onChange={onChange} value={value} />
-        )}
-      />
+        <TextArea name="Description" register={register} />
+        <Controller
+          control={control}
+          name="Échéance"
+          render={({ field: { onChange, value } }) => (
+            <InputDatePicker onChange={onChange} value={value} />
+          )}
+        />
 
-      <Controller
-        control={control}
-        name="Date de début"
-        render={({ field: { onChange, value } }) => (
-          <InputDatePicker onChange={onChange} value={value} />
-        )}
-      />
+        <Controller
+          control={control}
+          name="StartDate"
+          render={({ field: { onChange, value } }) => (
+            <InputDatePicker onChange={onChange} value={value} />
+          )}
+        />
 
-      <Controller
-        control={control}
-        name="Statut"
-        render={({ field: { onChange, value } }) => (
-          <CustomDropdown
-            options={[{ name: "Example 1" }, { name: "Example 2" }]}
-            onChange={onChange}
-            value={value}
-            headerTitle={"Statut"}
-          />
-        )}
-      />
+        <Controller
+          control={control}
+          name="Statut"
+          render={({ field: { onChange, value } }) => (
+            <CustomDropdown
+              options={[{ name: "Example 1" }, { name: "Example 2" }]}
+              onChange={onChange}
+              value={value}
+              headerTitle={"Statut"}
+            />
+          )}
+        />
 
-      <Controller
-        control={control}
-        name="Catégorie"
-        render={({ field: { onChange, value } }) => (
-          <CustomDropdown
-            options={[{ name: "Example 1" }, { name: "Example 2" }]}
-            onChange={onChange}
-            value={value}
-            headerTitle={"Category"}
-          />
-        )}
-      />
+        <Controller
+          control={control}
+          name="Catégorie"
+          render={({ field: { onChange, value } }) => (
+            <CustomDropdown
+              options={[{ name: "ARTICLES" }, { name: "WORK" }, { name: "PERSONAL" }, { name: "PHOTOGRAPHY" }, { name: "OTHER" }]}
+              onChange={onChange}
+              value={value}
+              headerTitle={"Category"}
+            />
+          )}
+        />
       </div>
       <div className="button-wrapper flex justify-around bg-brand-yellow py-5">
-      <Button variant="secondary" onClick={closeModal}>Annuler</Button>
-      <Button role="submit">Ajouter une tâche</Button>
+        <Button variant="secondary" onClick={closeModal}>
+          Annuler
+        </Button>
+        <Button role="submit" type="submit">Ajouter une tâche</Button>
       </div>
     </form>
   );

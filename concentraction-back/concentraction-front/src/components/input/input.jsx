@@ -36,11 +36,14 @@ export function Input({
     titleHeading = "text-neutral-black";
   }
 
+  //make sure to capitalize name of the input
+  let titleOfInput = name.charAt(0).toUpperCase() + name.slice(1);
+
   return (
     <fieldset className="input-wrapper flex flex-col gap-2 w-fit">
       <Body body2={true} classBody={`font-bold ${titleHeading}`}>
         {" "}
-        {name}
+        {titleOfInput}
       </Body>
       <label htmlFor={name}>
         <input
@@ -77,11 +80,12 @@ export function TextArea({
   } else {
     titleHeading = "text-neutral-black";
   }
+  let titleOfText = name.charAt(0).toUpperCase() + name.slice(1);
 
   return (
     <fieldset className="text-wrapper flex flex-col gap-2">
       <Body body2={true} classBody={`font-bold ${titleHeading}`}>
-        {name}
+        {titleOfText}
       </Body>
       <label htmlFor={name}>
         <textarea

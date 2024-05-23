@@ -4,8 +4,10 @@
  * if not => redirects to sign-up
  */
 import { Navigate, Outlet } from "react-router-dom";
+import {useSessionStorage} from "../../utils/hooks/sessionStorage";
 
 export default function ProtectedRoutes() {
+    // const [sessionStorageToken] = useSessionStorage("token", "");
     const sessionStorageToken = sessionStorage.getItem("token");
     return sessionStorageToken ? <Outlet /> : <Navigate to="/sign-up" />
 }
