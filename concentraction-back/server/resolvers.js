@@ -77,6 +77,7 @@ const resolvers = {
   Mutation: {
     //creates a new user
     addUser: async (_, { name, content }, context) => {
+      console.log("context", context);
       const hashedPassword = await bcrypt.hash(content.password, 10);
       const email = content.email;
       const user = new UserModel({
@@ -86,7 +87,7 @@ const resolvers = {
       });
       const newUser = await user.save();
       //creates token
-      const token = jwt.sign({ id: user.id }, "secretkey");
+      const token = jwt.sign({ id: user.id }, process.env.ACCESS_TOKEN_SECRET);
       if (newUser) {
         console.log("here");
 
@@ -111,7 +112,7 @@ const resolvers = {
       const { email, password } = content;
       const user = await UserModel.findOne({ email });
       if (user && bcrypt.compareSync(password, user.password)) {
-        const token = jwt.sign({ id: user.id }, "secretkey");
+        const token = jwt.sign({ id: user.id }, process.env.ACCESS_TOKEN_SECRET);
         return {
           code: 200,
           success: true,

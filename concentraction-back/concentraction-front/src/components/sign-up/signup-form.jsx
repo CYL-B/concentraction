@@ -26,7 +26,8 @@ export function SignUpForm({ logIn }) {
 
   const [addUser, { data, loading, error }] = useMutation(ADD_USER, {
     onCompleted: (data) => {
-      if (data.success == true && data.token != null) {
+      const dataFromBack = data.addUser;
+      if (dataFromBack.success == true && dataFromBack.token != null) {
         const token = data.token;
         sessionStorage.setItem("token", token);
         //needs to add redirection

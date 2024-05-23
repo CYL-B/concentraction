@@ -16,7 +16,7 @@ import { useForm, Controller } from "react-hook-form";
 
 //Apollo client import
 import { useMutation } from "@apollo/client";
-// import { ADD_TASK, GET_USER_TASKS } from "../../services/queries.jsx";
+import { ADD_TASK, GET_USER_TASKS } from "../../services/queries.jsx";
 
 //"handleSubmit" will validate your inputs before invoking "onSubmit"
 //register : register your input into the hook by invoking the "register" function
@@ -35,34 +35,34 @@ export function AddATask() {
  //consumer component
 const {closeModal} = useContext(ModalContext);
 
-  // //extracts addTask mutation from useMutation hook, loading, error
-  // const[addTask, { loading, error}] = useMutation(ADD_TASK, {
-  //   onCompleted: (data) => {
-  //     console.log(data)
-  //   },
-    // update(cache, {data}) {
-    //   //current state of tasks
-    //   const {tasks} = cache.readQuery({
-    //     query: GET_USER_TASKS}
-    //   );
-    //   //change the data within the cache for get user tasks, copying current tasks and adding the new one
-    //   cache.writeQuery({
-    //     query:GET_USER_TASKS,
-    //     data:{
-    //       user :{
-    //       tasks:[
-    //         data.addTask,
-    //         ...tasks
-    //       ]}
-    //     }
-    //   })
-    // }
-  // }
-  //   );
+  //extracts addTask mutation from useMutation hook, loading, error
+  const[addTask, { loading, error}] = useMutation(ADD_TASK, {
+    onCompleted: (data) => {
+      console.log(data)
+    },
+    update(cache, {data}) {
+      //current state of tasks
+      const {tasks} = cache.readQuery({
+        query: GET_USER_TASKS}
+      );
+      //change the data within the cache for get user tasks, copying current tasks and adding the new one
+      cache.writeQuery({
+        query:GET_USER_TASKS,
+        data:{
+          user :{
+          tasks:[
+            data.addTask,
+            ...tasks
+          ]}
+        }
+      })
+    }
+  }
+    );
 
   const onSubmit = (data) => {
     console.log(data);
-    // addTask({variables: {content: data}})
+    addTask({variables: {content: data}})
   };
 
   // if (loading) return 'Submitting...';

@@ -1,7 +1,7 @@
 import Checkbox from "../input/checkbox.jsx";
 import { Input } from "../input/input.jsx";
 import { Button } from "../button.jsx";
-import {Link} from "../links.jsx";
+import { Link } from "../links.jsx";
 import { Heading1 } from "../typography.jsx";
 
 import { useForm } from "react-hook-form";
@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../services/queries.jsx";
 
-export function LogInForm({signUp}) {
+export function LogInForm({ signUp }) {
   const {
     register,
     handleSubmit,
@@ -25,19 +25,20 @@ export function LogInForm({signUp}) {
 
   const [login, { data, loading, error }] = useMutation(LOGIN, {
     onCompleted: (data) => {
-        console.log(data);
-      const token = data.token;
-      sessionStorage.setItem("token", token);
-      //redirection
-      navigate("/dashboard");
+      if (data.success == true && data.token != null) {
+        const token = data.token;
+        sessionStorage.setItem("token", token);
+        //redirection
+        navigate("/dashboard");
+      }
     },
   });
 
   const onSubmit = (loginData) => {
     try {
-        login({
+      login({
         variables: {
-          content:  {email: loginData.email, password: loginData.password},
+          content: { email: loginData.email, password: loginData.password },
         },
       });
     } catch (res) {
@@ -59,7 +60,9 @@ export function LogInForm({signUp}) {
         <Input name="password" register={register} required />
         <Checkbox name="Data" register={register} required />
         <Button role="submit" type="submit" />
-        <Link variant="fineprint" onClick={signUp}>Don't have an account? Sign up ! </Link>
+        <Link variant="fineprint" onClick={signUp}>
+          Don't have an account? Sign up !{" "}
+        </Link>
       </form>
     </>
   );

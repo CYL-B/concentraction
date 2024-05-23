@@ -39,7 +39,7 @@ const authenticate = async (req) => {
   const token = req.headers["authorization"];
   if (token) {
     try {
-      const decoded = jwt.verify(token, "secretkey");
+      const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
       const user = await UserModel.findById(decoded.id);
       return user;
     } catch (err) {
