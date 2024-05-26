@@ -49,7 +49,7 @@ const resolvers = {
   //{id} : déstructure args
   Query: {
     // promise : if successful, get user, if not, return error
-    user: async (_, { id }) => {
+    getUser: async (_, { id }) => {
       try {
         let collection = await db.collection("users");
         let query = { _id: new ObjectId(id) };
@@ -68,6 +68,29 @@ const resolvers = {
           success: false,
           message: error.extensions.response.body,
           user: null,
+        };
+      }
+    },
+
+    getTasks: async (_, {}, contextValue) => {
+      const user = contextValue.user;
+      console.log("user", user);
+      if (user) {
+        const userID = user.id ?? user._id;
+        const findUser = await UserModel.findOne({ _id: userID });
+        const findTasks = findUser.tasks;
+
+        return {
+          code: 200,
+          success: true,
+          message: "Successfully retrieved tasks",
+          user: { tasks: findTasks },
+        };
+      } else {
+        return {
+          code: 401,
+          success: false,
+          message: "You don't have permission to add a task",
         };
       }
     },
@@ -137,10 +160,11 @@ const resolvers = {
       const { name, priority, category, status, startDate, endDate, desc } =
         content;
       const user = contextValue.user;
+      console.log("user", user);
       if (user) {
         const userID = user.id ?? user._id;
-        const findUser = await UserModel.updateOne(
-          { id: userID },
+        const addLatestTask = await UserModel.updateOne(
+          { _id: userID },
           {
             $push: {
               tasks: {
@@ -155,13 +179,30 @@ const resolvers = {
             },
           }
         );
-        const updatedTask = await findUser.save();
-        if (updatedTask) {
+
+        const findUser = await UserModel.findOne({ _id: userID });
+        //retourne la tâche ajoutée, retrouve la position du dernier ajout
+        const findLatestTask = findUser.tasks[findUser.tasks.length - 1];
+        console.log("find", findLatestTask.id);
+        if (
+          addLatestTask.acknowledged == true &&
+          addLatestTask.modifiedCount == 1
+        ) {
+          console.log("yo");
           return {
             code: 200,
             success: true,
             message: "Task successfully added",
-            task: content
+            task: {
+              id: findLatestTask.id,
+              name: findLatestTask.name,
+              priority: findLatestTask.priority,
+              category: findLatestTask.category,
+              status: findLatestTask.status,
+              startDate: findLatestTask.startDate,
+              endDate: findLatestTask.endDate,
+              desc: findLatestTask.desc,
+            },
           };
         }
       } else {

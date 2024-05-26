@@ -38,17 +38,17 @@ export const ADD_TASK = gql`
   mutation AddTask($content: TaskContent!) {
     addTask(content: $content) {
       code
-      message
       success
+      message
       task {
-        category
-        desc
-        endDate
         id
         name
         priority
-        startDate
+        category
         status
+        startDate
+        endDate
+        desc
       }
     }
   }
@@ -59,6 +59,9 @@ export const ADD_TASK = gql`
 // //retrieves the tasks of the user
 export const GET_USER_TASKS = gql`
   query GetUserTasks {
+    code
+    success
+    message
     user {
       tasks {
         id

@@ -4,28 +4,31 @@ import gql from "graphql-tag";
 export const typeDefs = gql`
   "Get User when connected or created"
   type Query {
-    user: User!
+    "get user"
+    getUser: User!
+    "get tasks of the user"
+    getTasks: TasksOfUser!
   }
 
   type Mutation {
     "create an account for new user, returns AuthPayload"
     addUser(name: String!, content: UserInput!): AuthPayloadResponse!
     "update user's information, returns user"
-    updateUser(id: ID!, name: String, password: String, email: String): UpdateUserResponse!
+    updateUser(
+      id: ID!
+      name: String
+      password: String
+      email: String
+    ): UpdateUserResponse!
     "login an existing user, returns AuthPayload"
-    login(content:UserInput!): AuthPayloadResponse!
+    login(content: UserInput!): AuthPayloadResponse!
     "create a new task"
-    addTask(content:
-      TaskContent!
-    ): AddTaskResponse
+    addTask(content: TaskContent!): AddTaskResponse
     "delete a task"
     deleteTask(id: ID!): Task!
 
     "update a task"
-    updateTask(
-      id: ID!
-      content: TaskContent!
-    ): UpdateTaskResponse!
+    updateTask(id: ID!, content: TaskContent!): UpdateTaskResponse!
   }
 
   "Information to provide as argument of user, used in signup and login"
@@ -45,11 +48,18 @@ export const typeDefs = gql`
     desc: String
   }
 
+  "Tasks of user"
+  type TasksOfUser {
+    code: Int!
+    success: Boolean!
+    message: String!
+    user: User!
+  }
 
   "Identification of a user"
   type AuthPayloadResponse {
     "Similar to HTTP status code"
-    code:Int!
+    code: Int!
     "Indicates if the request was successful"
     success: Boolean!
     "Human readable message for the UI"
@@ -59,25 +69,25 @@ export const typeDefs = gql`
     user: User
   }
 
-  
   "User response"
   type UpdateUserResponse {
-    code:Int!
+    code: Int!
     success: Boolean!
     message: String!
     user: User
   }
-  
+
   "Add task response"
   type AddTaskResponse {
-    code:Int!
+    code: Int!
     success: Boolean!
     message: String!
     task: Task
   }
+  
   "Update task response"
   type UpdateTaskResponse {
-    code:Int!
+    code: Int!
     success: Boolean!
     message: String!
     task: Task
@@ -128,13 +138,13 @@ export const typeDefs = gql`
     OTHER
   }
 
-"Restricts the values for property Priority"
+  "Restricts the values for property Priority"
   enum Priority {
     LOW
     MEDIUM
     HIGH
   }
-"Restricts the values for property Status"
+  "Restricts the values for property Status"
   enum Status {
     TODO
     ONGOING

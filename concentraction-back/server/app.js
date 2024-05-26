@@ -37,7 +37,6 @@ connect();
 const authenticate = async (token) => {
   //  extracts a user token from the HTTP Authorization header included in each operation
   //cf apollo client, token is included in headers
-  console.log("token", token);
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);

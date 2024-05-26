@@ -53,8 +53,9 @@ export function SignUpForm({ logIn }) {
       const errors = res.graphQLErrors.map((error) => {
         return error.message;
       });
+      console.log(errors);
     }
-    console.log(errors)
+    
   };
   return (
     <>

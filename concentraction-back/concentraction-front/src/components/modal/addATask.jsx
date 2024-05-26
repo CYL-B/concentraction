@@ -36,49 +36,57 @@ export function AddATask() {
   const { closeModal } = useContext(ModalContext);
 
   //extracts addTask mutation from useMutation hook, loading, error
-  const [addTask, { loading, error }] = useMutation(ADD_TASK, {
+  const [addTask, {data, loading, error }] = useMutation(ADD_TASK, {
     onCompleted: (data) => {
-      console.log(data);
+      //add confirmation message
+      console.log("hey",data);
     },
-    update(cache, { data }) {
-      //current state of tasks
-      const { tasks } = cache.readQuery({
-        query: GET_USER_TASKS,
-      });
-      //change the data within the cache for get user tasks, copying current tasks and adding the new one
-      cache.writeQuery({
-        query: GET_USER_TASKS,
-        data: {
-          user: {
-            tasks: [data.addTask, ...tasks],
-          },
-        },
-      });
-    },
+    // update(cache, { data }) {
+    //   //current state of tasks
+    //   const { tasks } = cache.readQuery({
+    //     query: GET_USER_TASKS,
+    //   });
+    //   //change the data within the cache for get user tasks, copying current tasks and adding the new one
+    //   cache.writeQuery({
+    //     query: GET_USER_TASKS,
+    //     data: {
+    //       user: {
+    //         tasks: [data.addTask, ...tasks],
+    //       },
+    //     },
+    //   });
+    // },
   });
-  
-  const formatDateFn = (date) => {
-    const selectedDate = new Date(date)
-    return selectedDate.getDate() + "/"+ parseInt(selectedDate.getMonth()+1) +"/"+ selectedDate.getFullYear();
 
-} 
+  const formatDateFn = (date) => {
+    const selectedDate = new Date(date);
+    return (
+      selectedDate.getDate() +
+      "/" +
+      parseInt(selectedDate.getMonth() + 1) +
+      "/" +
+      selectedDate.getFullYear()
+    );
+  };
 
   const onSubmit = (data) => {
-    const startDate = formatDateFn(data.StartDate);
-    const endDate = formatDateFn(data.echeance);
-
-    console.log(data, startDate, endDate )
+    const startDate = data.StartDate;
+    const endDate = data.echeance;
     try {
       addTask({
         variables: {
           content: {
             name: data.titre,
+            priority: data.priority ? data.priority : null,
             status: data.statut,
-            category: data.category
+            category: data.category,
+            startDate: startDate ? formatDateFn(startDate) : null,
+            endDate: endDate ? formatDateFn(endDate) : null,
+            desc: data.Description ? data.Description : null,
           },
         },
       });
-      console.log(addTask)
+      console.log("pass");
     } catch (res) {
       const errors = res.graphQLErrors.map((error) => {
         return error.message;
@@ -124,7 +132,11 @@ export function AddATask() {
           name="statut"
           render={({ field: { onChange, value } }) => (
             <CustomDropdown
-              options={[{ name: "TODO" }, { name: "ONGOING" }, { name: "DONE" }]}
+              options={[
+                { name: "TODO" },
+                { name: "ONGOING" },
+                { name: "DONE" },
+              ]}
               onChange={onChange}
               value={value}
               headerTitle={"Statut"}
@@ -137,7 +149,13 @@ export function AddATask() {
           name="category"
           render={({ field: { onChange, value } }) => (
             <CustomDropdown
-              options={[{ name: "ARTICLES" }, { name: "WORK" }, { name: "PERSONAL" }, { name: "PHOTOGRAPHY" }, { name: "OTHER" }]}
+              options={[
+                { name: "ARTICLES" },
+                { name: "WORK" },
+                { name: "PERSONAL" },
+                { name: "PHOTOGRAPHY" },
+                { name: "OTHER" },
+              ]}
               onChange={onChange}
               value={value}
               headerTitle={"Category"}
@@ -149,7 +167,9 @@ export function AddATask() {
         <Button variant="secondary" onClick={closeModal}>
           Annuler
         </Button>
-        <Button role="submit" type="submit">Ajouter une tâche</Button>
+        <Button role="submit" type="submit">
+          Ajouter une tâche
+        </Button>
       </div>
     </form>
   );

@@ -6,6 +6,7 @@ import {
   ApolloLink,
   from,
 } from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
 
 //connect the ApolloClient instance with the GraphQL API and .
 const httpLink = createHttpLink({
@@ -21,14 +22,23 @@ const authLink = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers }) => ({
     // return the headers to the context
     headers: {
-      authorization: token,
+      authorization: token ? token : "",
       ...headers,
     },
-  }
-  
-));
+  }));
   return forward(operation);
 });
+
+// const errorLink = onError(({ graphQLErrors, networkError }) => {
+//   if (graphQLErrors)
+//     graphQLErrors.forEach(({ message, locations, path }) =>
+//       console.log(
+//         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+//       )
+//     );
+//   if (networkError) console.error(`[Network error]: ${networkError}`);
+// });
+
 
 // const authLink = new ApolloLink((operation, forward) =>
 //   operation.setContext((_, { headers }) => {
