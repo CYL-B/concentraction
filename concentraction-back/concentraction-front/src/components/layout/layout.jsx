@@ -45,7 +45,7 @@ export default function Layout({
       </main>
       <Scrolltop scrollToTop={scrollToMain} />
     </div>
-    /</ModalProvider>
+    </ModalProvider>
   );
 }
 //?? : if value on the left is defined, it returns said value, if not, returns value on the right

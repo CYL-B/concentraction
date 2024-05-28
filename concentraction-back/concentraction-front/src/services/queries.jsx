@@ -59,19 +59,21 @@ export const ADD_TASK = gql`
 // //retrieves the tasks of the user
 export const GET_USER_TASKS = gql`
   query GetUserTasks {
-    code
-    success
-    message
-    user {
-      tasks {
-        id
-        name
-        priority
-        category
-        status
-        startDate
-        endDate
-        desc
+    getTasks {
+      code
+      success
+      message
+      user {
+        tasks {
+          id
+          name
+          priority
+          category
+          status
+          startDate
+          endDate
+          desc
+        }
       }
     }
   }

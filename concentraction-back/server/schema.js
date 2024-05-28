@@ -7,7 +7,7 @@ export const typeDefs = gql`
     "get user"
     getUser: User!
     "get tasks of the user"
-    getTasks: TasksOfUser!
+    getTasks: TasksOfUser
   }
 
   type Mutation {

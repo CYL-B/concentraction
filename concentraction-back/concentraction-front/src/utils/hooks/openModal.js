@@ -7,7 +7,7 @@
 */
 import { useState, useEffect, useRef } from "react";
 export function useOpenModal() {
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
 
   const ref = useRef();
   const handleOpenModal = () => {

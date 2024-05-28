@@ -32,7 +32,7 @@ import { getTaskById } from "../../../utils/hooks/getTasks";
 import { useMediaQuery } from "../../../utils/hooks/mediaQueryHook";
 import ListSlider from "../../../services/slickCarousel";
 
-function DayView() {
+export function DayView() {
   const tasks = DAY_TASKS;
 
   //returns an object with properties named after a container, each property contains an array of tasks
@@ -218,12 +218,3 @@ function DayView() {
 
 //dragOverlay emulates the active task being dragged from one list to another
 
-function MonthView() {
-  return <div>I am the monthView.</div>;
-}
-
-function WeekView() {
-  return <div>I am the WeekView</div>;
-}
-
-export { DayView, WeekView, MonthView };

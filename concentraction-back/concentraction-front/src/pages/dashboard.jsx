@@ -1,6 +1,8 @@
 import Layout from "../components/layout/layout";
 import Tabs from "../components/tabs";
-import { DayView, WeekView, MonthView } from "../components/layout/views/views";
+import { DayView} from "../components/layout/views/dayview";
+import { WeekView } from "../components/layout/views/weekview";
+import { MonthView } from "../components/layout/views/monthview";
 
 export default function Dashboard() {
   const tabButtons = ["Month view", "Day view", "Week view"];

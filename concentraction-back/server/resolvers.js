@@ -39,14 +39,6 @@ const dateScalar = new GraphQLScalarType({
 
 const resolvers = {
   Date: dateScalar,
-  User: {
-    id: (parent) => parent.id ?? parent._id,
-    //retrieve nested tasks
-    tasks: (parent) => {
-      parent.tasks;
-    },
-  },
-  //{id} : déstructure args
   Query: {
     // promise : if successful, get user, if not, return error
     getUser: async (_, { id }) => {
@@ -74,28 +66,37 @@ const resolvers = {
 
     getTasks: async (_, {}, contextValue) => {
       const user = contextValue.user;
-      console.log("user", user);
       if (user) {
         const userID = user.id ?? user._id;
+        // console.log("userID", userID);
         const findUser = await UserModel.findOne({ _id: userID });
-        const findTasks = findUser.tasks;
 
         return {
           code: 200,
           success: true,
           message: "Successfully retrieved tasks",
-          user: { tasks: findTasks },
+          user:findUser,
         };
       } else {
         return {
           code: 401,
           success: false,
-          message: "You don't have permission to add a task",
+          message: "You don't have permission to retrieve tasks",
         };
       }
     },
   },
-  //retrieve nested tasks
+  //
+  User: {
+    //This resolver field is used to resolve the id field of a User object. 
+    id: (parent) => parent.id ?? parent._id,
+    //used to resolve the tasks field of a User object : retrieve nested tasks
+    tasks: async (user, args, contextValue) => {
+      const tasks = user.tasks;
+      // console.log("Tasks:", tasks); // Log tasks data
+      return tasks;
+    },
+  },
 
   Mutation: {
     //creates a new user
