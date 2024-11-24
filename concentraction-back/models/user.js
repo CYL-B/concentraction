@@ -1,17 +1,20 @@
 import mongoose from "mongoose";
 
 const TaskSchema = new mongoose.Schema({
+
   name: {
     type: String,
     required: true,
   },
-  priority: String,
+  priority: {String, enum: ['LOW', 'MEDIUM', 'HIGH'], default: 'LOW'},
   category: {
     type: String,
+    enum: ['WORK', 'PERSONAL', 'PHOTOGRAPHY', 'ARTICLES', 'OTHER'],
     required: true,
   },
   status: {
     type: String,
+    enum: ['TODO', 'ONGOING', 'DONE'],
     required: true,
   },
   startDate: Date,

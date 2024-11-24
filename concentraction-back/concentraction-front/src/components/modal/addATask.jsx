@@ -60,13 +60,14 @@ export function AddATask() {
 
   const formatDateFn = (date) => {
     const selectedDate = new Date(date);
-    return (
-      selectedDate.getDate() +
-      "/" +
-      parseInt(selectedDate.getMonth() + 1) +
-      "/" +
-      selectedDate.getFullYear()
-    );
+    return selectedDate;
+    // return (
+    //   selectedDate.getDate() +
+    //   "/" +
+    //   parseInt(selectedDate.getMonth() + 1) +
+    //   "/" +
+    //   selectedDate.getFullYear()
+    // );
   };
 
   const onSubmit = (data) => {

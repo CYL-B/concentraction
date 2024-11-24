@@ -14,6 +14,9 @@ export function Modal() {
   //consumer component that takes modal element
   const { modal } = useContext(ModalContext);
 
+
+
+
   return (
     <>
       <section
@@ -25,6 +28,7 @@ export function Modal() {
             ? "overflow-auto z-50 block bg-neutral-black bg-opacity-60"
             : " pointer-events-none overflow-hidden  bg-opacity-0 transition-[background] duration-300 ease-in-out"
         }`}
+      
       >
         <div
           role="dialog"
