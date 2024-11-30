@@ -58,7 +58,7 @@ export function CustomForm({}) {
 //receives children inputs : dropdown, textarea...
 //said children must be registered and receive a register prop in order for the form to pass down methods from react hook forms
 
-export function FormTwo({ defaultValues, children, onSubmit, isNotCustomComponent }) {
+export function FormTwo({ defaultValues, children, onSubmit, formClassName }) {
   const {
     handleSubmit,
     register,
@@ -69,7 +69,7 @@ export function FormTwo({ defaultValues, children, onSubmit, isNotCustomComponen
 
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className={formClassName} onSubmit={handleSubmit(onSubmit)}>
       {childrenArray.map((child) => {
         return child.props.name
           ? React.createElement(child.type, {

@@ -14,9 +14,6 @@ export function Modal() {
   //consumer component that takes modal element
   const { modal } = useContext(ModalContext);
 
-
-
-
   return (
     <>
       <section
@@ -28,7 +25,6 @@ export function Modal() {
             ? "overflow-auto z-50 block bg-neutral-black bg-opacity-60"
             : " pointer-events-none overflow-hidden  bg-opacity-0 transition-[background] duration-300 ease-in-out"
         }`}
-      
       >
         <div
           role="dialog"
@@ -47,14 +43,34 @@ export function Modal() {
   );
 }
 
-function ModalHeader({modalTitle}) {
+function ModalHeader({ modalTitle }) {
   const { closeModal } = useContext(ModalContext);
 
   return (
-    <div className="modal-header flex justify-between w-full p-6 rounded-md" aria-labelledby="Add a task">
-      <button><IconifyIcon iconName="lets-icons:return-light" iconClassName="text-brand-blue" width={40} height={40}/></button>
-      <Heading2 text={modalTitle} heading2ClassName="text-neutral-white text-shadow-modalHeader"></Heading2>
-      <button onClick={closeModal}><IconifyIcon iconName="system-uicons:cross" iconClassName="text-brand-blue bg-brand-red border border-solid border-brand-blue rounded-full" width={30} height={30}/></button>
+    <div
+      className="modal-header flex justify-between w-full p-6 rounded-md"
+      aria-labelledby="Add a task"
+    >
+      <button>
+        <IconifyIcon
+          iconName="lets-icons:return-light"
+          iconClassName="text-brand-blue"
+          width={40}
+          height={40}
+        />
+      </button>
+      <Heading2
+        text={modalTitle}
+        heading2ClassName="text-neutral-white text-shadow-modalHeader"
+      ></Heading2>
+      <button onClick={closeModal}>
+        <IconifyIcon
+          iconName="system-uicons:cross"
+          iconClassName="text-brand-blue bg-brand-red border border-solid border-brand-blue rounded-full"
+          width={30}
+          height={30}
+        />
+      </button>
     </div>
   );
 }
