@@ -85,6 +85,27 @@ const resolvers = {
         };
       }
     },
+    getObjectives: async (_, {}, contextValue) => {
+      const user = contextValue.user;
+      if (user) {
+        const userID = user.id ?? user._id;
+        // console.log("userID", userID);
+        const findUser = await UserModel.findOne({ _id: userID });
+
+        return {
+          code: 200,
+          success: true,
+          message: "Successfully retrieved Objectives",
+          user:findUser,
+        };
+      } else {
+        return {
+          code: 401,
+          success: false,
+          message: "You don't have permission to retrieve Objectives",
+        };
+      }
+    },
   },
   //
   User: {

@@ -78,3 +78,21 @@ export const GET_USER_TASKS = gql`
     }
   }
 `;
+
+// /*QUERY GET OBJECTIVES*/
+
+// //retrieves the objectives of the user
+export const GET_USER_OBJECTIVES = gql`
+  query GetUserObjectives {
+    getObjectives {
+      code
+      success
+      message
+      user {
+        objectives {
+        title
+    status
+      }
+    }
+  }
+`;
