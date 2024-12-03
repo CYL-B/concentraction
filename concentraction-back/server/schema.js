@@ -124,13 +124,19 @@ export const typeDefs = gql`
   }
 
   "Schema designed to describe list"
-  type List {
-    name: Category
+  type Category {
+    name: CategoryName
+    tasks: [Task]
+  }
+
+  "Schema designed to describe a status"
+  type Status {
+    name: StatusName
     tasks: [Task]
   }
 
   "Restricts the values for property Category"
-  enum Category {
+  enum CategoryName {
     WORK
     PERSONAL
     PHOTOGRAPHY
@@ -145,9 +151,9 @@ export const typeDefs = gql`
     HIGH
   }
 
-  
+
   "Restricts the values for property Status"
-  enum Status {
+  enum StatusName {
     TODO
     ONGOING
     DONE
