@@ -144,6 +144,8 @@ export const typeDefs = gql`
     MEDIUM
     HIGH
   }
+
+  
   "Restricts the values for property Status"
   enum Status {
     TODO

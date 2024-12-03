@@ -32,6 +32,8 @@ export default function ObjectivesSection() {
           });
         },
       });
+
+      //l'objectif est de boucler sur un tableau de checkbox (objectives) et afficher les objectifs de chaque utilisateur
     return (
             <FormTwo formClassName={"objectives-section flex flex-col gap-4"}>
             <Checkbox
