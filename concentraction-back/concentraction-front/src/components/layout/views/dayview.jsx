@@ -3,7 +3,7 @@
 import { useState } from "react";
 import ListCard from "../../dnd/listCard";
 import Card from "../../dnd/card";
-import { DAY_TASKS } from "../../../data/tasks";
+import getTasksByDate  from "../../../data/tasks";
 
 //custom hooks
 import {
@@ -33,7 +33,7 @@ import { useMediaQuery } from "../../../utils/hooks/mediaQueryHook";
 import ListSlider from "../../../services/slickCarousel";
 
 export function DayView() {
-  const tasks = DAY_TASKS;
+  const tasks = getTasksByDate();
 
   //returns an object with properties named after a container, each property contains an array of tasks
   const initialBoardSections = useInitializeLists(tasks);

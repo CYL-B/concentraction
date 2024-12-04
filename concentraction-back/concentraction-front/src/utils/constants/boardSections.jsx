@@ -1,8 +1,8 @@
 /** For each property of the object, the key is the name of the section */
 export const DAYVIEW_SECTIONS ={
-    todo:"todo",
-    ongoing:"ongoing",
-    done:"done"
+    todo:"TODO",
+    ongoing:"ONGOING",
+    done:"DONE"
 }
 
 export const WEEKVIEW_SECTIONS = {

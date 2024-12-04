@@ -13,7 +13,6 @@ import { GET_USER_TASKS } from "../../../services/queries";
 
 export function MonthView() {
   const client = useApolloClient();
-
   //destructuring fails when attempting to destructure from undefined or null
   const { tasks } = client.readQuery({
     query: GET_USER_TASKS,
