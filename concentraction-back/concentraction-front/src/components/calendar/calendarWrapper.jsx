@@ -7,7 +7,6 @@ import { Day } from "./day";
 //Apollo client import
 import { useQuery } from "@apollo/client";
 import { GET_USER_TASKS } from "../../services/queries";
-import { set } from "mongoose";
 
 function getDaysInMonth(year, month) {
   var daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -41,7 +40,9 @@ export default function CalendarWrapper({ year, month, tasks }) {
   const [tasksMap, setTasksMap] = useState([]);
 
   const { data, loading, error } = useQuery(GET_USER_TASKS, {
+    
     onCompleted: (data) => {
+      console.log("hey")
       //add confirmation message
       var dataFrom = data.getTasks.user.tasks;
       setTasksMap(dataFrom);
@@ -91,6 +92,8 @@ export default function CalendarWrapper({ year, month, tasks }) {
 
         <Day day={index + 1} tasks={filteredTasks(tasksMap, date)} />
       )}
+      {console.log(tasksMap)}
     </div>
+    
   );
 }

@@ -73,17 +73,18 @@ export function AddATask() {
   const onSubmit = (data) => {
     const startDate = data.StartDate;
     const endDate = data.echeance;
+   
     try {
       addTask({
         variables: {
           content: {
             name: data.titre,
-            priority: data.priority ? data.priority : null,
+            priority: data.priority,
             status: data.statut,
             category: data.category,
             startDate: startDate ? formatDateFn(startDate) : null,
             endDate: endDate ? formatDateFn(endDate) : null,
-            desc: data.Description ? data.Description : null,
+            desc: data.description,
           },
         },
       });
@@ -111,12 +112,13 @@ export function AddATask() {
           aria-invalid={errors.example1 ? "true" : "false"}
         />
 
-        <TextArea name="Description" register={register} />
+        <TextArea name="description" register={register} />
         <Controller
           control={control}
           name="echeance"
+          
           render={({ field: { onChange, value } }) => (
-            <InputDatePicker onChange={onChange} value={value} />
+            <InputDatePicker onChange={onChange} value={value} dateTitle="Deadline" />
           )}
         />
 
@@ -124,9 +126,10 @@ export function AddATask() {
           control={control}
           name="StartDate"
           render={({ field: { onChange, value } }) => (
-            <InputDatePicker onChange={onChange} value={value} />
+            <InputDatePicker onChange={onChange} value={value} dateTitle="Start date"/>
           )}
         />
+
 
         <Controller
           control={control}
@@ -145,6 +148,22 @@ export function AddATask() {
           )}
         />
 
+        <Controller
+          control={control}
+          name="priority"
+          render={({ field: { onChange, value } }) => (
+            <CustomDropdown
+              options={[
+                { name: "LOW" },
+                { name: "MEDIUM" },
+                { name: "HIGH" },
+              ]}
+              onChange={onChange}
+              value={value}
+              headerTitle={"Priority"}
+            />
+          )}
+        />
         <Controller
           control={control}
           name="category"

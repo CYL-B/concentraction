@@ -91,6 +91,7 @@ export function TextArea({
         <textarea
         {...register(name)}
           className={`${variant.toLowerCase()}`}
+          id={name}
           type={type}
           onChange={handleTextChange}
           {...textProps}

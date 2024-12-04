@@ -7,7 +7,6 @@ import { Body } from "../typography";
 //Date picker imports
 import DatePicker, {
   registerLocale,
-  CalendarContainer,
 } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -25,14 +24,14 @@ registerLocale("fr", fr);
 //     );
 //   };
 
-export default function InputDatePicker({onChange, value}) {
+export default function InputDatePicker({onChange, value, dateTitle}) {
 
   return (
     <div
       className="date-wrapper flex flex-col gap-y-2"
     >
       <Body classBody="font-bold" body2={true}>
-        Date example
+       {dateTitle}
       </Body>
           <DatePicker
             locale="fr"

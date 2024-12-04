@@ -181,8 +181,8 @@ const resolvers = {
     addTask: async (_, { content }, contextValue) => {
       const { name, priority, category, status, startDate, endDate, desc } =
         content;
+        
       const user = contextValue.user;
-      console.log("user", user);
       if (user) {
         const userID = user.id ?? user._id;
         const addLatestTask = await UserModel.updateOne(
@@ -201,16 +201,14 @@ const resolvers = {
             },
           }
         );
-
         const findUser = await UserModel.findOne({ _id: userID });
         //retourne la tâche ajoutée, retrouve la position du dernier ajout
         const findLatestTask = findUser.tasks[findUser.tasks.length - 1];
-        console.log("find", findLatestTask.id);
+        
         if (
           addLatestTask.acknowledged == true &&
           addLatestTask.modifiedCount == 1
         ) {
-          console.log("yo");
           return {
             code: 200,
             success: true,

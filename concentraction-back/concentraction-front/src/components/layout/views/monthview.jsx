@@ -7,8 +7,19 @@ import ObjectivesSection from "../../objectives/objectivesSection";
 
 import { ModalContext } from "../../modal/modalContext";
 
+import { useApolloClient } from "@apollo/client";
+import { GET_USER_TASKS } from "../../../services/queries";
+
 
 export function MonthView() {
+  const client = useApolloClient();
+
+  //destructuring fails when attempting to destructure from undefined or null
+  const { tasks } = client.readQuery({
+    query: GET_USER_TASKS,
+    // Provide any required variables in this object.
+  }) || {};
+
   const { handleOpenModal } = useContext(ModalContext);
 
   const openModal = () => {
@@ -27,6 +38,7 @@ export function MonthView() {
         <Button variant="secondary">Today</Button>
         <Button onClick={openModal}>New Task</Button>
       </div>
+      {  console.log("tasks", tasks)}
     </section>
   );
 }

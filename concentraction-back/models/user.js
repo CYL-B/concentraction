@@ -6,14 +6,21 @@ const TaskSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  priority: {String, enum: ['LOW', 'MEDIUM', 'HIGH']},
-  category: { type: mongoose.Schema.Types.ObjectId, ref: 'categories' },
-  status: { type: mongoose.Schema.Types.ObjectId, ref: 'statuses' },
+  priority: {type: String, enum: ['LOW', 'MEDIUM', 'HIGH']},
+  category: {
+    type: String,
+    enum: ['WORK', 'PERSONAL', 'PHOTOGRAPHY', 'ARTICLES', 'OTHER'],
+    required: true,
+  },
+  status: {
+    type: String,
+    enum: ['TODO', 'ONGOING', 'DONE'],
+    required: true,
+  },
   startDate: Date,
   endDate: Date,
-  description: {
-    type: String,
-    required: true,
+  desc: {
+    type: String
   },
 });
 
