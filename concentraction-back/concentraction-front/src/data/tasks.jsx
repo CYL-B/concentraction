@@ -13,9 +13,13 @@ export default function getTasksByDate() {
   });
 
   const tasks = dataFromBack.getTasks.user.tasks
+
+
   const date = new Date().toLocaleDateString("fr");
 
   const DAY_TASKS = filteredTasks(tasks, date)
+
+  // console.log("day",DAY_TASKS)
 
   return DAY_TASKS;
 }

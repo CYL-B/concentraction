@@ -37,6 +37,7 @@ export function DayView() {
 
   //returns an object with properties named after a container, each property contains an array of tasks
   const initialBoardSections = useInitializeLists(tasks);
+  // console.log("initialBoardSections", initialBoardSections);
 
   const [listSections, setListSections] = useState(initialBoardSections);
 
@@ -137,12 +138,12 @@ export function DayView() {
 
     //boucle sur chaque tâche associée au container de début et trouve l'index de la tâche dont l'id correspond à l'id de la tâche active (recherche de la tâche active)
     const activeIndex = listSections[activeContainer].findIndex(
-      (task) => task.id === active.id
+      (task) => task.status === active.id
     );
 
     //boucle sur chaque tâche associée au container de fin et trouve l'index de la tâche dont l'id correspond à l'id de la tâche active
     const overIndex = listSections[overContainer].findIndex(
-      (task) => task.id === over?.id
+      (task) => task.status === over?.id
     );
 
     /* If the task is not already in the over container
@@ -191,7 +192,7 @@ export function DayView() {
             );
           })}
           <DragOverlay dropAnimation={dropAnimation}>
-            {task ? <Card cardDate={task.date} cardTitle={task.title} /> : ""}
+            {task ? <Card cardDate={new Date(Number(task.endDate)).toLocaleDateString("fr")} cardTitle={task.name} /> : ""}
           </DragOverlay>
         </section>
       </DndContext>

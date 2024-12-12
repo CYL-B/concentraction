@@ -39,12 +39,12 @@ export default function ListCard({
             {taskList &&
               taskList.map((task, index) => {
                 return (
-                  <Draggable id={task.title}>
+                  <Draggable id={task.id}>
                     <Card
-                      key={task.title}
-                      cardTitle={task.title}
-                      cardDate={task.date}
-                      cardTag={task.tag}
+                      key={task.name}
+                      cardTitle={task.name}
+                      cardDate={task.endDate}
+                      cardTag={task.category}
                     />
                   </Draggable>
                 );

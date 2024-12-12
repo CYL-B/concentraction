@@ -37,7 +37,6 @@ export function MonthView() {
         <Button variant="secondary">Today</Button>
         <Button onClick={openModal}>New Task</Button>
       </div>
-      {  console.log("tasks", tasks)}
     </section>
   );
 }
