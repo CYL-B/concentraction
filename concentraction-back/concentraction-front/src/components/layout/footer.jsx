@@ -45,7 +45,7 @@ export default function Footer() {
     </a>
   ));
   return (
-    <footer className=" absolute bottom-0 w-full h-1/12 self-end flex justify-between border-solid border-t border-brand-blue p-2">
+    <footer className=" absolute bottom-0 w-full h-14 self-end flex justify-between border-solid border-t border-brand-blue p-2">
       <div className="min-w-[30%] flex flex-col justify-center">
         <Heading4 classHeading={"text-brand-blue uppercase"}>
           Concentraction

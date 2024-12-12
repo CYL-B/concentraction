@@ -33,12 +33,12 @@ export default function Layout({
       <NavBar />
       <main
         role="main"
-        className={`relative z-10 p-10 box-border overflow-x-hidden overflow-y-hidden w-full ${
+        className={`relative z-10 p-10 min-h-screen box-border overflow-x-hidden overflow-y-hidden w-full ${
           mainClassName ?? ""
         }`}
       >
         <Header headerTitle={headerTitle}></Header>
-        <div className={`container mx-auto ${containerClassName ?? ""}`}>
+        <div className={`container mx-auto pb-14 ${containerClassName ?? ""}`}>
           <div className={`w-full ${pageClassName ?? ""}`}>{children}</div>
         </div>
         <Footer />
