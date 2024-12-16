@@ -54,6 +54,27 @@ export const ADD_TASK = gql`
   }
 `;
 
+// /*MUTATION UPDATE TASK*/
+export const UPDATE_TASK = gql`
+  mutation UpdateTask($id: ID!, $content: TaskContent!) {
+    updateTask(id: $id, content: $content) {
+      code
+      success
+      message
+      task {
+        id
+        name
+        priority
+        category
+        status
+        startDate
+        endDate
+        desc
+      }
+    }
+  }
+`;
+
 // /*QUERY GET TASKS*/
 // //the name of the query GetUserTasks does not matter but what is called within it does : "user". The query user must be defined in the schema
 // //retrieves the tasks of the user

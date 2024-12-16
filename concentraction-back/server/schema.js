@@ -93,6 +93,7 @@ export const typeDefs = gql`
     task: Task
   }
 
+
   "Schema designed to describe an user, its tasks and objectives"
   type User {
     id: ID!

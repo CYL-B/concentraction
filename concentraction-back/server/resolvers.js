@@ -75,7 +75,7 @@ const resolvers = {
           code: 200,
           success: true,
           message: "Successfully retrieved tasks",
-          user:findUser,
+          user: findUser,
         };
       } else {
         return {
@@ -96,7 +96,7 @@ const resolvers = {
           code: 200,
           success: true,
           message: "Successfully retrieved Objectives",
-          user:findUser,
+          user: findUser,
         };
       } else {
         return {
@@ -109,7 +109,7 @@ const resolvers = {
   },
   //
   User: {
-    //This resolver field is used to resolve the id field of a User object. 
+    //This resolver field is used to resolve the id field of a User object.
     id: (parent) => parent.id ?? parent._id,
     //used to resolve the tasks field of a User object : retrieve nested tasks
     tasks: async (user, args, contextValue) => {
@@ -181,7 +181,7 @@ const resolvers = {
     addTask: async (_, { content }, contextValue) => {
       const { name, priority, category, status, startDate, endDate, desc } =
         content;
-        
+
       const user = contextValue.user;
       if (user) {
         const userID = user.id ?? user._id;
@@ -204,7 +204,7 @@ const resolvers = {
         const findUser = await UserModel.findOne({ _id: userID });
         //retourne la tâche ajoutée, retrouve la position du dernier ajout
         const findLatestTask = findUser.tasks[findUser.tasks.length - 1];
-        
+
         if (
           addLatestTask.acknowledged == true &&
           addLatestTask.modifiedCount == 1
@@ -235,14 +235,49 @@ const resolvers = {
     },
 
     //modification de la tâche
-    updateTask: async (
-      _,
-      { id, name, priority, category, status, startDate, endDate, desc, token },
-      contextValue
-    ) => {
-      // let collection = await db.collection("users");
-    },
+    updateTask: async (_, { id, content }, contextValue) => {
+      const { name, category, status } = content;
+      const user = contextValue.user;
+      if (user) {
+        const userID = user.id ?? user._id;
+        const updateTask = await UserModel.updateOne(
+          { _id: userID, "tasks._id": id},
+          {
+            $set: {
+              "tasks.$.name": name,
+              "tasks.$.category": category,
+              "tasks.$.status": status,
+            }
+          }
+        )
 
+        const findUser = await UserModel.findOne({ _id: userID });
+        const findTask = findUser.tasks.find((task) => task.id === id);
+        if (updateTask.acknowledged == true && updateTask.modifiedCount == 1) {
+          return {
+            code: 200,
+            success: true,
+            message: "Task successfully updated",
+            task: {
+              id: findTask.id,
+              name: findTask.name,
+              priority: findTask.priority,
+              category: findTask.category,
+              status: findTask.status,
+              startDate: findTask.startDate,
+              endDate: findTask.endDate,
+              desc: findTask.desc,
+            },
+          };
+        }
+      } else {
+        return {
+          code: 401,
+          success: false,
+          message: "You don't have permission to add a task",
+        };
+      }
+    },
     //suppression de la tâche, logique à revoir
 
     deleteTask: async (_, { id, token }, context) => {

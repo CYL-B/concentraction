@@ -3,7 +3,7 @@
 import { useState } from "react";
 import ListCard from "../../dnd/listCard";
 import Card from "../../dnd/card";
-import getTasksByDate  from "../../../data/tasks";
+import getTasksByDate from "../../../data/tasks";
 
 //custom hooks
 import {
@@ -32,7 +32,34 @@ import { getTaskById } from "../../../utils/hooks/getTasks";
 import { useMediaQuery } from "../../../utils/hooks/mediaQueryHook";
 import ListSlider from "../../../services/slickCarousel";
 
+//queries
+import { UPDATE_TASK } from "../../../services/queries";
+import { useMutation } from "@apollo/client";
+import throttleDnD from "../../../utils/hooks/useDebounce";
+
 export function DayView() {
+  const [updateTask, { data, loading, error }] = useMutation(UPDATE_TASK, {
+    onCompleted: (data) => {
+      //add confirmation message
+      console.log("hey", data);
+    },
+    // update(cache, { data }) {
+    //   //current state of tasks
+    //   const { tasks } = cache.readQuery({
+    //     query: GET_USER_TASKS,
+    //   });
+    //   //change the data within the cache for get user tasks, copying current tasks and adding the new one
+    //   cache.writeQuery({
+    //     query: GET_USER_TASKS,
+    //     data: {
+    //       user: {
+    //         tasks: [data.addTask, ...tasks],
+    //       },
+    //     },
+    //   });
+    // },
+  });
+
   const tasks = getTasksByDate();
 
   //returns an object with properties named after a container, each property contains an array of tasks
@@ -161,6 +188,25 @@ export function DayView() {
     }
 
     setActiveTaskId(null);
+    throttleDnD(function updateTaskAfterHover() {
+      try {
+        updateTask({
+          variables: {
+            id: active.id,
+            content: {
+              name: active.name,
+              status: overContainer,
+              category: active.category,
+            },
+          },
+        });
+        console.log("pass");
+      } catch (res) {
+        const errors = res.graphQLErrors.map((error) => {
+          return error.message;
+        });
+      }
+    }, 1000);
   };
 
   const dropAnimation = {
@@ -192,7 +238,16 @@ export function DayView() {
             );
           })}
           <DragOverlay dropAnimation={dropAnimation}>
-            {task ? <Card cardDate={new Date(Number(task.endDate)).toLocaleDateString("fr")} cardTitle={task.name} /> : ""}
+            {task ? (
+              <Card
+                cardDate={new Date(Number(task.endDate)).toLocaleDateString(
+                  "fr"
+                )}
+                cardTitle={task.name}
+              />
+            ) : (
+              ""
+            )}
           </DragOverlay>
         </section>
       </DndContext>
@@ -218,4 +273,3 @@ export function DayView() {
 }
 
 //dragOverlay emulates the active task being dragged from one list to another
-
